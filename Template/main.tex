@@ -1,0 +1,206 @@
+\documentclass{applemlr}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+
+\setcounter{tocdepth}{2}
+\setlist[itemize]{leftmargin=*, itemsep=0.4em}
+\setlist[enumerate]{leftmargin=*, itemsep=0.4em}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\definecolor{listingbg}{gray}{0.95}
+\definecolor{listingborder}{HTML}{D0D3D4}
+\definecolor{listingcomment}{HTML}{5E8050}
+\definecolor{listingkeyword}{HTML}{007AFF}
+
+\lstdefinestyle{aiproject}{
+  backgroundcolor=\color{listingbg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{listingborder},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{listingkeyword}\bfseries,
+  commentstyle=\color{listingcomment},
+  numbers=left,
+  numberstyle=\scriptsize\color{listingkeyword},
+  stepnumber=1,
+  numbersep=6pt,
+  breaklines=true,
+  columns=fullflexible,
+  captionpos=b,
+  keepspaces=true
+}
+
+
+\usepackage{xcolor}       % 用于颜色定义
+\usepackage[most]{tcolorbox} % 引入 tcolorbox 宏包
+
+\newtcbox{\code}{
+  nobeforeafter, % 确保它是一个行内命令
+  colback=black!10, % 背景颜色 (10%的黑色，即浅灰色)
+  colframe=black!60, % 边框颜色 (60%的黑色)
+  boxrule=0.5pt,    % 边框粗细
+  arc=2pt,          % 圆角大小
+  boxsep=0pt,       % 内部文字与边框的间距
+  left=3pt, right=3pt, top=2pt, bottom=2pt, % 分别设置四个方向的间距
+  % raise=1.5pt, % 稍微向上调整盒子位置，让它和文本对齐更好看
+  fontupper=\ttfamily % 盒子内的文字使用打字机字体
+}
+
+
+
+
+\title{课程大作业中文报告模板}
+
+\author{张三}
+\author{李四}
+\author{王五}
+\affiliation{上海交通大学自动化与感知学院}
+
+\metadata[课程信息]{人工智能算法实践}
+\metadata[提交日期]{2025 年 12 月 31 日}
+
+\abstract{
+本文提供一个简洁的人工智能课程大作业中文报告模板，帮助同学们快速上手撰写项目总结。模板涵盖文档结构建议、排版规范、图表与实验记录示例以及提交前检查清单，读者可直接在此基础上替换内容并生成高质量报告。
+}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{快速开始}
+\label{sec:quickstart}
+
+\begin{enumerate}
+  \item \textbf{复制模板：} 克隆仓库或复制本目录，在 \code{main.tex} 中替换作者信息、摘要和正文。
+  \item \textbf{编译方式：} 推荐运行 \code{xelatex main.tex}；若添加参考文献，请依次执行 \code{bibtex main} 与额外两次 \code{xelatex main.tex} 以更新引用。
+  \item \textbf{字体要求：} 模板默认启用 SF Pro 与自动检测的中文无衬线字体；若本地缺失，请安装 \code{Noto Sans CJK SC} 或 \code{Source Han Sans SC}。
+  \item \textbf{参考文献：} 所有条目集中维护在项目根目录的 \code{ref.bib} 中，引用方式参见附录~\ref{sec:bib}。
+  \item \textbf{代码高亮：} 使用 \code{listings} 宏包，示例参见\autoref{lst:code}；如需 \code{minted} 请自行启用并添加 \code{-shell-escape}。
+  \item \textbf{提交产物：} 建议提交 \code{main.pdf} 以及必要的源文件、数据和运行脚本。
+\end{enumerate}
+
+\section{建议的报告结构}
+\label{sec:structure}
+
+\subsection{封面与摘要}
+\begin{itemize}
+  \item \textbf{标题：} 明确描述项目主题，例如 ``基于 Transformer 的中文情感分析''。
+  \item \textbf{作者与学号：} 建议使用 \code{\string\author} 和 \code{\string\affiliation} 列出全部成员及分工说明。
+  \item \textbf{摘要：} 150--200 字，概述任务背景、方法要点、核心结果与结论。
+\end{itemize}
+
+\subsection{正文主体}
+可按以下层次组织内容（可增删）：
+\begin{enumerate}
+  \item \textbf{引言：} 说明问题背景、研究动机与项目目标。
+  \item \textbf{相关工作：} 简述参考文献或基线方法，突出差异。
+  \item \textbf{方法设计：} 介绍模型架构、算法流程和实现细节，可适量插入公式。
+  \item \textbf{实验设置：} 给出数据集来源、预处理方式、评价指标和训练超参数。
+  \item \textbf{结果与分析：} 使用表格、图像比较方法表现，讨论优势与不足。
+  \item \textbf{总结与展望：} 回顾主要收获并提出后续改进方向。
+\end{enumerate}
+
+\section{图表与排版示例}
+\label{sec:figures}
+
+\subsection{图像示例}
+\begin{figure}[ht]
+  \centering
+  \fbox{\parbox[c][0.4\linewidth][c]{0.8\linewidth}{\centering 在此放置实验结果示意图\\(可替换为真实图片文件)}}
+  \caption{模型推理流程或实验可视化示例。上传正式报告时请替换为真实图像并更新说明。}
+  \label{fig:placeholder}
+\end{figure}
+
+\subsection{表格示例}
+\begin{table}[ht]
+  \centering
+  \caption{模型在验证集上的性能指标示例。}
+  \label{tab:metrics}
+  \begin{tabularx}{0.9\linewidth}{@{}l *{3}{Y}@{}}
+    \toprule
+    \textbf{模型} & \textbf{准确率} & \textbf{宏平均 F1} & \textbf{推理时间 (ms)} \\
+    \midrule
+    基线 SVM & 86.2 & 85.0 & 4.8 \\
+    BERT 微调 & 92.7 & 92.1 & 16.4 \\
+    我们的方法 & \textbf{94.5} & \textbf{94.0} & 18.9 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\subsection{代码示例}
+\lstinputlisting[style=aiproject, language=Python, caption={训练脚本片段示例。}, label={lst:code}]{store/example.py}
+
+
+\section{实验记录与可复现性}
+\label{sec:repro}
+
+\begin{itemize}
+  \item \textbf{环境说明：} 记录硬件、操作系统、Python/框架版本，并给出 \code{requirements.txt} 或 \code{environment.yml}。
+  \item \textbf{训练流程：} 说明数据划分、训练轮次、学习率、随机种子等关键参数。
+  \item \textbf{可重复验证：} 提供运行命令示例，例如 \code{python train.py --config configs/base.yaml}，并展示日志或曲线截图。
+\end{itemize}
+
+\section{提交前检查清单}
+\label{sec:checklist}
+
+\begin{enumerate}
+  \item 已完成全部小节内容更新，删除无关示例文字与占位图。
+  \item 图表均有编号与清晰说明，坐标与单位准确无误。
+  \item 公式、变量符号在全文保持一致，并适当给出解释。
+  \item 引用格式统一，\code{ref.bib} 中条目完整无误。
+  \item 运行 \code{xelatex main.tex} 至少两次，确保目录与引用无报错；若使用 \code{bibtex}，请执行额外编译流程。
+  \item 清理辅助文件（可执行 \code{latexmk -c}），提交结果前手动检查 PDF 排版。
+\end{enumerate}
+
+\addcontentsline{toc}{section}{参考文献}
+\bibliographystyle{ieeetr}
+\bibliography{ref}
+
+\appendix
+
+\section{参考文献管理示例}
+\label{sec:bib}
+
+使用 \code{bibtex} 时可将文献条目放入 \code{ref.bib}，并在正文中通过 \code{\string\citep{lecun2015deep}} 引用。编译流程示意：
+\begin{enumerate}
+  \item 首次编译，立即暴露语法与缺字错误：\code{xelatex main.tex}
+  \item 更新 \code{ref.bib} 后运行，生成最新参考文献列表：\code{bibtex main}
+  \item 重新编译以刷新目录、交叉引用与页码：\code{xelatex main.tex} （运行两次）
+  % \item 重新编译以刷新目录、交叉引用与页码：xelatex main.tex
+\end{enumerate}
+
+
+
+下面给出占位符文献条目（默认已写入 \code{ref.bib}）：
+\begin{verbatim}
+@article{lecun2015deep,
+  title={Deep learning},
+  author={LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+  journal={nature},
+  volume={521},
+  number={7553},
+  pages={436--444},
+  year={2015},
+  publisher={Nature Publishing Group UK London}
+}
+\end{verbatim}
+
+\section{常见问题解答}
+
+\begin{description}[leftmargin=0.5cm,labelindent=0cm]
+  \item[图像模糊] 使用矢量格式（PDF/SVG）或更高分辨率 PNG。
+  \item[中文乱码] 确认以 UTF-8 编码保存 \code{main.tex}，并使用 XeLaTeX 编译。
+\end{description}
+
+\end{document}
