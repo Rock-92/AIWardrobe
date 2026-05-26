@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIWardrobe 对话样本</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">AIWardrobe Local Prototype</p>
+          <h1>对话式穿搭助手</h1>
+        </div>
+        <div class="status-strip" aria-label="pipeline status">
+          <span>多用户本地记忆</span>
+          <span>150 样例 mock</span>
+          <span>API 未接入</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="panel controls-panel" aria-labelledby="user-title">
+          <div class="panel-heading">
+            <h2 id="user-title">用户</h2>
+            <button id="newUserButton" class="text-button" type="button">新建</button>
+          </div>
+          <div id="userTabs" class="user-tabs" aria-label="用户选择"></div>
+          <div class="user-actions">
+            <button id="renameUserButton" class="secondary-button" type="button">重命名</button>
+            <button id="clearHistoryButton" class="secondary-button" type="button">清空历史</button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="panel-heading compact">
+            <h2 id="request-title">用户需求</h2>
+          </div>
+
+          <form id="intentForm" class="control-stack">
+            <label class="field">
+              <span>城市</span>
+              <input id="cityInput" type="text" value="" placeholder="无" autocomplete="off" />
+            </label>
+
+            <div class="two-col">
+              <label class="field">
+                <span>温度</span>
+                <input id="tempInput" type="number" value="" placeholder="无" min="-10" max="42" />
+              </label>
+
+              <label class="field">
+                <span>天气</span>
+                <select id="weatherInput">
+                  <option value="无" selected>无</option>
+                  <option>小雨</option>
+                  <option>晴</option>
+                  <option>多云</option>
+                  <option>降温</option>
+                  <option>闷热</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="segmented" data-control="occasion">
+              <legend>场合</legend>
+              <button type="button" data-value="无" aria-pressed="true">无</button>
+              <button type="button" data-value="通勤" aria-pressed="false">通勤</button>
+              <button type="button" data-value="约会" aria-pressed="false">约会</button>
+              <button type="button" data-value="周末" aria-pressed="false">周末</button>
+              <button type="button" data-value="晚餐" aria-pressed="false">晚餐</button>
+            </fieldset>
+
+            <fieldset class="segmented" data-control="mood">
+              <legend>心情</legend>
+              <button type="button" data-value="无" aria-pressed="true">无</button>
+              <button type="button" data-value="松弛" aria-pressed="false">松弛</button>
+              <button type="button" data-value="精致" aria-pressed="false">精致</button>
+              <button type="button" data-value="明亮" aria-pressed="false">明亮</button>
+              <button type="button" data-value="利落" aria-pressed="false">利落</button>
+            </fieldset>
+
+            <fieldset class="segmented wide" data-control="mode">
+              <legend>推荐边界</legend>
+              <button type="button" data-value="closet" aria-pressed="true">衣柜优先</button>
+              <button type="button" data-value="inspiration" aria-pressed="false">可加灵感</button>
+            </fieldset>
+          </form>
+
+          <div>
+            <div class="section-title">
+              <h3>当前衣柜</h3>
+              <span id="closetCount">0</span>
+            </div>
+            <div id="closetRail" class="closet-rail"></div>
+          </div>
+        </section>
+
+        <section class="chat-panel" aria-labelledby="chat-title">
+          <div class="chat-header">
+            <div>
+              <p class="eyebrow">Conversation</p>
+              <h2 id="chat-title">穿搭对话</h2>
+            </div>
+            <div id="activeUserBadge" class="active-user-badge"></div>
+          </div>
+
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+
+          <form id="chatForm" class="chat-composer">
+            <textarea
+              id="messageInput"
+              rows="3"
+              placeholder="描述你的需求，比如：今天小雨，晚上约会，想轻松一点但不要太随便。"
+            ></textarea>
+            <button id="sendButton" class="send-button" type="submit">生成搭配</button>
+          </form>
+        </section>
+
+        <aside class="panel evidence-panel" aria-labelledby="evidence-title">
+          <div class="panel-heading">
+            <h2 id="evidence-title">检索证据</h2>
+            <span class="small-badge">RAG Mock</span>
+          </div>
+
+          <div class="evidence-block">
+            <h3>历史偏好</h3>
+            <div id="preferenceList" class="tag-row"></div>
+          </div>
+
+          <div class="evidence-block">
+            <h3>匹配样例</h3>
+            <div id="exampleList" class="example-list"></div>
+          </div>
+
+          <div class="evidence-block">
+            <h3>校验结果</h3>
+            <div id="validationList" class="validation-list"></div>
+          </div>
+
+          <div class="evidence-block">
+            <h3>模型输入摘要</h3>
+            <pre id="promptPreview" class="prompt-preview"></pre>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
