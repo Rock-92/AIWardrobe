@@ -1,0 +1,5152 @@
+[
+  {
+    "id": "sample-0001",
+    "pic": "0001.jpg",
+    "image_path": "Dataset/data_exemple/0001.jpg",
+    "description": "衣物描述：驼色连帽夹克叠穿浅色卫衣，搭配浅蓝宽松牛仔裤和黑白运动鞋；性别：男；适宜季节：秋冬；适宜场合：日常出街、校园、休闲通勤；穿搭风格：日系休闲、City Boy。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：通勤、校园、日常。 适合季节：秋、冬。 主要色彩：浅色、棕色、蓝色。 可见单品：卫衣、夹克、牛仔裤、运动鞋、帽子。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "卫衣",
+        "夹克",
+        "牛仔裤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-001",
+      "dataset": "ljly",
+      "original_pic": "ljly_001.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_001.jpg"
+    }
+  },
+  {
+    "id": "sample-0002",
+    "pic": "0002.jpg",
+    "image_path": "Dataset/data_exemple/0002.jpg",
+    "description": "衣物描述：米白拼接立领棉服搭配棕色工装长裤和黑白板鞋，配色干净温暖；性别：男；适宜季节：秋冬；适宜场合：日常出街、校园、旅行；穿搭风格：日系休闲、City Boy。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：校园、日常、旅行。 适合季节：秋、冬。 主要色彩：浅色、棕色。 可见单品：长裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "长裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-002",
+      "dataset": "ljly",
+      "original_pic": "ljly_002.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_002.jpg"
+    }
+  },
+  {
+    "id": "sample-0003",
+    "pic": "0003.jpg",
+    "image_path": "Dataset/data_exemple/0003.jpg",
+    "description": "衣物描述：棕色皮草感外套搭配白色短裙、白色内搭、棕色长袜和毛绒雪地靴，配棕色手袋；性别：女；适宜季节：秋冬；适宜场合：约会、拍照、逛街；穿搭风格：甜酷、韩系辣妹、冬日氛围感。 风格关键词：韩系、氛围感。 适合场合：约会、日常、拍照。 适合季节：秋、冬。 主要色彩：浅色、棕色。 可见单品：外套、半身裙、靴子。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "约会",
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "韩系",
+        "氛围感"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "外套",
+        "半身裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-003",
+      "dataset": "ljly",
+      "original_pic": "ljly_003.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_003.jpg"
+    }
+  },
+  {
+    "id": "sample-0004",
+    "pic": "0004.jpg",
+    "image_path": "Dataset/data_exemple/0004.jpg",
+    "description": "衣物描述：黑色机车皮夹克叠穿白衬衫和领带，搭配黑色宽松长裤与厚底鞋；性别：女；适宜季节：春秋、初冬；适宜场合：出街、派对、拍照；穿搭风格：甜酷、暗黑学院、街头机车风。 风格关键词：学院、街头。 适合场合：日常、拍照、派对。 适合季节：春、秋、冬。 主要色彩：深色。 可见单品：衬衫、夹克、长裤。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "日常",
+        "拍照",
+        "派对"
+      ],
+      "style": [
+        "学院",
+        "街头"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "夹克",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-004",
+      "dataset": "ljly",
+      "original_pic": "ljly_004.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_004.jpg"
+    }
+  },
+  {
+    "id": "sample-0005",
+    "pic": "0005.jpg",
+    "image_path": "Dataset/data_exemple/0005.jpg",
+    "description": "衣物描述：白色长款大衣叠穿格纹连衣裙和围巾，搭配棕色长靴，温柔又有层次；性别：女；适宜季节：秋冬；适宜场合：约会、通勤、城市漫步；穿搭风格：韩系温柔、复古学院、冬日淑女风。 风格关键词：韩系、学院、复古。 适合场合：通勤、约会。 适合季节：秋、冬。 主要色彩：浅色、棕色。 可见单品：外套、连衣裙、靴子。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "约会"
+      ],
+      "style": [
+        "韩系",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "外套",
+        "连衣裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-005",
+      "dataset": "ljly",
+      "original_pic": "ljly_005.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_005.jpg"
+    }
+  },
+  {
+    "id": "sample-0006",
+    "pic": "0006.jpg",
+    "image_path": "Dataset/data_exemple/0006.jpg",
+    "description": "衣物描述：浅棕色短款羽绒服搭配黑色工装裤和白色运动鞋，保暖且利落；性别：男；适宜季节：冬季；适宜场合：日常出街、校园、户外休闲；穿搭风格：日系机能、休闲工装。 风格关键词：日常休闲、日系、学院。 适合场合：校园、日常。 适合季节：冬。 主要色彩：浅色、深色、棕色。 可见单品：工装裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "冬"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "工装裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-006",
+      "dataset": "ljly",
+      "original_pic": "ljly_006.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_006.jpg"
+    }
+  },
+  {
+    "id": "sample-0007",
+    "pic": "0007.jpg",
+    "image_path": "Dataset/data_exemple/0007.jpg",
+    "description": "衣物描述：棕色西装外套内搭浅色背心，搭配米白高腰阔腿裤和同色运动鞋；性别：女；适宜季节：春秋；适宜场合：通勤、约会、咖啡店拍照；穿搭风格：轻熟通勤、法式休闲。 风格关键词：日常休闲、法式、轻熟。 适合场合：通勤、约会、拍照。 适合季节：春、秋。 主要色彩：浅色、棕色。 可见单品：西装、外套、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "拍照"
+      ],
+      "style": [
+        "日常休闲",
+        "法式",
+        "轻熟"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "西装",
+        "外套",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-007",
+      "dataset": "ljly",
+      "original_pic": "ljly_007.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_007.jpg"
+    }
+  },
+  {
+    "id": "sample-0008",
+    "pic": "0008.jpg",
+    "image_path": "Dataset/data_exemple/0008.jpg",
+    "description": "衣物描述：白衬衫叠黑色领带，搭配黑色宽松长裤和黑白运动鞋；性别：男；适宜季节：春秋、初夏；适宜场合：校园、日常出街、休闲通勤；穿搭风格：学院风、City Boy、黑白极简。 风格关键词：日常休闲、学院、City Boy。 适合场合：通勤、校园、日常。 适合季节：春、夏、秋。 主要色彩：深色。 可见单品：衬衫、长裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "夏",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-008",
+      "dataset": "ljly",
+      "original_pic": "ljly_008.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_008.jpg"
+    }
+  },
+  {
+    "id": "sample-0009",
+    "pic": "0009.jpg",
+    "image_path": "Dataset/data_exemple/0009.jpg",
+    "description": "衣物描述：蓝白条纹衬衫叠穿白色T恤，搭配浅灰宽松牛仔裤和运动鞋；性别：男；适宜季节：春夏；适宜场合：校园、逛街、周末出游；穿搭风格：清爽少年感、City Boy、日系休闲。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：校园、日常。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、牛仔裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-009",
+      "dataset": "ljly",
+      "original_pic": "ljly_009.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_009.jpg"
+    }
+  },
+  {
+    "id": "sample-0010",
+    "pic": "0010.jpg",
+    "image_path": "Dataset/data_exemple/0010.jpg",
+    "description": "衣物描述：浅蓝衬衫内搭白色印花T恤，搭配浅灰牛仔裤和白色运动鞋；性别：男；适宜季节：春夏；适宜场合：校园、日常出街、旅行；穿搭风格：清爽日系、City Boy、少年感。 风格关键词：日系、学院、City Boy。 适合场合：校园、日常、旅行。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、牛仔裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-010",
+      "dataset": "ljly",
+      "original_pic": "ljly_010.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_010.jpg"
+    }
+  },
+  {
+    "id": "sample-0011",
+    "pic": "0011.jpg",
+    "image_path": "Dataset/data_exemple/0011.jpg",
+    "description": "衣物描述：浅蓝开衫或衬衫外套搭配白色蕾丝长裙、米色平底鞋和编织包；性别：女；适宜季节：春夏；适宜场合：约会、度假、拍照；穿搭风格：森系、温柔法式、清新甜美。 风格关键词：法式、甜美。 适合场合：约会、旅行、拍照。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、外套、半身裙、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "旅行",
+        "拍照"
+      ],
+      "style": [
+        "法式",
+        "甜美"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "外套",
+        "半身裙",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-011",
+      "dataset": "ljly",
+      "original_pic": "ljly_011.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_011.jpg"
+    }
+  },
+  {
+    "id": "sample-0012",
+    "pic": "0012.jpg",
+    "image_path": "Dataset/data_exemple/0012.jpg",
+    "description": "衣物描述：棕色针织开衫搭配格纹背心和棕色长裙，配草编托特包与棕色鞋；性别：女；适宜季节：秋季、初冬；适宜场合：通勤、约会、咖啡店；穿搭风格：复古文艺、温柔学院。 风格关键词：学院、复古。 适合场合：通勤、约会。 适合季节：秋、冬。 主要色彩：棕色。 可见单品：针织、半身裙、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "约会"
+      ],
+      "style": [
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "棕色"
+      ],
+      "items": [
+        "针织",
+        "半身裙",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-012",
+      "dataset": "ljly",
+      "original_pic": "ljly_012.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_012.jpg"
+    }
+  },
+  {
+    "id": "sample-0013",
+    "pic": "0013.jpg",
+    "image_path": "Dataset/data_exemple/0013.jpg",
+    "description": "衣物描述：浅蓝宽松上衣搭配米白蕾丝半身长裙、浅色鞋和棕色小包；性别：女；适宜季节：春夏；适宜场合：约会、旅行、日常拍照；穿搭风格：森系、清新甜美、文艺休闲。 风格关键词：日常休闲、甜美。 适合场合：约会、日常、旅行、拍照。 适合季节：春、夏。 主要色彩：浅色、棕色、蓝色。 可见单品：半身裙、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "日常",
+        "旅行",
+        "拍照"
+      ],
+      "style": [
+        "日常休闲",
+        "甜美"
+      ],
+      "colors": [
+        "浅色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "半身裙",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-013",
+      "dataset": "ljly",
+      "original_pic": "ljly_013.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_013.jpg"
+    }
+  },
+  {
+    "id": "sample-0014",
+    "pic": "0014.jpg",
+    "image_path": "Dataset/data_exemple/0014.jpg",
+    "description": "衣物描述：米白蕾丝衬衫搭配深绿色牛仔拼接长裙和黑色短靴；性别：女；适宜季节：春秋；适宜场合：约会、逛街、拍照；穿搭风格：复古少女、法式田园、文艺感。 风格关键词：法式、复古。 适合场合：约会、日常、拍照。 适合季节：春、秋。 主要色彩：浅色、深色、蓝色、绿色。 可见单品：衬衫、牛仔裤、半身裙、靴子。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "约会",
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "法式",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色",
+        "绿色"
+      ],
+      "items": [
+        "衬衫",
+        "牛仔裤",
+        "半身裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-014",
+      "dataset": "ljly",
+      "original_pic": "ljly_014.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_014.jpg"
+    }
+  },
+  {
+    "id": "sample-0015",
+    "pic": "0015.jpg",
+    "image_path": "Dataset/data_exemple/0015.jpg",
+    "description": "衣物描述：浅灰宽松外套叠穿白色内搭，搭配白色半身长裙和运动鞋；性别：女；适宜季节：春秋；适宜场合：日常出街、校园、休闲通勤；穿搭风格：韩系休闲、温柔松弛。 风格关键词：日常休闲、韩系、学院。 适合场合：通勤、校园、日常。 适合季节：春、秋。 主要色彩：浅色。 可见单品：外套、半身裙、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "韩系",
+        "学院"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "外套",
+        "半身裙",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-015",
+      "dataset": "ljly",
+      "original_pic": "ljly_015.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_015.jpg"
+    }
+  },
+  {
+    "id": "sample-0016",
+    "pic": "0016.jpg",
+    "image_path": "Dataset/data_exemple/0016.jpg",
+    "description": "衣物描述：白色针织开衫叠穿吊带或背心，搭配浅蓝牛仔裤和白色运动鞋；性别：女；适宜季节：春秋；适宜场合：校园、逛街、日常约会；穿搭风格：韩系清新、温柔休闲。 风格关键词：日常休闲、韩系、学院。 适合场合：约会、校园、日常。 适合季节：春、秋。 主要色彩：浅色、蓝色。 可见单品：针织、牛仔裤、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "约会",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "韩系",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "针织",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-016",
+      "dataset": "ljly",
+      "original_pic": "ljly_016.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_016.jpg"
+    }
+  },
+  {
+    "id": "sample-0017",
+    "pic": "0017.jpg",
+    "image_path": "Dataset/data_exemple/0017.jpg",
+    "description": "衣物描述：白色短袖收腰连衣裙搭配白色袜子和浅色运动鞋，裙摆轻盈；性别：女；适宜季节：夏季；适宜场合：约会、校园、拍照；穿搭风格：甜美少女、韩系清纯。 风格关键词：韩系、学院、甜美。 适合场合：约会、校园、拍照。 适合季节：夏。 主要色彩：浅色。 可见单品：T恤、连衣裙、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "校园",
+        "拍照"
+      ],
+      "style": [
+        "韩系",
+        "学院",
+        "甜美"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "T恤",
+        "连衣裙",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-017",
+      "dataset": "ljly",
+      "original_pic": "ljly_017.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_017.jpg"
+    }
+  },
+  {
+    "id": "sample-0018",
+    "pic": "0018.jpg",
+    "image_path": "Dataset/data_exemple/0018.jpg",
+    "description": "衣物描述：浅蓝衬衫外搭白色吊带连衣长裙，搭配白袜和白色运动鞋；性别：女；适宜季节：春夏；适宜场合：校园、约会、日常出游；穿搭风格：清新学院、温柔韩系。 风格关键词：韩系、学院。 适合场合：约会、校园、日常。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、半身裙、连衣裙、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "韩系",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "半身裙",
+        "连衣裙",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-018",
+      "dataset": "ljly",
+      "original_pic": "ljly_018.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_018.jpg"
+    }
+  },
+  {
+    "id": "sample-0019",
+    "pic": "0019.jpg",
+    "image_path": "Dataset/data_exemple/0019.jpg",
+    "description": "衣物描述：黑色短袖针织上衣搭配米白A字半身长裙和白色运动鞋；性别：女；适宜季节：春夏；适宜场合：通勤、校园、日常出街；穿搭风格：简约清爽、韩系轻熟。 风格关键词：韩系、学院、轻熟。 适合场合：通勤、校园、日常。 适合季节：春、夏。 主要色彩：浅色、深色。 可见单品：T恤、针织、半身裙、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "韩系",
+        "学院",
+        "轻熟"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "T恤",
+        "针织",
+        "半身裙",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-019",
+      "dataset": "ljly",
+      "original_pic": "ljly_019.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_019.jpg"
+    }
+  },
+  {
+    "id": "sample-0020",
+    "pic": "0020.jpg",
+    "image_path": "Dataset/data_exemple/0020.jpg",
+    "description": "衣物描述：白色花朵立体装饰吊带连衣裙搭配白色中筒靴，裙摆带不规则层次；性别：女；适宜季节：春夏；适宜场合：约会、派对、拍照；穿搭风格：仙女风、甜美公主感。 风格关键词：甜美。 适合场合：约会、拍照、派对。 适合季节：春、夏。 主要色彩：浅色。 可见单品：连衣裙、靴子。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "拍照",
+        "派对"
+      ],
+      "style": [
+        "甜美"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "连衣裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-020",
+      "dataset": "ljly",
+      "original_pic": "ljly_020.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_020.jpg"
+    }
+  },
+  {
+    "id": "sample-0021",
+    "pic": "0021.jpg",
+    "image_path": "Dataset/data_exemple/0021.jpg",
+    "description": "衣物描述：粉棕格纹西装外套搭配短裙或短裤，配白色小包、白袜和厚底鞋；性别：女；适宜季节：春秋；适宜场合：校园、约会、逛街；穿搭风格：学院风、甜酷少女。 风格关键词：学院。 适合场合：约会、校园、日常。 适合季节：春、秋。 主要色彩：浅色。 可见单品：西装、外套、短裤、半身裙、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "约会",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "学院"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "西装",
+        "外套",
+        "短裤",
+        "半身裙",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-021",
+      "dataset": "ljly",
+      "original_pic": "ljly_021.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_021.jpg"
+    }
+  },
+  {
+    "id": "sample-0022",
+    "pic": "0022.jpg",
+    "image_path": "Dataset/data_exemple/0022.jpg",
+    "description": "衣物描述：深灰宽松印花T恤搭配黑色短裤和白色运动鞋，整体轻便利落；性别：女；适宜季节：夏季；适宜场合：日常出街、校园、运动休闲；穿搭风格：休闲街头、甜酷运动。 风格关键词：日常休闲、学院、街头。 适合场合：校园、日常。 适合季节：夏。 主要色彩：浅色、深色。 可见单品：T恤、短裤、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "T恤",
+        "短裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-022",
+      "dataset": "ljly",
+      "original_pic": "ljly_022.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_022.jpg"
+    }
+  },
+  {
+    "id": "sample-0023",
+    "pic": "0023.jpg",
+    "image_path": "Dataset/data_exemple/0023.jpg",
+    "description": "衣物描述：白色短袖针织上衣搭配浅蓝阔腿牛仔裤，腰间系粉色格纹衬衫；性别：女；适宜季节：春夏；适宜场合：校园、逛街、旅行；穿搭风格：美式复古、甜酷休闲。 风格关键词：日常休闲、美式、学院、复古。 适合场合：校园、日常、旅行。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、针织、牛仔裤。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "美式",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "针织",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-023",
+      "dataset": "ljly",
+      "original_pic": "ljly_023.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_023.jpg"
+    }
+  },
+  {
+    "id": "sample-0024",
+    "pic": "0024.jpg",
+    "image_path": "Dataset/data_exemple/0024.jpg",
+    "description": "衣物描述：棕色西装外套叠穿白衬衫，搭配棕色阔腿裤和白色运动鞋；性别：女；适宜季节：春秋；适宜场合：通勤、校园、日常出街；穿搭风格：复古学院、轻熟休闲。 风格关键词：日常休闲、学院、轻熟、复古。 适合场合：通勤、校园、日常。 适合季节：春、秋。 主要色彩：浅色、棕色。 可见单品：衬衫、西装、外套、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "轻熟",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-024",
+      "dataset": "ljly",
+      "original_pic": "ljly_024.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_024.jpg"
+    }
+  },
+  {
+    "id": "sample-0025",
+    "pic": "0025.jpg",
+    "image_path": "Dataset/data_exemple/0025.jpg",
+    "description": "衣物描述：棕色短外套搭配黑色上衣和黑色阔腿裤，腰间系格纹衬衫并配小包；性别：女；适宜季节：春秋；适宜场合：逛街、旅行、日常拍照；穿搭风格：复古街头、松弛休闲。 风格关键词：日常休闲、复古、街头。 适合场合：日常、旅行、拍照。 适合季节：春、秋。 主要色彩：深色、棕色。 可见单品：衬衫、外套、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "日常",
+        "旅行",
+        "拍照"
+      ],
+      "style": [
+        "日常休闲",
+        "复古",
+        "街头"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-025",
+      "dataset": "ljly",
+      "original_pic": "ljly_025.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_025.jpg"
+    }
+  },
+  {
+    "id": "sample-0026",
+    "pic": "0026.jpg",
+    "image_path": "Dataset/data_exemple/0026.jpg",
+    "description": "衣物描述：黑色印花T恤搭配深色阔腿牛仔裤，腰间系格纹衬衫，配白色板鞋；性别：女；适宜季节：春夏；适宜场合：校园、出街、音乐节；穿搭风格：美式复古、街头甜酷。 风格关键词：美式、学院、复古、街头。 适合场合：校园、日常。 适合季节：春、夏。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、T恤、牛仔裤、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "美式",
+        "学院",
+        "复古",
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-026",
+      "dataset": "ljly",
+      "original_pic": "ljly_026.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_026.jpg"
+    }
+  },
+  {
+    "id": "sample-0027",
+    "pic": "0027.jpg",
+    "image_path": "Dataset/data_exemple/0027.jpg",
+    "description": "衣物描述：白色短袖上衣搭配浅蓝宽松牛仔裤，腰间系粉色格纹衬衫；性别：女；适宜季节：春夏；适宜场合：校园、逛街、休闲出游；穿搭风格：甜酷休闲、美式学院。 风格关键词：日常休闲、美式、学院。 适合场合：校园、日常。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、牛仔裤。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "美式",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-027",
+      "dataset": "ljly",
+      "original_pic": "ljly_027.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_027.jpg"
+    }
+  },
+  {
+    "id": "sample-0028",
+    "pic": "0028.jpg",
+    "image_path": "Dataset/data_exemple/0028.jpg",
+    "description": "衣物描述：白色短袖针织衫搭配灰黑色微喇牛仔裤，腰间系浅色条纹衬衫；性别：女；适宜季节：春夏；适宜场合：出街、校园、朋友聚会；穿搭风格：复古辣妹、甜酷休闲。 风格关键词：日常休闲、学院、复古。 适合场合：校园、日常。 适合季节：春、夏。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、T恤、针织、牛仔裤。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "针织",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-028",
+      "dataset": "ljly",
+      "original_pic": "ljly_028.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_028.jpg"
+    }
+  },
+  {
+    "id": "sample-0029",
+    "pic": "0029.jpg",
+    "image_path": "Dataset/data_exemple/0029.jpg",
+    "description": "衣物描述：白色短袖衬衫外套搭配浅米色工装阔腿裤，腰部有抽绳和口袋设计；性别：女；适宜季节：春夏；适宜场合：旅行、日常出街、休闲通勤；穿搭风格：清爽工装、日系休闲。 风格关键词：日常休闲、日系。 适合场合：通勤、日常、旅行。 适合季节：春、夏。 主要色彩：浅色。 可见单品：衬衫、T恤、外套。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "日系"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "外套"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-029",
+      "dataset": "ljly",
+      "original_pic": "ljly_029.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_029.jpg"
+    }
+  },
+  {
+    "id": "sample-0030",
+    "pic": "0030.jpg",
+    "image_path": "Dataset/data_exemple/0030.jpg",
+    "description": "衣物描述：卡其色连帽卫衣搭配深蓝宽松牛仔裤和黑色皮鞋，简洁耐看；性别：男；适宜季节：春秋；适宜场合：校园、日常出街、休闲通勤；穿搭风格：日系休闲、City Boy。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：通勤、校园、日常。 适合季节：春、秋。 主要色彩：深色、棕色、蓝色。 可见单品：卫衣、牛仔裤、帽子。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "深色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "卫衣",
+        "牛仔裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-030",
+      "dataset": "ljly",
+      "original_pic": "ljly_030.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_030.jpg"
+    }
+  },
+  {
+    "id": "sample-0031",
+    "pic": "0031.jpg",
+    "image_path": "Dataset/data_exemple/0031.jpg",
+    "description": "衣物描述：浅蓝衬衫叠穿白T恤，搭配黑色直筒短裤和黑白运动鞋；性别：男；适宜季节：夏季；适宜场合：校园、出街、周末休闲；穿搭风格：清爽少年感、City Boy。 风格关键词：日常休闲、学院、City Boy。 适合场合：校园、日常。 适合季节：夏。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、T恤、短裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "短裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-031",
+      "dataset": "ljly",
+      "original_pic": "ljly_031.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_031.jpg"
+    }
+  },
+  {
+    "id": "sample-0032",
+    "pic": "0032.jpg",
+    "image_path": "Dataset/data_exemple/0032.jpg",
+    "description": "衣物描述：灰色短袖衬衫内搭白T恤，搭配黑色宽松短裤、白袜和黑白运动鞋；性别：男；适宜季节：夏季；适宜场合：日常出街、校园、旅行；穿搭风格：日系休闲、简约City Boy。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：校园、日常、旅行。 适合季节：夏。 主要色彩：深色。 可见单品：衬衫、T恤、短裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "短裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-032",
+      "dataset": "ljly",
+      "original_pic": "ljly_032.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_032.jpg"
+    }
+  },
+  {
+    "id": "sample-0033",
+    "pic": "0033.jpg",
+    "image_path": "Dataset/data_exemple/0033.jpg",
+    "description": "衣物描述：棕色宽松字母T恤搭配浅蓝宽松牛仔裤、棒球帽和运动鞋；性别：男；适宜季节：夏季；适宜场合：校园、逛街、户外休闲；穿搭风格：美式街头、City Boy、少年感。 风格关键词：日常休闲、美式、学院、街头、City Boy。 适合场合：校园、日常。 适合季节：夏。 主要色彩：浅色、棕色、蓝色。 可见单品：T恤、牛仔裤、运动鞋、帽子。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "美式",
+        "学院",
+        "街头",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-033",
+      "dataset": "ljly",
+      "original_pic": "ljly_033.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_033.jpg"
+    }
+  },
+  {
+    "id": "sample-0034",
+    "pic": "0034.jpg",
+    "image_path": "Dataset/data_exemple/0034.jpg",
+    "description": "衣物描述：蓝白格纹衬衫外套叠穿白T恤，搭配黑灰宽松牛仔裤和白色运动鞋；性别：男；适宜季节：春夏；适宜场合：校园、日常出街、旅行；穿搭风格：日系休闲、City Boy、清爽学院。 风格关键词：日常休闲、日系、学院、City Boy。 适合场合：校园、日常、旅行。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、外套、牛仔裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "外套",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-034",
+      "dataset": "ljly",
+      "original_pic": "ljly_034.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_034.jpg"
+    }
+  },
+  {
+    "id": "sample-0035",
+    "pic": "0035.jpg",
+    "image_path": "Dataset/data_exemple/0035.jpg",
+    "description": "衣物描述：白色薄纱长袖连衣裙搭配黑色短靴和黑色小包，材质轻盈透气；性别：女；适宜季节：春夏；适宜场合：约会、拍照、展览；穿搭风格：仙女风、温柔甜美、轻法式。 风格关键词：法式、甜美。 适合场合：约会、拍照。 适合季节：春、夏。 主要色彩：浅色、深色。 可见单品：连衣裙、靴子、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "拍照"
+      ],
+      "style": [
+        "法式",
+        "甜美"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "连衣裙",
+        "靴子",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-035",
+      "dataset": "ljly",
+      "original_pic": "ljly_035.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_035.jpg"
+    }
+  },
+  {
+    "id": "sample-0036",
+    "pic": "0036.jpg",
+    "image_path": "Dataset/data_exemple/0036.jpg",
+    "description": "衣物描述：灰蓝衬衫外套搭配短款上衣、灰色短裙和白色中筒靴；性别：女；适宜季节：春夏、初秋；适宜场合：逛街、约会、拍照；穿搭风格：韩系辣妹、甜酷学院。 风格关键词：韩系、学院。 适合场合：约会、日常、拍照。 适合季节：春、夏、秋。 主要色彩：浅色、蓝色。 可见单品：衬衫、外套、半身裙、靴子。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏",
+        "秋"
+      ],
+      "occasion": [
+        "约会",
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "韩系",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "外套",
+        "半身裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-036",
+      "dataset": "ljly",
+      "original_pic": "ljly_036.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_036.jpg"
+    }
+  },
+  {
+    "id": "sample-0037",
+    "pic": "0037.jpg",
+    "image_path": "Dataset/data_exemple/0037.jpg",
+    "description": "衣物描述：白色吊带上衣搭配米色高腰半身长裙、浅色短靴和小挎包；性别：女；适宜季节：春夏；适宜场合：约会、通勤、度假；穿搭风格：法式简约、温柔轻熟。 风格关键词：法式、轻熟。 适合场合：通勤、约会、旅行。 适合季节：春、夏。 主要色彩：浅色。 可见单品：半身裙、靴子、包。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "旅行"
+      ],
+      "style": [
+        "法式",
+        "轻熟"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙",
+        "靴子",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-037",
+      "dataset": "ljly",
+      "original_pic": "ljly_037.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_037.jpg"
+    }
+  },
+  {
+    "id": "sample-0038",
+    "pic": "0038.jpg",
+    "image_path": "Dataset/data_exemple/0038.jpg",
+    "description": "衣物描述：黑色碎花吊带连衣长裙搭配白色运动鞋，裙身飘逸显瘦；性别：女；适宜季节：夏季；适宜场合：约会、旅行、日常拍照；穿搭风格：法式田园、复古甜美。 风格关键词：法式、甜美、复古。 适合场合：约会、日常、旅行、拍照。 适合季节：夏。 主要色彩：浅色、深色。 可见单品：半身裙、连衣裙、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "约会",
+        "日常",
+        "旅行",
+        "拍照"
+      ],
+      "style": [
+        "法式",
+        "甜美",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "半身裙",
+        "连衣裙",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-038",
+      "dataset": "ljly",
+      "original_pic": "ljly_038.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_038.jpg"
+    }
+  },
+  {
+    "id": "sample-0039",
+    "pic": "0039.jpg",
+    "image_path": "Dataset/data_exemple/0039.jpg",
+    "description": "衣物描述：黑白条纹短袖上衣搭配浅蓝高腰牛仔阔腿裤和白色运动鞋；性别：女；适宜季节：春夏；适宜场合：校园、逛街、休闲通勤；穿搭风格：法式休闲、清爽日常。 风格关键词：日常休闲、法式、学院。 适合场合：通勤、校园、日常。 适合季节：春、夏。 主要色彩：浅色、蓝色。 可见单品：T恤、牛仔裤、运动鞋。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "法式",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-039",
+      "dataset": "ljly",
+      "original_pic": "ljly_039.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_039.jpg"
+    }
+  },
+  {
+    "id": "sample-0040",
+    "pic": "0040.jpg",
+    "image_path": "Dataset/data_exemple/0040.jpg",
+    "description": "衣物描述：米白长袖衬衫搭配深灰A字半身中长裙和白色单鞋，线条干净；性别：女；适宜季节：春秋；适宜场合：通勤、面试、正式日常；穿搭风格：轻熟通勤、简约优雅。 风格关键词：轻熟。 适合场合：通勤、日常、正式。 适合季节：春、秋。 主要色彩：浅色。 可见单品：衬衫、半身裙。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "日常",
+        "正式"
+      ],
+      "style": [
+        "轻熟"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "衬衫",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-040",
+      "dataset": "ljly",
+      "original_pic": "ljly_040.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_040.jpg"
+    }
+  },
+  {
+    "id": "sample-0041",
+    "pic": "0041.jpg",
+    "image_path": "Dataset/data_exemple/0041.jpg",
+    "description": "衣物描述：浅蓝牛仔外套叠穿白色上衣，搭配黑色直筒裤和黑色乐福鞋；性别：女；适宜季节：春秋；适宜场合：通勤、校园、日常出街；穿搭风格：简约休闲、韩系通勤。 风格关键词：日常休闲、韩系、学院。 适合场合：通勤、校园、日常。 适合季节：春、秋。 主要色彩：浅色、深色、蓝色。 可见单品：外套、牛仔裤。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "韩系",
+        "学院"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "外套",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-041",
+      "dataset": "ljly",
+      "original_pic": "ljly_041.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_041.jpg"
+    }
+  },
+  {
+    "id": "sample-0042",
+    "pic": "0042.jpg",
+    "image_path": "Dataset/data_exemple/0042.jpg",
+    "description": "衣物描述：浅蓝短袖衬衫搭配黑色A字半身中长裙和浅色单鞋；性别：女；适宜季节：春夏；适宜场合：通勤、面试、校园；穿搭风格：轻熟通勤、学院简约。 风格关键词：学院、轻熟。 适合场合：通勤、校园。 适合季节：春、夏。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、T恤、半身裙。 呈现性别风格：女。",
+    "tags": {
+      "gender": [
+        "女"
+      ],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "校园"
+      ],
+      "style": [
+        "学院",
+        "轻熟"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-042",
+      "dataset": "ljly",
+      "original_pic": "ljly_042.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_042.jpg"
+    }
+  },
+  {
+    "id": "sample-0043",
+    "pic": "0043.jpg",
+    "image_path": "Dataset/data_exemple/0043.jpg",
+    "description": "衣物描述：蓝白格纹短袖衬衫搭配浅蓝阔腿裤，内搭白色T恤并配蓝白运动鞋；性别：男；适宜季节：夏季；适宜场合：校园、出街、旅行；穿搭风格：清爽City Boy、夏日少年感。 风格关键词：学院、City Boy。 适合场合：校园、日常、旅行。 适合季节：夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-043",
+      "dataset": "ljly",
+      "original_pic": "ljly_043.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_043.jpg"
+    }
+  },
+  {
+    "id": "sample-0044",
+    "pic": "0044.jpg",
+    "image_path": "Dataset/data_exemple/0044.jpg",
+    "description": "衣物描述：蓝白格纹短袖衬衫内搭白色T恤，搭配浅蓝宽松长裤和蓝白运动鞋；性别：男；适宜季节：夏季；适宜场合：校园、日常出街、休闲聚会；穿搭风格：清爽学院、City Boy。 风格关键词：日常休闲、学院、City Boy。 适合场合：校园、日常。 适合季节：夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、T恤、长裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "学院",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "长裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-044",
+      "dataset": "ljly",
+      "original_pic": "ljly_044.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_044.jpg"
+    }
+  },
+  {
+    "id": "sample-0045",
+    "pic": "0045.jpg",
+    "image_path": "Dataset/data_exemple/0045.jpg",
+    "description": "衣物描述：白色短袖衬衫搭配黑色阔腿裤、白色棒球帽、项链和银白运动鞋；性别：男；适宜季节：夏季；适宜场合：校园、出街、旅行；穿搭风格：极简街头、City Boy。 风格关键词：学院、街头、City Boy。 适合场合：校园、日常、旅行。 适合季节：夏。 主要色彩：浅色、深色。 可见单品：衬衫、T恤、运动鞋、帽子。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "学院",
+        "街头",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-045",
+      "dataset": "ljly",
+      "original_pic": "ljly_045.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_045.jpg"
+    }
+  },
+  {
+    "id": "sample-0046",
+    "pic": "0046.jpg",
+    "image_path": "Dataset/data_exemple/0046.jpg",
+    "description": "衣物描述：黑色宽松短袖衬衫搭配黑色阔腿裤、黑色手表、项链和黑白板鞋；性别：男；适宜季节：夏季；适宜场合：出街、聚会、休闲通勤；穿搭风格：黑色系街头、酷感极简。 风格关键词：日常休闲、街头。 适合场合：通勤、日常。 适合季节：夏。 主要色彩：深色。 可见单品：衬衫、T恤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "街头"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-046",
+      "dataset": "ljly",
+      "original_pic": "ljly_046.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_046.jpg"
+    }
+  },
+  {
+    "id": "sample-0047",
+    "pic": "0047.jpg",
+    "image_path": "Dataset/data_exemple/0047.jpg",
+    "description": "衣物描述：灰绿色工装外套叠穿浅色内搭，搭配同色宽松牛仔裤和浅色帆布鞋；性别：男；适宜季节：春秋；适宜场合：日常出街、校园、旅行；穿搭风格：复古工装、City Boy、FLAG感穿搭。 风格关键词：学院、复古、City Boy。 适合场合：校园、日常、旅行。 适合季节：春、秋。 主要色彩：浅色、蓝色、绿色。 可见单品：外套、牛仔裤。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "校园",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "学院",
+        "复古",
+        "City Boy"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色",
+        "绿色"
+      ],
+      "items": [
+        "外套",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-047",
+      "dataset": "ljly",
+      "original_pic": "ljly_047.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_047.jpg"
+    }
+  },
+  {
+    "id": "sample-0048",
+    "pic": "0048.jpg",
+    "image_path": "Dataset/data_exemple/0048.jpg",
+    "description": "衣物描述：蓝色衬衫搭配黑色西装阔腿裤、黑色皮鞋和黑色手提包，外搭深色外套作为备选；性别：男；适宜季节：春秋；适宜场合：通勤、约会、正式日常；穿搭风格：韩系通勤、简约绅士。 风格关键词：韩系。 适合场合：通勤、约会、日常、正式。 适合季节：春、秋。 主要色彩：深色、蓝色。 可见单品：衬衫、西装、外套、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "日常",
+        "正式"
+      ],
+      "style": [
+        "韩系"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-048",
+      "dataset": "ljly",
+      "original_pic": "ljly_048.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_048.jpg"
+    }
+  },
+  {
+    "id": "sample-0049",
+    "pic": "0049.jpg",
+    "image_path": "Dataset/data_exemple/0049.jpg",
+    "description": "衣物描述：灰色短款夹克叠穿浅色衬衫或针织内搭，搭配灰色宽松牛仔裤和米色帆布鞋；性别：男；适宜季节：春秋；适宜场合：校园、日常出街、休闲通勤；穿搭风格：松弛日系、复古休闲。 风格关键词：日常休闲、日系、学院、复古。 适合场合：通勤、校园、日常。 适合季节：春、秋。 主要色彩：浅色、蓝色。 可见单品：衬衫、针织、夹克、牛仔裤。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "日系",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "针织",
+        "夹克",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-049",
+      "dataset": "ljly",
+      "original_pic": "ljly_049.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_049.jpg"
+    }
+  },
+  {
+    "id": "sample-0050",
+    "pic": "0050.jpg",
+    "image_path": "Dataset/data_exemple/0050.jpg",
+    "description": "衣物描述：黑色休闲夹克内搭白色上衣，搭配米白直筒裤和黑色鞋；性别：男；适宜季节：春秋；适宜场合：日常通勤、休闲约会、城市漫步；穿搭风格：成熟休闲、简约通勤。 风格关键词：日常休闲。 适合场合：通勤、约会、日常。 适合季节：春、秋。 主要色彩：浅色、深色。 可见单品：夹克。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "夹克"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-050",
+      "dataset": "ljly",
+      "original_pic": "ljly_050.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_050.jpg"
+    }
+  },
+  {
+    "id": "sample-0051",
+    "pic": "0051.jpg",
+    "image_path": "Dataset/data_exemple/0051.jpg",
+    "description": "衣物描述：黑色长大衣叠穿灰色连帽卫衣，搭配黑色宽松长裤和白色运动鞋；性别：男；适宜季节：秋冬；适宜场合：日常通勤、海边或城市出游；穿搭风格：成熟休闲、韩系层次。 风格关键词：日常休闲、韩系。 适合场合：通勤、日常。 适合季节：秋、冬。 主要色彩：浅色、深色。 可见单品：卫衣、外套、长裤、运动鞋、帽子。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "韩系"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "卫衣",
+        "外套",
+        "长裤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-051",
+      "dataset": "ljly",
+      "original_pic": "ljly_051.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_051.jpg"
+    }
+  },
+  {
+    "id": "sample-0052",
+    "pic": "0052.jpg",
+    "image_path": "Dataset/data_exemple/0052.jpg",
+    "description": "衣物描述：深棕色西装外套搭配白衬衫、棕色西装裤和黑色皮鞋，配黑色手提包；性别：男；适宜季节：春秋；适宜场合：日常通勤、商务休闲、约会；穿搭风格：复古绅士、轻商务。 风格关键词：日常休闲、复古。 适合场合：通勤、约会、日常。 适合季节：春、秋。 主要色彩：深色、棕色。 可见单品：衬衫、西装、外套、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-052",
+      "dataset": "ljly",
+      "original_pic": "ljly_052.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_052.jpg"
+    }
+  },
+  {
+    "id": "sample-0053",
+    "pic": "0053.jpg",
+    "image_path": "Dataset/data_exemple/0053.jpg",
+    "description": "衣物描述：棕色宽松夹克叠穿白衬衫，搭配蓝色直筒牛仔裤和黑白板鞋；性别：男；适宜季节：春秋；适宜场合：日常出街、通勤、旅行；穿搭风格：温暖复古、City Boy、休闲通勤。 风格关键词：日常休闲、复古、City Boy。 适合场合：通勤、日常、旅行。 适合季节：春、秋。 主要色彩：棕色、蓝色。 可见单品：衬衫、夹克、牛仔裤、运动鞋。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲",
+        "复古",
+        "City Boy"
+      ],
+      "colors": [
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "夹克",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-053",
+      "dataset": "ljly",
+      "original_pic": "ljly_053.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_053.jpg"
+    }
+  },
+  {
+    "id": "sample-0054",
+    "pic": "0054.jpg",
+    "image_path": "Dataset/data_exemple/0054.jpg",
+    "description": "衣物描述：卡其色工装西装外套叠穿灰色上衣，搭配黑色工装裤和黑色鞋；性别：男；适宜季节：春秋；适宜场合：日常出街、户外休闲、旅行；穿搭风格：工装机能、成熟休闲。 风格关键词：日常休闲。 适合场合：日常、旅行。 适合季节：春、秋。 主要色彩：深色、棕色。 可见单品：西装、外套、工装裤。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "西装",
+        "外套",
+        "工装裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-054",
+      "dataset": "ljly",
+      "original_pic": "ljly_054.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_054.jpg"
+    }
+  },
+  {
+    "id": "sample-0055",
+    "pic": "0055.jpg",
+    "image_path": "Dataset/data_exemple/0055.jpg",
+    "description": "衣物描述：黑色西装套装内搭白衬衫和深色马甲，配领带、棕色手提包和黑色皮鞋；性别：男；适宜季节：春秋、冬季；适宜场合：通勤、商务、正式聚会；穿搭风格：复古绅士、英伦正装。 风格关键词：复古。 适合场合：通勤、正式。 适合季节：春、秋、冬。 主要色彩：深色、棕色。 可见单品：衬衫、西装、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-055",
+      "dataset": "ljly",
+      "original_pic": "ljly_055.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_055.jpg"
+    }
+  },
+  {
+    "id": "sample-0056",
+    "pic": "0056.jpg",
+    "image_path": "Dataset/data_exemple/0056.jpg",
+    "description": "衣物描述：深蓝菱格夹克叠穿棕色针织衫和衬衫领带，搭配灰色西装裤与皮鞋；性别：男；适宜季节：秋冬；适宜场合：通勤、商务休闲、聚会；穿搭风格：雅痞绅士、成熟学院。 风格关键词：日常休闲、学院。 适合场合：通勤。 适合季节：秋、冬。 主要色彩：深色、棕色、蓝色。 可见单品：衬衫、针织、西装、夹克。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤"
+      ],
+      "style": [
+        "日常休闲",
+        "学院"
+      ],
+      "colors": [
+        "深色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "针织",
+        "西装",
+        "夹克"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-056",
+      "dataset": "ljly",
+      "original_pic": "ljly_056.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_056.jpg"
+    }
+  },
+  {
+    "id": "sample-0057",
+    "pic": "0057.jpg",
+    "image_path": "Dataset/data_exemple/0057.jpg",
+    "description": "衣物描述：黑色西装或长外套叠穿白衬衫与领带，搭配黑色阔腿裤、皮鞋和棕色公文包；性别：男；适宜季节：春秋、冬季；适宜场合：商务通勤、会议、正式出行；穿搭风格：低调绅士、复古商务。 风格关键词：复古。 适合场合：通勤、正式。 适合季节：春、秋、冬。 主要色彩：深色、棕色。 可见单品：衬衫、西装、外套、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-057",
+      "dataset": "ljly",
+      "original_pic": "ljly_057.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_057.jpg"
+    }
+  },
+  {
+    "id": "sample-0058",
+    "pic": "0058.jpg",
+    "image_path": "Dataset/data_exemple/0058.jpg",
+    "description": "衣物描述：深棕色西装套装搭配白衬衫、同色领带、黑色皮鞋和棕色手提包；性别：男；适宜季节：春秋、冬季；适宜场合：商务通勤、正式聚会、晚宴；穿搭风格：成熟绅士、复古正装。 风格关键词：复古。 适合场合：通勤、正式。 适合季节：春、秋、冬。 主要色彩：深色、棕色。 可见单品：衬衫、西装、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-058",
+      "dataset": "ljly",
+      "original_pic": "ljly_058.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_058.jpg"
+    }
+  },
+  {
+    "id": "sample-0059",
+    "pic": "0059.jpg",
+    "image_path": "Dataset/data_exemple/0059.jpg",
+    "description": "衣物描述：灰色长款双排扣大衣内搭深色套装，配黑色手提包和黑色皮鞋；性别：男；适宜季节：冬季；适宜场合：商务通勤、正式出行、城市旅行；穿搭风格：雅痞帅气、成熟大衣穿搭。 适合场合：通勤、旅行、正式。 适合季节：冬。 主要色彩：深色。 可见单品：外套、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "旅行",
+        "正式"
+      ],
+      "style": [],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-059",
+      "dataset": "ljly",
+      "original_pic": "ljly_059.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_059.jpg"
+    }
+  },
+  {
+    "id": "sample-0060",
+    "pic": "0060.jpg",
+    "image_path": "Dataset/data_exemple/0060.jpg",
+    "description": "衣物描述：黑色夹克或薄棉服叠穿黑色高领上衣，搭配黑色直筒裤和黑色皮鞋；性别：男；适宜季节：秋冬；适宜场合：通勤、商务休闲、日常出街；穿搭风格：极简黑色系、成熟通勤。 风格关键词：日常休闲。 适合场合：通勤、日常。 适合季节：秋、冬。 主要色彩：深色。 可见单品：夹克。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "秋",
+        "冬"
+      ],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "夹克"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-060",
+      "dataset": "ljly",
+      "original_pic": "ljly_060.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_060.jpg"
+    }
+  },
+  {
+    "id": "sample-0061",
+    "pic": "0061.jpg",
+    "image_path": "Dataset/data_exemple/0061.jpg",
+    "description": "衣物描述：灰色皮夹克叠穿黑色上衣，搭配蓝色直筒牛仔裤和黑色皮鞋；性别：男；适宜季节：春秋；适宜场合：日常出街、约会、休闲通勤；穿搭风格：复古机车、成熟休闲。 风格关键词：日常休闲、复古。 适合场合：通勤、约会、日常。 适合季节：春、秋。 主要色彩：深色、蓝色。 可见单品：夹克、牛仔裤。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "约会",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "夹克",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-061",
+      "dataset": "ljly",
+      "original_pic": "ljly_061.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_061.jpg"
+    }
+  },
+  {
+    "id": "sample-0062",
+    "pic": "0062.jpg",
+    "image_path": "Dataset/data_exemple/0062.jpg",
+    "description": "衣物描述：浅蓝衬衫搭配深灰西装阔腿裤、黑色单鞋和黑色手提包，可加浅色西装或外套；性别：男；适宜季节：春秋；适宜场合：周一通勤、面试、商务日常；穿搭风格：简约商务、韩系通勤。 风格关键词：韩系。 适合场合：通勤、日常。 适合季节：春、秋。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、西装、外套、包。 呈现性别风格：男。",
+    "tags": {
+      "gender": [
+        "男"
+      ],
+      "season": [
+        "春",
+        "秋"
+      ],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "韩系"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ljly-062",
+      "dataset": "ljly",
+      "original_pic": "ljly_062.jpg",
+      "original_path": "Dataset/Pics_ljly/ljly_062.jpg"
+    }
+  },
+  {
+    "id": "sample-0063",
+    "pic": "0063.jpg",
+    "image_path": "Dataset/data_exemple/0063.jpg",
+    "description": "日常休闲：棕色西装套装搭配白色内搭，干练又利落，适合通勤和日常出街。 风格关键词：日常休闲。 适合场合：通勤、日常。 主要色彩：浅色、棕色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-001",
+      "dataset": "wad",
+      "original_pic": "wad_001.jpg",
+      "original_path": "Dataset/Pics_wad/wad_001.jpg"
+    }
+  },
+  {
+    "id": "sample-0064",
+    "pic": "0064.jpg",
+    "image_path": "Dataset/data_exemple/0064.jpg",
+    "description": "轻奢正装：黑色西装套装配金属感内搭，整体沉稳有气场，适合正式场合。 风格关键词：轻奢。 适合场合：正式。 主要色彩：深色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-002",
+      "dataset": "wad",
+      "original_pic": "wad_002.jpg",
+      "original_path": "Dataset/Pics_wad/wad_002.jpg"
+    }
+  },
+  {
+    "id": "sample-0065",
+    "pic": "0065.jpg",
+    "image_path": "Dataset/data_exemple/0065.jpg",
+    "description": "氛围感穿搭：灰黑简约背心搭配黑色短裙，线条利落，带一点冷感高级氛围。 风格关键词：氛围感。 主要色彩：深色。 可见单品：半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-003",
+      "dataset": "wad",
+      "original_pic": "wad_003.jpg",
+      "original_path": "Dataset/Pics_wad/wad_003.jpg"
+    }
+  },
+  {
+    "id": "sample-0066",
+    "pic": "0066.jpg",
+    "image_path": "Dataset/data_exemple/0066.jpg",
+    "description": "美式风格：浅蓝衬衫搭配宽松牛仔裤，轻松随性，日常通勤都很合适。 风格关键词：美式。 适合场合：通勤、日常。 主要色彩：浅色、蓝色。 可见单品：衬衫、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "美式"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-004",
+      "dataset": "wad",
+      "original_pic": "wad_004.jpg",
+      "original_path": "Dataset/Pics_wad/wad_004.jpg"
+    }
+  },
+  {
+    "id": "sample-0067",
+    "pic": "0067.jpg",
+    "image_path": "Dataset/data_exemple/0067.jpg",
+    "description": "氛围感穿搭：奶油色短裙搭配草帽，轻盈甜美，带一点度假感。 风格关键词：甜美、氛围感。 适合场合：旅行。 主要色彩：浅色。 可见单品：半身裙、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "旅行"
+      ],
+      "style": [
+        "甜美",
+        "氛围感"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-005",
+      "dataset": "wad",
+      "original_pic": "wad_005.jpg",
+      "original_path": "Dataset/Pics_wad/wad_005.jpg"
+    }
+  },
+  {
+    "id": "sample-0068",
+    "pic": "0068.jpg",
+    "image_path": "Dataset/data_exemple/0068.jpg",
+    "description": "美式风格：深绿色衬衫搭配深色长裤，松弛利落，偏日常的活力型穿搭。 风格关键词：美式。 适合场合：日常。 主要色彩：深色、绿色。 可见单品：衬衫、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "美式"
+      ],
+      "colors": [
+        "深色",
+        "绿色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-006",
+      "dataset": "wad",
+      "original_pic": "wad_006.jpg",
+      "original_path": "Dataset/Pics_wad/wad_006.jpg"
+    }
+  },
+  {
+    "id": "sample-0069",
+    "pic": "0069.jpg",
+    "image_path": "Dataset/data_exemple/0069.jpg",
+    "description": "氛围感穿搭：浅色针织上衣配棕色短裙，温柔又清爽，带一点法式感。 风格关键词：法式、氛围感。 主要色彩：浅色、棕色。 可见单品：针织、半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "法式",
+        "氛围感"
+      ],
+      "colors": [
+        "浅色",
+        "棕色"
+      ],
+      "items": [
+        "针织",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-007",
+      "dataset": "wad",
+      "original_pic": "wad_007.jpg",
+      "original_path": "Dataset/Pics_wad/wad_007.jpg"
+    }
+  },
+  {
+    "id": "sample-0070",
+    "pic": "0070.jpg",
+    "image_path": "Dataset/data_exemple/0070.jpg",
+    "description": "轻奢正装：深棕色西装套装，稳重成熟，适合正式出行和商务场景。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：深色、棕色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-008",
+      "dataset": "wad",
+      "original_pic": "wad_008.jpg",
+      "original_path": "Dataset/Pics_wad/wad_008.jpg"
+    }
+  },
+  {
+    "id": "sample-0071",
+    "pic": "0071.jpg",
+    "image_path": "Dataset/data_exemple/0071.jpg",
+    "description": "氛围感穿搭：浅色长裙配草帽，飘逸柔和，度假感和松弛感都很强。 风格关键词：氛围感。 适合场合：旅行。 主要色彩：浅色。 可见单品：半身裙、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "旅行"
+      ],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-009",
+      "dataset": "wad",
+      "original_pic": "wad_009.jpg",
+      "original_path": "Dataset/Pics_wad/wad_009.jpg"
+    }
+  },
+  {
+    "id": "sample-0072",
+    "pic": "0072.jpg",
+    "image_path": "Dataset/data_exemple/0072.jpg",
+    "description": "氛围感穿搭：米色背心连体裤，干净利落又显身材，整体很简约。 风格关键词：氛围感。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-wad-010",
+      "dataset": "wad",
+      "original_pic": "wad_010.jpg",
+      "original_path": "Dataset/Pics_wad/wad_010.jpg"
+    }
+  },
+  {
+    "id": "sample-0073",
+    "pic": "0073.jpg",
+    "image_path": "Dataset/data_exemple/0073.jpg",
+    "description": "氛围感穿搭：浅色长裙版型宽松飘逸，色调温柔，显高又有轻盈感。 风格关键词：氛围感。 主要色彩：浅色。 可见单品：半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-011",
+      "dataset": "wad",
+      "original_pic": "wad_011.jpg",
+      "original_path": "Dataset/Pics_wad/wad_011.jpg"
+    }
+  },
+  {
+    "id": "sample-0074",
+    "pic": "0074.jpg",
+    "image_path": "Dataset/data_exemple/0074.jpg",
+    "description": "轻奢正装：深棕色套装配宽檐帽，复古而沉稳，整体很有气质。 风格关键词：复古、轻奢。 适合场合：正式。 主要色彩：深色、棕色。 可见单品：帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "复古",
+        "轻奢"
+      ],
+      "colors": [
+        "深色",
+        "棕色"
+      ],
+      "items": [
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-012",
+      "dataset": "wad",
+      "original_pic": "wad_012.jpg",
+      "original_path": "Dataset/Pics_wad/wad_012.jpg"
+    }
+  },
+  {
+    "id": "sample-0075",
+    "pic": "0075.jpg",
+    "image_path": "Dataset/data_exemple/0075.jpg",
+    "description": "日常休闲：白色T恤搭配深色牛仔裤，清爽简单，是很实用的基础款。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：浅色、深色、蓝色。 可见单品：T恤、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-013",
+      "dataset": "wad",
+      "original_pic": "wad_013.jpg",
+      "original_path": "Dataset/Pics_wad/wad_013.jpg"
+    }
+  },
+  {
+    "id": "sample-0076",
+    "pic": "0076.jpg",
+    "image_path": "Dataset/data_exemple/0076.jpg",
+    "description": "美式风格：灰绿色小衫搭配宽松长裤，随性自然，偏休闲街头感。 风格关键词：日常休闲、美式、街头。 主要色彩：绿色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "日常休闲",
+        "美式",
+        "街头"
+      ],
+      "colors": [
+        "绿色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-014",
+      "dataset": "wad",
+      "original_pic": "wad_014.jpg",
+      "original_path": "Dataset/Pics_wad/wad_014.jpg"
+    }
+  },
+  {
+    "id": "sample-0077",
+    "pic": "0077.jpg",
+    "image_path": "Dataset/data_exemple/0077.jpg",
+    "description": "日常休闲：深色T恤搭配运动裤，舒适松弛，适合日常出行。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：深色。 可见单品：T恤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "T恤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-015",
+      "dataset": "wad",
+      "original_pic": "wad_015.jpg",
+      "original_path": "Dataset/Pics_wad/wad_015.jpg"
+    }
+  },
+  {
+    "id": "sample-0078",
+    "pic": "0078.jpg",
+    "image_path": "Dataset/data_exemple/0078.jpg",
+    "description": "美式风格：浅蓝衬衫搭配牛仔裤，清爽利落，带一点少年感。 风格关键词：美式。 主要色彩：浅色、蓝色。 可见单品：衬衫、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "美式"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-016",
+      "dataset": "wad",
+      "original_pic": "wad_016.jpg",
+      "original_path": "Dataset/Pics_wad/wad_016.jpg"
+    }
+  },
+  {
+    "id": "sample-0079",
+    "pic": "0079.jpg",
+    "image_path": "Dataset/data_exemple/0079.jpg",
+    "description": "氛围感穿搭：浅色短裙搭配轻薄上衣，清甜可爱，适合春夏日常拍照。 风格关键词：氛围感。 适合场合：日常、拍照。 适合季节：春、夏。 主要色彩：浅色。 可见单品：半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [
+        "春",
+        "夏"
+      ],
+      "occasion": [
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-017",
+      "dataset": "wad",
+      "original_pic": "wad_017.jpg",
+      "original_path": "Dataset/Pics_wad/wad_017.jpg"
+    }
+  },
+  {
+    "id": "sample-0080",
+    "pic": "0080.jpg",
+    "image_path": "Dataset/data_exemple/0080.jpg",
+    "description": "轻奢正装：粉色衬衫搭配黑色西装裤，正式里带一点柔和感。 风格关键词：轻奢。 适合场合：正式。 主要色彩：浅色、深色。 可见单品：衬衫、西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-018",
+      "dataset": "wad",
+      "original_pic": "wad_018.jpg",
+      "original_path": "Dataset/Pics_wad/wad_018.jpg"
+    }
+  },
+  {
+    "id": "sample-0081",
+    "pic": "0081.jpg",
+    "image_path": "Dataset/data_exemple/0081.jpg",
+    "description": "氛围感穿搭：红蓝撞色卫衣搭配牛仔裤，活力感很强，学院气息明显。 风格关键词：学院、氛围感。 主要色彩：蓝色、红色。 可见单品：卫衣、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "学院",
+        "氛围感"
+      ],
+      "colors": [
+        "蓝色",
+        "红色"
+      ],
+      "items": [
+        "卫衣",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-019",
+      "dataset": "wad",
+      "original_pic": "wad_019.jpg",
+      "original_path": "Dataset/Pics_wad/wad_019.jpg"
+    }
+  },
+  {
+    "id": "sample-0082",
+    "pic": "0082.jpg",
+    "image_path": "Dataset/data_exemple/0082.jpg",
+    "description": "日常休闲：浅色上衣搭配宽松长裤，干净利落，整体非常松弛。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：浅色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-020",
+      "dataset": "wad",
+      "original_pic": "wad_020.jpg",
+      "original_path": "Dataset/Pics_wad/wad_020.jpg"
+    }
+  },
+  {
+    "id": "sample-0083",
+    "pic": "0083.jpg",
+    "image_path": "Dataset/data_exemple/0083.jpg",
+    "description": "美式风格：拼色吊带搭配红色宽松长裤，颜色鲜明，青春又有运动感。 风格关键词：美式。 适合季节：春。 主要色彩：红色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [
+        "春"
+      ],
+      "occasion": [],
+      "style": [
+        "美式"
+      ],
+      "colors": [
+        "红色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-021",
+      "dataset": "wad",
+      "original_pic": "wad_021.jpg",
+      "original_path": "Dataset/Pics_wad/wad_021.jpg"
+    }
+  },
+  {
+    "id": "sample-0084",
+    "pic": "0084.jpg",
+    "image_path": "Dataset/data_exemple/0084.jpg",
+    "description": "街头潮酷：浅色外套叠穿黑色内搭，配宽松白裤，层次感强，街头感明显。 风格关键词：街头。 主要色彩：浅色、深色。 可见单品：外套。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "外套"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-022",
+      "dataset": "wad",
+      "original_pic": "wad_022.jpg",
+      "original_path": "Dataset/Pics_wad/wad_022.jpg"
+    }
+  },
+  {
+    "id": "sample-0085",
+    "pic": "0085.jpg",
+    "image_path": "Dataset/data_exemple/0085.jpg",
+    "description": "复古格调：蓝白条纹Polo搭配黑色宽松长裤，休闲里带一点复古学院味。 风格关键词：日常休闲、学院、复古。 主要色彩：深色、蓝色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "日常休闲",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-023",
+      "dataset": "wad",
+      "original_pic": "wad_023.jpg",
+      "original_path": "Dataset/Pics_wad/wad_023.jpg"
+    }
+  },
+  {
+    "id": "sample-0086",
+    "pic": "0086.jpg",
+    "image_path": "Dataset/data_exemple/0086.jpg",
+    "description": "轻奢正装：粉色衬衫搭配黑色西裤，干练利落，适合通勤和面试。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：浅色、深色。 可见单品：衬衫。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-024",
+      "dataset": "wad",
+      "original_pic": "wad_024.jpg",
+      "original_path": "Dataset/Pics_wad/wad_024.jpg"
+    }
+  },
+  {
+    "id": "sample-0087",
+    "pic": "0087.jpg",
+    "image_path": "Dataset/data_exemple/0087.jpg",
+    "description": "复古格调：长款绿色外套搭配牛仔裤，氛围安静松弛，有一点老电影感。 风格关键词：复古。 主要色彩：蓝色、绿色。 可见单品：外套、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "蓝色",
+        "绿色"
+      ],
+      "items": [
+        "外套",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-025",
+      "dataset": "wad",
+      "original_pic": "wad_025.jpg",
+      "original_path": "Dataset/Pics_wad/wad_025.jpg"
+    }
+  },
+  {
+    "id": "sample-0088",
+    "pic": "0088.jpg",
+    "image_path": "Dataset/data_exemple/0088.jpg",
+    "description": "氛围感穿搭：黑色短裙搭配长靴，甜酷感明显，适合拍照和日常出街。 风格关键词：氛围感。 适合场合：日常、拍照。 主要色彩：深色。 可见单品：半身裙、靴子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "半身裙",
+        "靴子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-026",
+      "dataset": "wad",
+      "original_pic": "wad_026.jpg",
+      "original_path": "Dataset/Pics_wad/wad_026.jpg"
+    }
+  },
+  {
+    "id": "sample-0089",
+    "pic": "0089.jpg",
+    "image_path": "Dataset/data_exemple/0089.jpg",
+    "description": "美式风格：卡其连帽卫衣搭配灰色运动裤，舒适随性，街头运动感强。 风格关键词：美式、街头。 主要色彩：棕色。 可见单品：卫衣、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "美式",
+        "街头"
+      ],
+      "colors": [
+        "棕色"
+      ],
+      "items": [
+        "卫衣",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-027",
+      "dataset": "wad",
+      "original_pic": "wad_027.jpg",
+      "original_path": "Dataset/Pics_wad/wad_027.jpg"
+    }
+  },
+  {
+    "id": "sample-0090",
+    "pic": "0090.jpg",
+    "image_path": "Dataset/data_exemple/0090.jpg",
+    "description": "轻奢正装：米色西装搭配黑色内搭，简洁高级，带一点都市感。 风格关键词：轻奢。 适合场合：正式。 主要色彩：深色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-028",
+      "dataset": "wad",
+      "original_pic": "wad_028.jpg",
+      "original_path": "Dataset/Pics_wad/wad_028.jpg"
+    }
+  },
+  {
+    "id": "sample-0091",
+    "pic": "0091.jpg",
+    "image_path": "Dataset/data_exemple/0091.jpg",
+    "description": "日常休闲：绿色衬衫搭配白色长裤，清爽自然，日常通勤都能穿。 风格关键词：日常休闲。 适合场合：通勤、日常。 主要色彩：浅色、绿色。 可见单品：衬衫、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "绿色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-029",
+      "dataset": "wad",
+      "original_pic": "wad_029.jpg",
+      "original_path": "Dataset/Pics_wad/wad_029.jpg"
+    }
+  },
+  {
+    "id": "sample-0092",
+    "pic": "0092.jpg",
+    "image_path": "Dataset/data_exemple/0092.jpg",
+    "description": "复古格调：米色上衣搭配印花宽裤，色调温和，带一点文艺复古气息。 风格关键词：复古。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-wad-030",
+      "dataset": "wad",
+      "original_pic": "wad_030.jpg",
+      "original_path": "Dataset/Pics_wad/wad_030.jpg"
+    }
+  },
+  {
+    "id": "sample-0093",
+    "pic": "0093.jpg",
+    "image_path": "Dataset/data_exemple/0093.jpg",
+    "description": "中式穿搭：黑白花纹上衣搭配黑色短裤，整体利落，带一点老港风味道。 主要色彩：深色。 可见单品：短裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "短裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-031",
+      "dataset": "wad",
+      "original_pic": "wad_031.jpg",
+      "original_path": "Dataset/Pics_wad/wad_031.jpg"
+    }
+  },
+  {
+    "id": "sample-0094",
+    "pic": "0094.jpg",
+    "image_path": "Dataset/data_exemple/0094.jpg",
+    "description": "氛围感穿搭：浅蓝条纹衬衫搭配白色短裤，清爽松弛，像夏日度假穿搭。 风格关键词：氛围感。 适合场合：旅行。 适合季节：夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、短裤。",
+    "tags": {
+      "gender": [],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "旅行"
+      ],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "短裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-032",
+      "dataset": "wad",
+      "original_pic": "wad_032.jpg",
+      "original_path": "Dataset/Pics_wad/wad_032.jpg"
+    }
+  },
+  {
+    "id": "sample-0095",
+    "pic": "0095.jpg",
+    "image_path": "Dataset/data_exemple/0095.jpg",
+    "description": "中式穿搭：紫色短上衣搭配灰紫半裙，配色温柔雅致，东方感比较明显。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-wad-033",
+      "dataset": "wad",
+      "original_pic": "wad_033.jpg",
+      "original_path": "Dataset/Pics_wad/wad_033.jpg"
+    }
+  },
+  {
+    "id": "sample-0096",
+    "pic": "0096.jpg",
+    "image_path": "Dataset/data_exemple/0096.jpg",
+    "description": "中式穿搭：深蓝花纹上衣搭配浅蓝长裙，整体清雅细腻，很有东方韵味。 主要色彩：浅色、深色、蓝色。 可见单品：半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-034",
+      "dataset": "wad",
+      "original_pic": "wad_034.jpg",
+      "original_path": "Dataset/Pics_wad/wad_034.jpg"
+    }
+  },
+  {
+    "id": "sample-0097",
+    "pic": "0097.jpg",
+    "image_path": "Dataset/data_exemple/0097.jpg",
+    "description": "中式穿搭：白色无袖上衣搭配同色长裤，干净素雅，气质很安静。 主要色彩：浅色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-035",
+      "dataset": "wad",
+      "original_pic": "wad_035.jpg",
+      "original_path": "Dataset/Pics_wad/wad_035.jpg"
+    }
+  },
+  {
+    "id": "sample-0098",
+    "pic": "0098.jpg",
+    "image_path": "Dataset/data_exemple/0098.jpg",
+    "description": "中式穿搭：浅蓝长袖上衣搭配米色宽裤，色调柔和，简洁又有文艺感。 主要色彩：浅色、蓝色。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-wad-036",
+      "dataset": "wad",
+      "original_pic": "wad_036.jpg",
+      "original_path": "Dataset/Pics_wad/wad_036.jpg"
+    }
+  },
+  {
+    "id": "sample-0099",
+    "pic": "0099.jpg",
+    "image_path": "Dataset/data_exemple/0099.jpg",
+    "description": "中式穿搭：白色套装搭配极简剪裁，整体干净温柔，带现代中式气质。 主要色彩：浅色。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色"
+      ],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-wad-037",
+      "dataset": "wad",
+      "original_pic": "wad_037.jpg",
+      "original_path": "Dataset/Pics_wad/wad_037.jpg"
+    }
+  },
+  {
+    "id": "sample-0100",
+    "pic": "0100.jpg",
+    "image_path": "Dataset/data_exemple/0100.jpg",
+    "description": "街头潮酷：黑色宽松上衣搭配牛仔长裤，黑色系为主，随性又有街头感。 风格关键词：街头。 主要色彩：深色、蓝色。 可见单品：牛仔裤、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "牛仔裤",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-038",
+      "dataset": "wad",
+      "original_pic": "wad_038.jpg",
+      "original_path": "Dataset/Pics_wad/wad_038.jpg"
+    }
+  },
+  {
+    "id": "sample-0101",
+    "pic": "0101.jpg",
+    "image_path": "Dataset/data_exemple/0101.jpg",
+    "description": "街头潮酷：白色衬衫叠穿黑色短外套，搭配宽松长裤，层次感丰富，潮酷感强。 风格关键词：街头。 主要色彩：浅色、深色。 可见单品：衬衫、外套、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "外套",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-039",
+      "dataset": "wad",
+      "original_pic": "wad_039.jpg",
+      "original_path": "Dataset/Pics_wad/wad_039.jpg"
+    }
+  },
+  {
+    "id": "sample-0102",
+    "pic": "0102.jpg",
+    "image_path": "Dataset/data_exemple/0102.jpg",
+    "description": "街头潮酷：灰色字母上衣搭配工装短裤，个性鲜明，机能和街头味都很足。 风格关键词：街头。 可见单品：短裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [],
+      "items": [
+        "短裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-040",
+      "dataset": "wad",
+      "original_pic": "wad_040.jpg",
+      "original_path": "Dataset/Pics_wad/wad_040.jpg"
+    }
+  },
+  {
+    "id": "sample-0103",
+    "pic": "0103.jpg",
+    "image_path": "Dataset/data_exemple/0103.jpg",
+    "description": "街头潮酷：军绿色工装外套搭配宽松长裤，低调酷感很明显，适合日常出街。 风格关键词：街头。 适合场合：日常。 主要色彩：绿色。 可见单品：外套、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "绿色"
+      ],
+      "items": [
+        "外套",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-041",
+      "dataset": "wad",
+      "original_pic": "wad_041.jpg",
+      "original_path": "Dataset/Pics_wad/wad_041.jpg"
+    }
+  },
+  {
+    "id": "sample-0104",
+    "pic": "0104.jpg",
+    "image_path": "Dataset/data_exemple/0104.jpg",
+    "description": "街头潮酷：短款牛仔外套叠穿白色内搭，搭配工装长裤，层次感和机能感都很强。 风格关键词：街头。 主要色彩：浅色、蓝色。 可见单品：外套、牛仔裤、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "外套",
+        "牛仔裤",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-042",
+      "dataset": "wad",
+      "original_pic": "wad_042.jpg",
+      "original_path": "Dataset/Pics_wad/wad_042.jpg"
+    }
+  },
+  {
+    "id": "sample-0105",
+    "pic": "0105.jpg",
+    "image_path": "Dataset/data_exemple/0105.jpg",
+    "description": "街头潮酷：卡其工装夹克搭配灰色裤装，粗粝随性，偏复古街头风。 风格关键词：复古、街头。 主要色彩：棕色。 可见单品：夹克。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古",
+        "街头"
+      ],
+      "colors": [
+        "棕色"
+      ],
+      "items": [
+        "夹克"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-043",
+      "dataset": "wad",
+      "original_pic": "wad_043.jpg",
+      "original_path": "Dataset/Pics_wad/wad_043.jpg"
+    }
+  },
+  {
+    "id": "sample-0106",
+    "pic": "0106.jpg",
+    "image_path": "Dataset/data_exemple/0106.jpg",
+    "description": "日常休闲：白色连帽卫衣搭配破洞牛仔裤，轻松又有运动感，适合日常拍照。 风格关键词：日常休闲。 适合场合：日常、拍照。 主要色彩：浅色、蓝色。 可见单品：卫衣、牛仔裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "卫衣",
+        "牛仔裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-044",
+      "dataset": "wad",
+      "original_pic": "wad_044.jpg",
+      "original_path": "Dataset/Pics_wad/wad_044.jpg"
+    }
+  },
+  {
+    "id": "sample-0107",
+    "pic": "0107.jpg",
+    "image_path": "Dataset/data_exemple/0107.jpg",
+    "description": "街头潮酷：黑色印花上衣搭配宽松牛仔裤，个性张扬，整体很有反叛感。 风格关键词：街头。 主要色彩：深色、蓝色。 可见单品：牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-045",
+      "dataset": "wad",
+      "original_pic": "wad_045.jpg",
+      "original_path": "Dataset/Pics_wad/wad_045.jpg"
+    }
+  },
+  {
+    "id": "sample-0108",
+    "pic": "0108.jpg",
+    "image_path": "Dataset/data_exemple/0108.jpg",
+    "description": "轻奢正装：灰色收腰西装套装搭配白色半裙，优雅利落，适合正式场合。 风格关键词：轻奢。 适合场合：正式。 主要色彩：浅色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-046",
+      "dataset": "wad",
+      "original_pic": "wad_046.jpg",
+      "original_path": "Dataset/Pics_wad/wad_046.jpg"
+    }
+  },
+  {
+    "id": "sample-0109",
+    "pic": "0109.jpg",
+    "image_path": "Dataset/data_exemple/0109.jpg",
+    "description": "轻奢正装：黑色西装套装搭配白衬衫，商务感很强，适合会议和正式通勤。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：深色。 可见单品：衬衫、西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-047",
+      "dataset": "wad",
+      "original_pic": "wad_047.jpg",
+      "original_path": "Dataset/Pics_wad/wad_047.jpg"
+    }
+  },
+  {
+    "id": "sample-0110",
+    "pic": "0110.jpg",
+    "image_path": "Dataset/data_exemple/0110.jpg",
+    "description": "轻奢正装：浅灰西装搭配黑色衬衫，沉稳高级，都市感和精英感都很足。 风格关键词：轻奢。 适合场合：正式。 主要色彩：浅色、深色。 可见单品：衬衫、西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-048",
+      "dataset": "wad",
+      "original_pic": "wad_048.jpg",
+      "original_path": "Dataset/Pics_wad/wad_048.jpg"
+    }
+  },
+  {
+    "id": "sample-0111",
+    "pic": "0111.jpg",
+    "image_path": "Dataset/data_exemple/0111.jpg",
+    "description": "轻奢正装：浅蓝衬衫搭配黑色西裤，简洁干净，正式但不刻板。 风格关键词：轻奢。 适合场合：正式。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-049",
+      "dataset": "wad",
+      "original_pic": "wad_049.jpg",
+      "original_path": "Dataset/Pics_wad/wad_049.jpg"
+    }
+  },
+  {
+    "id": "sample-0112",
+    "pic": "0112.jpg",
+    "image_path": "Dataset/data_exemple/0112.jpg",
+    "description": "轻奢正装：浅灰收腰西装搭配白色半裙，优雅精致，很有成熟高级感。 风格关键词：轻奢。 适合场合：正式。 主要色彩：浅色。 可见单品：西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-wad-050",
+      "dataset": "wad",
+      "original_pic": "wad_050.jpg",
+      "original_path": "Dataset/Pics_wad/wad_050.jpg"
+    }
+  },
+  {
+    "id": "sample-0113",
+    "pic": "0113.jpg",
+    "image_path": "Dataset/data_exemple/0113.jpg",
+    "description": "日常休闲风。上身浅蓝衬衣，下身工装裤，清爽简约，适合上学上班、日常通勤。体型偏瘦的人更适合。 风格关键词：日常休闲。 适合场合：通勤、校园、日常。 主要色彩：浅色、蓝色。 可见单品：衬衫、工装裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "工装裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-001",
+      "dataset": "ywx",
+      "original_pic": "ywx_001.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_001.jpg"
+    }
+  },
+  {
+    "id": "sample-0114",
+    "pic": "0114.jpg",
+    "image_path": "Dataset/data_exemple/0114.jpg",
+    "description": "日常休闲风。上身灰蓝色短袖外套配里面白衬衣，下身开心果绿工装裤，清爽明亮中带着一丝沉着。体型偏瘦的人更适合。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：蓝色、绿色。 可见单品：衬衫、T恤、外套、工装裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "蓝色",
+        "绿色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "外套",
+        "工装裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-002",
+      "dataset": "ywx",
+      "original_pic": "ywx_002.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_002.jpg"
+    }
+  },
+  {
+    "id": "sample-0115",
+    "pic": "0115.jpg",
+    "image_path": "Dataset/data_exemple/0115.jpg",
+    "description": "日常休闲风。上身浅粉短袖，下身深粉长裤。上下身粉色的配搭在视觉上有很好的协调性。体型偏瘦的人更适合。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：浅色。 可见单品：T恤、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "T恤",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-004",
+      "dataset": "ywx",
+      "original_pic": "ywx_004.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_004.jpg"
+    }
+  },
+  {
+    "id": "sample-0116",
+    "pic": "0116.jpg",
+    "image_path": "Dataset/data_exemple/0116.jpg",
+    "description": "日常休闲风。上身白色衬衣长袖，下身浅灰绿色长裤，视觉上简洁清新、色彩协调。适合大体型的人穿搭。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：浅色、绿色。 可见单品：衬衫、长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "绿色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-006",
+      "dataset": "ywx",
+      "original_pic": "ywx_006.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_006.jpg"
+    }
+  },
+  {
+    "id": "sample-0117",
+    "pic": "0117.jpg",
+    "image_path": "Dataset/data_exemple/0117.jpg",
+    "description": "日常休闲风。上身灰绿色短袖，下身深蓝色短裤，撞色给视觉提供了奇妙体验。适合运动时穿搭，较为宽松的衣服也适合大体型的人穿搭。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：深色、蓝色、绿色。 可见单品：T恤、短裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "深色",
+        "蓝色",
+        "绿色"
+      ],
+      "items": [
+        "T恤",
+        "短裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-007",
+      "dataset": "ywx",
+      "original_pic": "ywx_007.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_007.jpg"
+    }
+  },
+  {
+    "id": "sample-0118",
+    "pic": "0118.jpg",
+    "image_path": "Dataset/data_exemple/0118.jpg",
+    "description": "日常休闲风。上身紫色长袖，下身黑色短裤，色彩具有一致性，同时也有一些力量感、少年感。适合运动和日常出行时穿搭，稍瘦一点的人更适合穿搭。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：深色。 可见单品：短裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "短裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-008",
+      "dataset": "ywx",
+      "original_pic": "ywx_008.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_008.jpg"
+    }
+  },
+  {
+    "id": "sample-0119",
+    "pic": "0119.jpg",
+    "image_path": "Dataset/data_exemple/0119.jpg",
+    "description": "氛围感穿搭，偏日系。上身白色短袖，下身黑色条纹裙。一黑一白视觉丰富，同时也有乖巧可爱与一丝灵动在其中。黑色的小帽子更为整套穿搭提供了点睛之笔。 风格关键词：日系、氛围感。 主要色彩：浅色、深色。 可见单品：T恤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "日系",
+        "氛围感"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "T恤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-009",
+      "dataset": "ywx",
+      "original_pic": "ywx_009.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_009.jpg"
+    }
+  },
+  {
+    "id": "sample-0120",
+    "pic": "0120.jpg",
+    "image_path": "Dataset/data_exemple/0120.jpg",
+    "description": "氛围感穿搭，偏法式。上身浅绿色短袖，下身黑色阔腿背带裤。视觉上丰富和谐，有成熟、沉着和坚定的感觉。棕色的帽子也为穿搭的和谐性与丰富性更添一层。 风格关键词：法式、氛围感。 主要色彩：深色、棕色、绿色。 可见单品：T恤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "法式",
+        "氛围感"
+      ],
+      "colors": [
+        "深色",
+        "棕色",
+        "绿色"
+      ],
+      "items": [
+        "T恤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-010",
+      "dataset": "ywx",
+      "original_pic": "ywx_010.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_010.jpg"
+    }
+  },
+  {
+    "id": "sample-0121",
+    "pic": "0121.jpg",
+    "image_path": "Dataset/data_exemple/0121.jpg",
+    "description": "氛围感穿搭，偏法式。上身浅蓝色斑点背心，下身浅蓝色斑点裙。视觉上非常和谐，给人清朗明快的感觉，同时能显得人较高。适合稍瘦一点的人穿搭。 风格关键词：法式、氛围感。 主要色彩：浅色、蓝色。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "法式",
+        "氛围感"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": []
+    },
+    "source": {
+      "sample_id": "sample-ywx-011",
+      "dataset": "ywx",
+      "original_pic": "ywx_011.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_011.jpg"
+    }
+  },
+  {
+    "id": "sample-0122",
+    "pic": "0122.jpg",
+    "image_path": "Dataset/data_exemple/0122.jpg",
+    "description": "氛围感穿搭，偏日式。上身灰色小黑斑点背心裙，下身宽松米色长裤，干净而又不失成熟，适合稍瘦一点的人穿搭。 风格关键词：氛围感。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "氛围感"
+      ],
+      "colors": [],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-014",
+      "dataset": "ywx",
+      "original_pic": "ywx_014.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_014.jpg"
+    }
+  },
+  {
+    "id": "sample-0123",
+    "pic": "0123.jpg",
+    "image_path": "Dataset/data_exemple/0123.jpg",
+    "description": "氛围感穿搭，偏法式。上身浅米色纱质半袖，下身棕色长裤。视觉上和谐舒适，颇有成熟感；同时颜色一致性好。适合稍瘦一点的人穿搭。 风格关键词：法式、氛围感。 主要色彩：棕色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "法式",
+        "氛围感"
+      ],
+      "colors": [
+        "棕色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-015",
+      "dataset": "ywx",
+      "original_pic": "ywx_015.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_015.jpg"
+    }
+  },
+  {
+    "id": "sample-0124",
+    "pic": "0124.jpg",
+    "image_path": "Dataset/data_exemple/0124.jpg",
+    "description": "氛围感穿搭，偏法式。上身灰色短袖毛衣，下身深蓝色长裤。简约和谐中不失成熟，条纹帽子、双肩的黑巾与肩上的背包更体现氛围感。 风格关键词：法式、氛围感。 主要色彩：深色、蓝色。 可见单品：T恤、针织、长裤、包、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "法式",
+        "氛围感"
+      ],
+      "colors": [
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "针织",
+        "长裤",
+        "包",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-016",
+      "dataset": "ywx",
+      "original_pic": "ywx_016.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_016.jpg"
+    }
+  },
+  {
+    "id": "sample-0125",
+    "pic": "0125.jpg",
+    "image_path": "Dataset/data_exemple/0125.jpg",
+    "description": "美式休闲风。上身黑色印花短袖，下身卡其色工装短裤，搭配棕色皮带和绿色板鞋。整体干净利落，有校园感和少年感，适合日常出行。 风格关键词：日常休闲、美式、学院。 适合场合：校园、日常。 主要色彩：深色、棕色、绿色。 可见单品：T恤、短裤、运动鞋。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "美式",
+        "学院"
+      ],
+      "colors": [
+        "深色",
+        "棕色",
+        "绿色"
+      ],
+      "items": [
+        "T恤",
+        "短裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-017",
+      "dataset": "ywx",
+      "original_pic": "ywx_017.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_017.jpg"
+    }
+  },
+  {
+    "id": "sample-0126",
+    "pic": "0126.jpg",
+    "image_path": "Dataset/data_exemple/0126.jpg",
+    "description": "美式街头风。上身灰色爱心印花短袖，下身浅蓝破洞牛仔裤，搭配白色运动鞋和黑色腰带。整体随性不羁，街头感较强，适合偏瘦的人穿搭。 风格关键词：美式、街头。 主要色彩：浅色、深色、蓝色。 可见单品：T恤、牛仔裤、运动鞋。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "美式",
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-018",
+      "dataset": "ywx",
+      "original_pic": "ywx_018.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_018.jpg"
+    }
+  },
+  {
+    "id": "sample-0127",
+    "pic": "0127.jpg",
+    "image_path": "Dataset/data_exemple/0127.jpg",
+    "description": "美式学院风。上身红色宽松卫衣，里面叠穿蓝色衬衫和领带，下身蓝色牛仔裤。整体有运动感和校园感，红蓝撞色醒目，适合日常拍照和出街。 风格关键词：美式、学院。 适合场合：校园、日常、拍照。 主要色彩：蓝色、红色。 可见单品：衬衫、卫衣、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "校园",
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "美式",
+        "学院"
+      ],
+      "colors": [
+        "蓝色",
+        "红色"
+      ],
+      "items": [
+        "衬衫",
+        "卫衣",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-019",
+      "dataset": "ywx",
+      "original_pic": "ywx_019.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_019.jpg"
+    }
+  },
+  {
+    "id": "sample-0128",
+    "pic": "0128.jpg",
+    "image_path": "Dataset/data_exemple/0128.jpg",
+    "description": "美式复古休闲风。上身棕色短款短袖，下身宽松蓝色牛仔裤，搭配棕色皮带和小包。整体轻松自然，露腰设计让穿搭更有活力，适合稍瘦一点的人穿搭。 风格关键词：日常休闲、美式、复古。 主要色彩：棕色、蓝色。 可见单品：T恤、牛仔裤、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "日常休闲",
+        "美式",
+        "复古"
+      ],
+      "colors": [
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-020",
+      "dataset": "ywx",
+      "original_pic": "ywx_020.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_020.jpg"
+    }
+  },
+  {
+    "id": "sample-0129",
+    "pic": "0129.jpg",
+    "image_path": "Dataset/data_exemple/0129.jpg",
+    "description": "美式运动休闲风。上身拼色吊带背心，下身红色宽松运动长裤，搭配红色运动包。整体色彩鲜明，随性中带有运动感和街头感，适合偏瘦的人穿搭。 风格关键词：日常休闲、美式、街头。 主要色彩：红色。 可见单品：长裤、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "日常休闲",
+        "美式",
+        "街头"
+      ],
+      "colors": [
+        "红色"
+      ],
+      "items": [
+        "长裤",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-021",
+      "dataset": "ywx",
+      "original_pic": "ywx_021.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_021.jpg"
+    }
+  },
+  {
+    "id": "sample-0130",
+    "pic": "0130.jpg",
+    "image_path": "Dataset/data_exemple/0130.jpg",
+    "description": "美式街头工装风。上身浅色短外套叠穿黑色内搭，下身米白色宽松长裤，搭配毛线帽和黑色鞋子。整体宽松随性，层次感强，有较强的街头氛围。 风格关键词：美式、街头。 主要色彩：浅色、深色。 可见单品：外套、长裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "美式",
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "外套",
+        "长裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-022",
+      "dataset": "ywx",
+      "original_pic": "ywx_022.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_022.jpg"
+    }
+  },
+  {
+    "id": "sample-0131",
+    "pic": "0131.jpg",
+    "image_path": "Dataset/data_exemple/0131.jpg",
+    "description": "美式复古休闲风。上身红蓝白宽条纹Polo衫，下身黑色宽松长裤，搭配灰色棒球帽、眼镜和运动鞋。整体随性自由，有校园感和复古运动感，适合日常出街。 风格关键词：日常休闲、美式、学院、复古。 适合场合：校园、日常。 主要色彩：深色、蓝色、红色。 可见单品：长裤、运动鞋、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "校园",
+        "日常"
+      ],
+      "style": [
+        "日常休闲",
+        "美式",
+        "学院",
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "蓝色",
+        "红色"
+      ],
+      "items": [
+        "长裤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-023",
+      "dataset": "ywx",
+      "original_pic": "ywx_023.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_023.jpg"
+    }
+  },
+  {
+    "id": "sample-0132",
+    "pic": "0132.jpg",
+    "image_path": "Dataset/data_exemple/0132.jpg",
+    "description": "美式复古街头风。上身黑色印花短袖，下身豹纹宽松长裤，搭配豹纹帽子和黑色鞋子。整体个性鲜明，图案呼应感强，随性自由中带有叛逆感。 风格关键词：美式、复古、街头。 主要色彩：深色。 可见单品：T恤、长裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "美式",
+        "复古",
+        "街头"
+      ],
+      "colors": [
+        "深色"
+      ],
+      "items": [
+        "T恤",
+        "长裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-024",
+      "dataset": "ywx",
+      "original_pic": "ywx_024.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_024.jpg"
+    }
+  },
+  {
+    "id": "sample-0133",
+    "pic": "0133.jpg",
+    "image_path": "Dataset/data_exemple/0133.jpg",
+    "description": "复古格调，偏港风。上身姜黄色短袖套装上衣，下身同色长裙，颜色浓郁而协调。整体有古典感和精致感，腰带与白色刺绣增加了层次，适合稍瘦一点的人穿搭。 风格关键词：复古。 主要色彩：浅色。 可见单品：T恤、半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "T恤",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-025",
+      "dataset": "ywx",
+      "original_pic": "ywx_025.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_025.jpg"
+    }
+  },
+  {
+    "id": "sample-0134",
+    "pic": "0134.jpg",
+    "image_path": "Dataset/data_exemple/0134.jpg",
+    "description": "复古格调，偏古着。上身深橄榄绿色短袖，下身深草绿花边短裙，腰间白色钩花装饰增加了手作感。整体温柔自然，有旧时光的氛围，适合稍瘦一点的人穿搭。 风格关键词：复古。 主要色彩：浅色、绿色。 可见单品：T恤、半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "绿色"
+      ],
+      "items": [
+        "T恤",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-026",
+      "dataset": "ywx",
+      "original_pic": "ywx_026.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_026.jpg"
+    }
+  },
+  {
+    "id": "sample-0135",
+    "pic": "0135.jpg",
+    "image_path": "Dataset/data_exemple/0135.jpg",
+    "description": "复古格调，偏英伦。上身浅蓝衬衣叠穿灰色针织开衫，下身蓝色牛仔裤。整体文艺沉静，眼镜和针织纹理加强了复古书卷气，适合日常通勤和出街。 风格关键词：复古。 适合场合：通勤、日常。 主要色彩：浅色、蓝色。 可见单品：衬衫、针织、牛仔裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "针织",
+        "牛仔裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-027",
+      "dataset": "ywx",
+      "original_pic": "ywx_027.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_027.jpg"
+    }
+  },
+  {
+    "id": "sample-0136",
+    "pic": "0136.jpg",
+    "image_path": "Dataset/data_exemple/0136.jpg",
+    "description": "复古格调，偏古着。上身米棕色花纹短袖衬衣，下身棕色宽松长裤，搭配宽檐帽、墨镜和棕色大包。整体色调统一，随性中带有旅行感和旧式绅士感。 风格关键词：复古。 适合场合：旅行。 主要色彩：棕色。 可见单品：衬衫、T恤、长裤、包、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "旅行"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "棕色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "长裤",
+        "包",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-028",
+      "dataset": "ywx",
+      "original_pic": "ywx_028.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_028.jpg"
+    }
+  },
+  {
+    "id": "sample-0137",
+    "pic": "0137.jpg",
+    "image_path": "Dataset/data_exemple/0137.jpg",
+    "description": "复古格调，偏港风。上身红色格纹衬衣叠穿白色内搭，下身灰蓝色宽松长裤，搭配墨镜和黑色单肩包。整体松弛自然，有城市漫步的复古氛围。 风格关键词：复古。 主要色彩：浅色、深色、蓝色、红色。 可见单品：衬衫、长裤、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色",
+        "红色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-030",
+      "dataset": "ywx",
+      "original_pic": "ywx_030.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_030.jpg"
+    }
+  },
+  {
+    "id": "sample-0138",
+    "pic": "0138.jpg",
+    "image_path": "Dataset/data_exemple/0138.jpg",
+    "description": "复古格调，偏港风。上身黑白花纹短袖衬衣，下身黑色牛仔短裤，搭配棕色皮带、皮鞋和大包。整体利落随性，砖墙背景下更有老街复古感。 风格关键词：复古。 主要色彩：深色、棕色、蓝色。 可见单品：衬衫、T恤、牛仔裤、短裤、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "深色",
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤",
+        "短裤",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-031",
+      "dataset": "ywx",
+      "original_pic": "ywx_031.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_031.jpg"
+    }
+  },
+  {
+    "id": "sample-0139",
+    "pic": "0139.jpg",
+    "image_path": "Dataset/data_exemple/0139.jpg",
+    "description": "复古格调，偏英伦。上身灰蓝色条纹衬衫打结，下身白色短裤，搭配编织草帽和凉鞋。整体清爽自然，有松弛的城市度假感，适合夏季日常出行。 风格关键词：复古。 适合场合：日常、旅行。 适合季节：夏。 主要色彩：浅色、蓝色。 可见单品：衬衫、短裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [
+        "夏"
+      ],
+      "occasion": [
+        "日常",
+        "旅行"
+      ],
+      "style": [
+        "复古"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "短裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-032",
+      "dataset": "ywx",
+      "original_pic": "ywx_032.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_032.jpg"
+    }
+  },
+  {
+    "id": "sample-0140",
+    "pic": "0140.jpg",
+    "image_path": "Dataset/data_exemple/0140.jpg",
+    "description": "新中式风格。上身紫色短袖上衣，下身灰紫色半身裙，色调温柔而沉静。裙摆的斜线设计和细节点缀增加了层次感，整体有含蓄、典雅的东方气质，适合稍瘦一点的人穿搭。 可见单品：T恤、半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [],
+      "items": [
+        "T恤",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-033",
+      "dataset": "ywx",
+      "original_pic": "ywx_033.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_033.jpg"
+    }
+  },
+  {
+    "id": "sample-0141",
+    "pic": "0141.jpg",
+    "image_path": "Dataset/data_exemple/0141.jpg",
+    "description": "新中式风格。上身深蓝色中式开衫叠穿白色内搭，下身同色长裤，整体简洁利落。深色套装带来成熟沉稳感，墨镜和利落发型让穿搭更有现代都市气质。 主要色彩：浅色、深色、蓝色。 可见单品：长裤。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "长裤"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-035",
+      "dataset": "ywx",
+      "original_pic": "ywx_035.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_035.jpg"
+    }
+  },
+  {
+    "id": "sample-0142",
+    "pic": "0142.jpg",
+    "image_path": "Dataset/data_exemple/0142.jpg",
+    "description": "新中式风格。上身浅蓝色立领长袖衬衣，下身米色宽松长裤，搭配草帽。整体清爽自然，浅色系让视觉更加柔和，有松弛、文艺的东方气息，适合日常休闲穿搭。 风格关键词：日常休闲。 适合场合：日常。 主要色彩：浅色、蓝色。 可见单品：衬衫、长裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "日常休闲"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "长裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-036",
+      "dataset": "ywx",
+      "original_pic": "ywx_036.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_036.jpg"
+    }
+  },
+  {
+    "id": "sample-0143",
+    "pic": "0143.jpg",
+    "image_path": "Dataset/data_exemple/0143.jpg",
+    "description": "新中式风格。上身白色无袖上衣，下身白色长裙，整套同色系搭配干净素雅。衣料上的暗纹和微光感增加了精致度，整体温柔端庄，有现代中式的清冷气质。 主要色彩：浅色。 可见单品：半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-037",
+      "dataset": "ywx",
+      "original_pic": "ywx_037.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_037.jpg"
+    }
+  },
+  {
+    "id": "sample-0144",
+    "pic": "0144.jpg",
+    "image_path": "Dataset/data_exemple/0144.jpg",
+    "description": "街头潮酷风。上身黑色宽松印花短袖，下身黑色宽松牛仔裤，搭配黑色单肩包和白色运动鞋。整体黑色系为主，随性中带有叛逆感和街头感，适合日常出街。 风格关键词：街头。 适合场合：日常。 主要色彩：浅色、深色、蓝色。 可见单品：T恤、牛仔裤、运动鞋、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常"
+      ],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "运动鞋",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-038",
+      "dataset": "ywx",
+      "original_pic": "ywx_038.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_038.jpg"
+    }
+  },
+  {
+    "id": "sample-0145",
+    "pic": "0145.jpg",
+    "image_path": "Dataset/data_exemple/0145.jpg",
+    "description": "街头潮酷风。上身白衬衣叠穿黑色宽松短袖，下身浅色牛仔短裤，腰间系格纹衬衫。整体层次丰富，耳机、墨镜和运动鞋增加了潮流感，适合偏瘦的人穿搭。 风格关键词：街头。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、T恤、牛仔裤、短裤、运动鞋。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "T恤",
+        "牛仔裤",
+        "短裤",
+        "运动鞋"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-039",
+      "dataset": "ywx",
+      "original_pic": "ywx_039.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_039.jpg"
+    }
+  },
+  {
+    "id": "sample-0146",
+    "pic": "0146.jpg",
+    "image_path": "Dataset/data_exemple/0146.jpg",
+    "description": "街头潮酷风。上身黑色印花短袖，下身军绿色宽松工装裤，搭配黑色棒球帽和大号单肩包。整体低调酷感，宽松版型让穿搭更随性，适合日常通勤和出街。 风格关键词：街头。 适合场合：通勤、日常。 主要色彩：深色、绿色。 可见单品：T恤、工装裤、包、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常"
+      ],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "深色",
+        "绿色"
+      ],
+      "items": [
+        "T恤",
+        "工装裤",
+        "包",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-041",
+      "dataset": "ywx",
+      "original_pic": "ywx_041.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_041.jpg"
+    }
+  },
+  {
+    "id": "sample-0147",
+    "pic": "0147.jpg",
+    "image_path": "Dataset/data_exemple/0147.jpg",
+    "description": "街头潮酷风。上身短款牛仔外套叠穿白色针织内搭，下身宽松牛仔工装裤，搭配黑色帽子和长筒机车靴。整体层次感强，牛仔与皮靴结合带来硬朗、前卫的感觉。 风格关键词：街头。 主要色彩：浅色、深色、蓝色。 可见单品：针织、外套、牛仔裤、工装裤、靴子、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "针织",
+        "外套",
+        "牛仔裤",
+        "工装裤",
+        "靴子",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-042",
+      "dataset": "ywx",
+      "original_pic": "ywx_042.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_042.jpg"
+    }
+  },
+  {
+    "id": "sample-0148",
+    "pic": "0148.jpg",
+    "image_path": "Dataset/data_exemple/0148.jpg",
+    "description": "街头潮酷风。上身卡其色工装夹克，下身黑灰色宽松牛仔裤，搭配迷彩帽和帆布鞋。整体粗粝随性，工装元素明显，有复古街头和机能感。 风格关键词：复古、街头。 主要色彩：棕色、蓝色。 可见单品：夹克、牛仔裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "复古",
+        "街头"
+      ],
+      "colors": [
+        "棕色",
+        "蓝色"
+      ],
+      "items": [
+        "夹克",
+        "牛仔裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-043",
+      "dataset": "ywx",
+      "original_pic": "ywx_043.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_043.jpg"
+    }
+  },
+  {
+    "id": "sample-0149",
+    "pic": "0149.jpg",
+    "image_path": "Dataset/data_exemple/0149.jpg",
+    "description": "街头潮酷风。上身白色宽松连帽卫衣，下身浅色破洞工装牛仔裤，搭配运动鞋和鸭舌帽。整体宽松自由，运动感和街头感比较强，适合日常拍照和出街。 风格关键词：街头。 适合场合：日常、拍照。 主要色彩：浅色、蓝色。 可见单品：卫衣、牛仔裤、运动鞋、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "日常",
+        "拍照"
+      ],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "蓝色"
+      ],
+      "items": [
+        "卫衣",
+        "牛仔裤",
+        "运动鞋",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-044",
+      "dataset": "ywx",
+      "original_pic": "ywx_044.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_044.jpg"
+    }
+  },
+  {
+    "id": "sample-0150",
+    "pic": "0150.jpg",
+    "image_path": "Dataset/data_exemple/0150.jpg",
+    "description": "街头潮酷风。上身白色印花短袖，下身黑色宽松刺绣牛仔裤，搭配黑色帽子、墨镜和腰带。整体个性张扬，红黑细节提升视觉冲击力，有明显的街头叛逆感。 风格关键词：街头。 主要色彩：浅色、深色、蓝色、红色。 可见单品：T恤、牛仔裤、帽子。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [],
+      "style": [
+        "街头"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色",
+        "红色"
+      ],
+      "items": [
+        "T恤",
+        "牛仔裤",
+        "帽子"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-045",
+      "dataset": "ywx",
+      "original_pic": "ywx_045.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_045.jpg"
+    }
+  },
+  {
+    "id": "sample-0151",
+    "pic": "0151.jpg",
+    "image_path": "Dataset/data_exemple/0151.jpg",
+    "description": "轻奢正装风。上身灰色双排扣西装外套配白色内搭，下身同色西装裤，整体干练利落。灰色套装低调高级，适合职场通勤、正式场合穿搭。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：浅色。 可见单品：西装、外套。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色"
+      ],
+      "items": [
+        "西装",
+        "外套"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-046",
+      "dataset": "ywx",
+      "original_pic": "ywx_046.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_046.jpg"
+    }
+  },
+  {
+    "id": "sample-0152",
+    "pic": "0152.jpg",
+    "image_path": "Dataset/data_exemple/0152.jpg",
+    "description": "轻奢正装风。上身黑色西装外套配白色衬衣，下身黑色西装裤，整体沉稳正式。眼镜和手提包增加了商务感，适合会议、面试和正式通勤。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：浅色、深色。 可见单品：衬衫、西装、外套、包。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套",
+        "包"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-047",
+      "dataset": "ywx",
+      "original_pic": "ywx_047.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_047.jpg"
+    }
+  },
+  {
+    "id": "sample-0153",
+    "pic": "0153.jpg",
+    "image_path": "Dataset/data_exemple/0153.jpg",
+    "description": "轻奢正装风。上身浅灰色西装外套配黑色衬衣，下身浅灰色西装裤，黑灰搭配简洁高级。整体成熟稳重，有精英感和都市感，适合正式商务场景。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：浅色、深色。 可见单品：衬衫、西装、外套。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "衬衫",
+        "西装",
+        "外套"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-048",
+      "dataset": "ywx",
+      "original_pic": "ywx_048.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_048.jpg"
+    }
+  },
+  {
+    "id": "sample-0154",
+    "pic": "0154.jpg",
+    "image_path": "Dataset/data_exemple/0154.jpg",
+    "description": "轻奢正装风。上身浅蓝色衬衣，下身黑色西装裤，搭配黑色皮带。整体干净利落，颜色清爽但不失正式感，适合日常通勤和半正式场合。 风格关键词：轻奢。 适合场合：通勤、日常、正式。 主要色彩：浅色、深色、蓝色。 可见单品：衬衫、西装。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "日常",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色",
+        "蓝色"
+      ],
+      "items": [
+        "衬衫",
+        "西装"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-049",
+      "dataset": "ywx",
+      "original_pic": "ywx_049.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_049.jpg"
+    }
+  },
+  {
+    "id": "sample-0155",
+    "pic": "0155.jpg",
+    "image_path": "Dataset/data_exemple/0155.jpg",
+    "description": "轻奢正装风。上身浅灰色收腰西装外套，下身同色百褶半身裙，搭配黑色丝袜和尖头高跟鞋。整体优雅精致，有成熟、知性的高级感，适合正式场合和商务宴会。 风格关键词：轻奢。 适合场合：通勤、正式。 主要色彩：浅色、深色。 可见单品：西装、外套、半身裙。",
+    "tags": {
+      "gender": [],
+      "season": [],
+      "occasion": [
+        "通勤",
+        "正式"
+      ],
+      "style": [
+        "轻奢"
+      ],
+      "colors": [
+        "浅色",
+        "深色"
+      ],
+      "items": [
+        "西装",
+        "外套",
+        "半身裙"
+      ]
+    },
+    "source": {
+      "sample_id": "sample-ywx-050",
+      "dataset": "ywx",
+      "original_pic": "ywx_050.jpg",
+      "original_path": "Dataset/Pics_ywx/ywx_050.jpg"
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "user-1",
+    "name": "小美",
+    "profile": {
+      "gender": "女",
+      "preferredStyles": ["松弛", "温柔", "甜美约会"],
+      "preferredItems": ["针织", "半身裙"],
+      "preferredColors": ["浅色", "低饱和"],
+      "createdAt": null
+    },
+    "preferenceMemory": {
+      "likes": [],
+      "dislikes": [],
+      "contextualPreferences": [],
+      "updatedAt": null
+    }
+  },
+  {
+    "id": "user-2",
+    "name": "ljly",
+    "profile": {
+      "gender": "男",
+      "preferredStyles": ["通勤利落", "日常休闲"],
+      "preferredItems": ["衬衫", "西装外套", "牛仔裤"],
+      "preferredColors": ["深色", "黑白灰"],
+      "createdAt": null
+    },
+    "preferenceMemory": {
+      "likes": [],
+      "dislikes": [],
+      "contextualPreferences": [],
+      "updatedAt": null
+    }
+  }
+]

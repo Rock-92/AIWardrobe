@@ -28,6 +28,7 @@
           </div>
           <div id="userTabs" class="user-tabs" aria-label="用户选择"></div>
           <div class="user-actions">
+            <button id="editProfileButton" class="secondary-button" type="button">编辑资料</button>
             <button id="renameUserButton" class="secondary-button" type="button">重命名</button>
             <button id="clearHistoryButton" class="secondary-button" type="button">清空历史</button>
           </div>
@@ -146,6 +147,83 @@
         </aside>
       </main>
     </div>
+
+    <dialog id="userProfileDialog" class="profile-dialog">
+      <form id="userProfileForm" class="profile-form" method="dialog">
+        <div class="profile-dialog-header">
+          <div>
+            <p class="eyebrow">User Profile</p>
+            <h2>新用户信息</h2>
+          </div>
+          <button id="cancelProfileButton" class="icon-button" type="button" aria-label="关闭">×</button>
+        </div>
+
+        <label class="field">
+          <span>用户名称</span>
+          <input id="profileNameInput" type="text" autocomplete="off" required />
+        </label>
+
+        <fieldset class="profile-options">
+          <legend>性别</legend>
+          <label><input type="radio" name="profileGender" value="女" required /> 女</label>
+          <label><input type="radio" name="profileGender" value="男" /> 男</label>
+        </fieldset>
+
+        <fieldset class="profile-options">
+          <legend>偏好风格</legend>
+          <label><input type="checkbox" name="profileStyles" value="无" data-none-option /> 无</label>
+          <label><input type="checkbox" name="profileStyles" value="日常休闲" /> 日常休闲</label>
+          <label><input type="checkbox" name="profileStyles" value="通勤利落" /> 通勤利落</label>
+          <label><input type="checkbox" name="profileStyles" value="温柔韩系" /> 温柔韩系</label>
+          <label><input type="checkbox" name="profileStyles" value="法式复古" /> 法式复古</label>
+          <label><input type="checkbox" name="profileStyles" value="甜美约会" /> 甜美约会</label>
+          <label><input type="checkbox" name="profileStyles" value="街头美式" /> 街头美式</label>
+        </fieldset>
+
+        <fieldset class="profile-options">
+          <legend>偏好衣物种类</legend>
+          <label><input type="checkbox" name="profileItems" value="无" data-none-option /> 无</label>
+          <label><input type="checkbox" name="profileItems" value="衬衫" /> 衬衫</label>
+          <label><input type="checkbox" name="profileItems" value="针织" /> 针织</label>
+          <label><input type="checkbox" name="profileItems" value="半身裙" /> 半身裙</label>
+          <label><input type="checkbox" name="profileItems" value="连衣裙" /> 连衣裙</label>
+          <label><input type="checkbox" name="profileItems" value="牛仔裤" /> 牛仔裤</label>
+          <label><input type="checkbox" name="profileItems" value="西装外套" /> 西装外套</label>
+        </fieldset>
+
+        <fieldset class="profile-options">
+          <legend>偏好颜色</legend>
+          <label><input type="checkbox" name="profileColors" value="无" data-none-option /> 无</label>
+          <label><input type="checkbox" name="profileColors" value="浅色" /> 浅色</label>
+          <label><input type="checkbox" name="profileColors" value="低饱和" /> 低饱和</label>
+          <label><input type="checkbox" name="profileColors" value="黑白灰" /> 黑白灰</label>
+          <label><input type="checkbox" name="profileColors" value="蓝色系" /> 蓝色系</label>
+          <label><input type="checkbox" name="profileColors" value="棕色系" /> 棕色系</label>
+          <label><input type="checkbox" name="profileColors" value="亮色点缀" /> 亮色点缀</label>
+        </fieldset>
+
+        <div class="memory-panel">
+          <div class="section-title">
+            <h3>历史对话提取</h3>
+            <span id="memoryUpdatedAt">暂无</span>
+          </div>
+          <div class="memory-grid">
+            <div>
+              <strong>喜欢</strong>
+              <div id="memoryLikes" class="tag-row"></div>
+            </div>
+            <div>
+              <strong>不喜欢</strong>
+              <div id="memoryDislikes" class="tag-row"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button id="submitProfileButton" class="send-button compact" type="submit">创建用户</button>
+        </div>
+      </form>
+    </dialog>
 
     <script src="./app.js"></script>
   </body>

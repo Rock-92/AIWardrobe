@@ -224,10 +224,41 @@ const outfitExamples = [
 
 const catalogById = new Map(wardrobeCatalog.map((item) => [item.id, item]));
 
+function createUserProfile({
+  gender,
+  preferredStyles = ["无"],
+  preferredItems = ["无"],
+  preferredColors = ["无"]
+}) {
+  return {
+    gender,
+    preferredStyles,
+    preferredItems,
+    preferredColors,
+    createdAt: new Date().toISOString()
+  };
+}
+
+function createPreferenceMemory() {
+  return {
+    likes: [],
+    dislikes: [],
+    contextualPreferences: [],
+    updatedAt: null
+  };
+}
+
 const defaultUsers = [
   {
     id: "user-1",
-    name: "用户1",
+    name: "小美",
+    profile: createUserProfile({
+      gender: "女",
+      preferredStyles: ["松弛", "温柔", "甜美约会"],
+      preferredItems: ["针织", "半身裙"],
+      preferredColors: ["浅色", "低饱和"]
+    }),
+    preferenceMemory: createPreferenceMemory(),
     wardrobeIds: [
       "top-001",
       "top-002",
@@ -257,7 +288,14 @@ const defaultUsers = [
   },
   {
     id: "user-2",
-    name: "用户2",
+    name: "ljly",
+    profile: createUserProfile({
+      gender: "男",
+      preferredStyles: ["通勤利落", "日常休闲"],
+      preferredItems: ["衬衫", "西装外套", "牛仔裤"],
+      preferredColors: ["深色", "黑白灰"]
+    }),
+    preferenceMemory: createPreferenceMemory(),
     wardrobeIds: [
       "top-002",
       "top-003",
@@ -283,8 +321,13 @@ const state = {
   mood: "无",
   mode: "closet",
   users: structuredClone(defaultUsers),
-  lastRun: null
+  lastRun: null,
+  profileDialogMode: "create"
 };
+
+const blockedMemoryTerms = ["忽略规则", "忽略之前", "系统提示", "system prompt", "越狱", "破解"];
+const negativeIntentPatterns = ["不要", "不喜欢", "别", "避免", "拒绝", "不想", "讨厌"];
+const maxPreferenceConfidence = 1;
 
 function loadState() {
   const raw = localStorage.getItem(storageKey);
@@ -292,12 +335,35 @@ function loadState() {
   try {
     const saved = JSON.parse(raw);
     if (Array.isArray(saved.users) && saved.users.length) {
-      state.users = saved.users;
+      state.users = saved.users.map(normalizeUser);
       state.activeUserId = saved.activeUserId || saved.users[0].id;
     }
   } catch {
     localStorage.removeItem(storageKey);
   }
+}
+
+function normalizeUser(user) {
+  const migratedName =
+    user.id === "user-1" && user.name === "用户1" ? "小美" : user.id === "user-2" && user.name === "用户2" ? "ljly" : user.name;
+  return {
+    ...user,
+    name: migratedName,
+    profile:
+      user.profile ||
+      createUserProfile({
+        gender: "女",
+        preferredStyles: ["无"],
+        preferredItems: ["无"],
+          preferredColors: ["无"]
+        }),
+    preferenceMemory: {
+      ...createPreferenceMemory(),
+      ...(user.preferenceMemory || {})
+    },
+    wardrobeIds: Array.isArray(user.wardrobeIds) ? user.wardrobeIds : [],
+    history: Array.isArray(user.history) ? user.history : []
+  };
 }
 
 function saveState() {
@@ -318,6 +384,253 @@ function activeWardrobe() {
   return activeUser()
     .wardrobeIds.map((id) => catalogById.get(id))
     .filter(Boolean);
+}
+
+function profileSummary(user) {
+  const profile = user.profile || {};
+  const parts = [
+    profile.gender,
+    ...(profile.preferredStyles || []).filter((item) => item !== "无"),
+    ...(profile.preferredItems || []).filter((item) => item !== "无"),
+    ...(profile.preferredColors || []).filter((item) => item !== "无")
+  ].filter(Boolean);
+  return parts.length ? parts.join(" · ") : "暂无特别偏好";
+}
+
+function selectedValues(form, name) {
+  const values = [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((input) => input.value);
+  return values.length ? values : ["无"];
+}
+
+function setCheckedValues(form, name, values) {
+  const selected = new Set(values?.length ? values : ["无"]);
+  form.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
+    input.checked = selected.has(input.value);
+  });
+}
+
+function renderMemoryPreview(user) {
+  const memory = user?.preferenceMemory || createPreferenceMemory();
+  const likes = (memory.likes || []).slice(0, 8);
+  const dislikes = (memory.dislikes || []).slice(0, 8);
+  document.querySelector("#memoryUpdatedAt").textContent = memory.updatedAt ? "已更新" : "暂无";
+  document.querySelector("#memoryLikes").innerHTML = likes.length
+    ? likes.map((item) => `<span class="match-tag">${escapeHtml(item.value)}</span>`).join("")
+    : `<span class="match-tag">暂无</span>`;
+  document.querySelector("#memoryDislikes").innerHTML = dislikes.length
+    ? dislikes.map((item) => `<span class="match-tag">${escapeHtml(item.value)}</span>`).join("")
+    : `<span class="match-tag">暂无</span>`;
+}
+
+function openProfileDialog(mode, user = null) {
+  state.profileDialogMode = mode;
+  const dialog = document.querySelector("#userProfileDialog");
+  const form = document.querySelector("#userProfileForm");
+  const nextIndex = state.users.length + 1;
+  form.reset();
+
+  const profile = user?.profile || createUserProfile({ gender: "女" });
+  document.querySelector("#profileNameInput").value = user?.name || `用户${nextIndex}`;
+  form.querySelector(`input[name="profileGender"][value="${profile.gender || "女"}"]`).checked = true;
+  setCheckedValues(form, "profileStyles", profile.preferredStyles || ["无"]);
+  setCheckedValues(form, "profileItems", profile.preferredItems || ["无"]);
+  setCheckedValues(form, "profileColors", profile.preferredColors || ["无"]);
+  form.querySelectorAll("[data-none-option]").forEach((input) => {
+    const groupChecked = [...input.closest("fieldset").querySelectorAll('input[type="checkbox"]:checked')];
+    if (!groupChecked.length) input.checked = true;
+  });
+  renderMemoryPreview(user);
+  document.querySelector("#submitProfileButton").textContent = mode === "edit" ? "保存资料" : "创建用户";
+  dialog.showModal();
+}
+
+function syncNoneOption(changedInput) {
+  const fieldset = changedInput.closest("fieldset");
+  if (!fieldset) return;
+  const checkboxes = [...fieldset.querySelectorAll('input[type="checkbox"]')];
+  const noneOption = checkboxes.find((input) => input.dataset.noneOption !== undefined);
+  if (!noneOption) return;
+
+  if (changedInput === noneOption && noneOption.checked) {
+    checkboxes.forEach((input) => {
+      if (input !== noneOption) input.checked = false;
+    });
+    return;
+  }
+
+  if (changedInput !== noneOption && changedInput.checked) {
+    noneOption.checked = false;
+  }
+
+  if (!checkboxes.some((input) => input.checked)) {
+    noneOption.checked = true;
+  }
+}
+
+async function analyzeUserMessage(message, user) {
+  const response = await fetch("/api/analyze-message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      rawUserInput: message,
+      userProfile: user.profile || {},
+      recentHistory: (user.history || []).slice(-6).map((item) => ({
+        role: item.role,
+        text: item.text
+      }))
+    })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error || "需求解析失败");
+  return payload;
+}
+
+async function retrieveExamplesByRag(query, topK = 8) {
+  const response = await fetch("/api/retrieve-examples", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ query, topK })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error || "样例检索失败");
+  return payload;
+}
+
+function memoryKey(item) {
+  return `${item.type || "general"}:${item.value}`;
+}
+
+function mergePreferenceList(current, incoming) {
+  const merged = new Map((current || []).map((item) => [memoryKey(item), item]));
+  (incoming || []).forEach((item) => {
+    if (!item?.value) return;
+    const key = memoryKey(item);
+    const existing = merged.get(key);
+    merged.set(key, existing && existing.confidence >= item.confidence ? existing : item);
+  });
+  return [...merged.values()].sort((a, b) => b.confidence - a.confidence).slice(0, 24);
+}
+
+function mergePreferenceMemory(user, preferenceDelta) {
+  if (!preferenceDelta) return;
+  const memory = user.preferenceMemory || createPreferenceMemory();
+  memory.likes = mergePreferenceList(memory.likes, preferenceDelta.likes);
+  memory.dislikes = mergePreferenceList(memory.dislikes, preferenceDelta.dislikes);
+  memory.contextualPreferences = [
+    ...(memory.contextualPreferences || []),
+    ...(preferenceDelta.contextual_preferences || [])
+  ].slice(-20);
+  memory.updatedAt = new Date().toISOString();
+  user.preferenceMemory = memory;
+}
+
+function memoryWords(user) {
+  const memory = user.preferenceMemory || createPreferenceMemory();
+  return [
+    ...(memory.likes || []).map((item) => item.value),
+    ...(memory.contextualPreferences || []).flatMap((item) => item.likes || [])
+  ].filter(Boolean);
+}
+
+function includesNegativeContext(text, value) {
+  if (!text || !value) return false;
+  const index = text.indexOf(value);
+  if (index < 0) return false;
+  const windowText = text.slice(Math.max(0, index - 12), index + value.length + 12);
+  return negativeIntentPatterns.some((pattern) => windowText.includes(pattern));
+}
+
+function validatePreferenceItems(items, rawText, polarity) {
+  const errors = [];
+  const accepted = [];
+  (items || []).forEach((item, index) => {
+    if (!item || typeof item.value !== "string" || !item.value.trim()) {
+      errors.push(`${polarity}[${index}] missing value`);
+      return;
+    }
+    if (blockedMemoryTerms.some((term) => item.value.includes(term))) {
+      errors.push(`${polarity}[${index}] contains unsafe memory term`);
+      return;
+    }
+    if (typeof item.confidence !== "number" || item.confidence < 0 || item.confidence > maxPreferenceConfidence) {
+      errors.push(`${polarity}[${index}] invalid confidence`);
+      return;
+    }
+    if (polarity === "likes" && includesNegativeContext(rawText, item.value)) {
+      errors.push(`${polarity}[${index}] appears in negative context`);
+      return;
+    }
+    accepted.push(item);
+  });
+  return { errors, accepted };
+}
+
+function mechanicalAuditAnalysis(analysis, rawText) {
+  const errors = [];
+  const warnings = [];
+  if (!analysis || typeof analysis !== "object") {
+    return {
+      ok: false,
+      errors: ["analysis_missing"],
+      warnings: [],
+      safeForPrompt: false,
+      safeForMemory: false,
+      sanitizedPreferenceDelta: null,
+      historyPolicy: "skip"
+    };
+  }
+
+  const guard = analysis.guard || {};
+  const intent = analysis.intent || {};
+  const delta = analysis.preference_delta || {};
+
+  if (typeof guard.safe !== "boolean") errors.push("guard.safe_missing");
+  if (!Array.isArray(guard.risk_types)) errors.push("guard.risk_types_missing");
+  if (guard.safe && !String(guard.sanitized_input || "").trim()) errors.push("sanitized_input_empty");
+  if (intent.mode && !["inspiration", "closet"].includes(intent.mode)) errors.push("intent.mode_invalid");
+  if (intent.retrieval_query && intent.retrieval_query.length > 240) warnings.push("retrieval_query_too_long");
+  if (intent.needs_clarification && !intent.clarifying_question) errors.push("clarifying_question_missing");
+
+  const highRiskTypes = ["prompt_injection", "privacy", "cross_user_data", "sexualized_or_overexposed", "unsafe_context"];
+  const hasHighRisk = (guard.risk_types || []).some((type) => highRiskTypes.includes(type));
+  if (hasHighRisk) warnings.push("high_risk_input");
+
+  const likeCheck = validatePreferenceItems(delta.likes, rawText, "likes");
+  const dislikeCheck = validatePreferenceItems(delta.dislikes, rawText, "dislikes");
+  errors.push(...likeCheck.errors, ...dislikeCheck.errors);
+
+  const sanitizedPreferenceDelta = {
+    likes: likeCheck.accepted,
+    dislikes: dislikeCheck.accepted,
+    contextual_preferences: Array.isArray(delta.contextual_preferences) ? delta.contextual_preferences.slice(0, 8) : [],
+    do_not_store: Array.isArray(delta.do_not_store) ? delta.do_not_store : [],
+    summary: typeof delta.summary === "string" ? delta.summary : ""
+  };
+
+  const ok = errors.length === 0;
+  return {
+    ok,
+    errors,
+    warnings,
+    safeForPrompt: ok && (guard.safe || Boolean(guard.sanitized_input)),
+    safeForMemory: ok && guard.safe && !hasHighRisk,
+    sanitizedPreferenceDelta,
+    historyPolicy: ok && guard.safe && !hasHighRisk ? "normal" : ok && guard.sanitized_input ? "low_weight" : "skip"
+  };
+}
+
+function pushHistory(user, role, text, { weight = 1, auditStatus = "ok", createdAt = new Date().toISOString() } = {}) {
+  user.history.push({
+    role,
+    text,
+    weight,
+    auditStatus,
+    createdAt
+  });
 }
 
 function normalizeValue(value) {
@@ -379,7 +692,21 @@ function withinTemp(range, temp) {
 }
 
 function derivePreferenceSignals(user) {
-  const text = user.history.map((message) => message.text).join(" ");
+  const profile = user.profile || {};
+  const profileText = [
+    profile.gender,
+    ...(profile.preferredStyles || []),
+    ...(profile.preferredItems || []),
+    ...(profile.preferredColors || []),
+    ...memoryWords(user)
+  ]
+    .filter((item) => item && item !== "无")
+    .join(" ");
+  const trustedHistoryText = user.history
+    .filter((message) => (message.weight ?? 1) >= 0.5 && !["failed_audit", "api_failed"].includes(message.auditStatus))
+    .map((message) => message.text)
+    .join(" ");
+  const text = `${profileText} ${trustedHistoryText}`;
   const candidates = [
     "松弛",
     "精致",
@@ -526,6 +853,14 @@ function itemIds(items) {
   return items.map((item) => `${item.id} ${item.name}`).join("、");
 }
 
+function exampleTags(example) {
+  if (Array.isArray(example.tags)) return example.tags;
+  if (example.tags && typeof example.tags === "object") {
+    return Object.values(example.tags).flat().filter(Boolean);
+  }
+  return [];
+}
+
 function naturalLanguageAnswer(intent, outfits, user, examples, preferences) {
   const weatherPart = intent.weather === "无" ? "没有指定天气" : `${intent.weather}`;
   const tempPart = intent.temp === null ? "没有指定温度" : `${intent.temp}度`;
@@ -551,18 +886,74 @@ function naturalLanguageAnswer(intent, outfits, user, examples, preferences) {
   return lines.join("\n");
 }
 
-function runRecommendation(message) {
+async function runRecommendation(message) {
   const user = activeUser();
-  const intent = mergeIntentWithMessage(getIntent(), message);
+  let analysis = null;
+  let mechanicalAudit = null;
+  try {
+    analysis = await analyzeUserMessage(message, user);
+    mechanicalAudit = mechanicalAuditAnalysis(analysis, message);
+    if (!mechanicalAudit.safeForPrompt) {
+      if (mechanicalAudit.historyPolicy !== "skip") {
+        pushHistory(user, "user", message, { weight: 0.2, auditStatus: "failed_audit" });
+      }
+      pushHistory(user, "assistant", "这条需求没有通过审核，暂时不会进入推荐或偏好记忆。你可以换一种穿搭需求描述。", {
+        weight: 0,
+        auditStatus: "system_notice"
+      });
+      saveState();
+      state.lastRun = { analysis, mechanicalAudit };
+      render();
+      return;
+    }
+    if (mechanicalAudit.safeForMemory) {
+      mergePreferenceMemory(user, mechanicalAudit.sanitizedPreferenceDelta);
+    }
+  } catch (error) {
+    pushHistory(user, "user", message, { weight: 0.2, auditStatus: "api_failed" });
+    pushHistory(user, "assistant", `需求解析 API 暂时不可用：${error.message}。请确认本地 .env 已配置 OPENAI_API_KEY。`, {
+      weight: 0,
+      auditStatus: "system_notice"
+    });
+    saveState();
+    render();
+    return;
+  }
+
+  const sanitizedMessage = analysis.guard?.sanitized_input || message;
+  const parsedIntent = analysis.intent || {};
+  const intent = {
+    ...mergeIntentWithMessage(getIntent(), sanitizedMessage),
+    parsed: parsedIntent,
+    retrievalQuery: parsedIntent.retrieval_query || sanitizedMessage
+  };
   const preferences = derivePreferenceSignals(user);
-  const examples = retrieveExamples(intent, preferences);
+  let ragResult = null;
+  let examples = [];
+  try {
+    ragResult = await retrieveExamplesByRag(intent.retrievalQuery, 8);
+    examples = (ragResult.examples || []).map((example) => ({
+      ...example,
+      title: example.description,
+      temp: example.tags?.season?.includes("夏") ? [22, 35] : undefined,
+      scenes: example.tags?.occasion || [],
+      moods: example.tags?.style || [],
+      weather: [],
+      score: example.score
+    }));
+  } catch (error) {
+    ragResult = { mode: "failed", error: error.message };
+    examples = retrieveExamples(intent, preferences);
+  }
   const outfits = buildOutfits(intent, user);
   const answer = naturalLanguageAnswer(intent, outfits, user, examples, preferences);
   const validation = outfits.map((outfit) => validateOutfit(outfit, user));
 
-  user.history.push({ role: "user", text: message, createdAt: new Date().toISOString() });
-  user.history.push({ role: "assistant", text: answer, createdAt: new Date().toISOString() });
-  state.lastRun = { intent, examples, outfits, validation, preferences };
+  const historyWeight = mechanicalAudit.historyPolicy === "low_weight" ? 0.2 : 1;
+  const auditStatus = mechanicalAudit.historyPolicy === "low_weight" ? "low_weight_audit" : "ok";
+  pushHistory(user, "user", message, { weight: historyWeight, auditStatus });
+  pushHistory(user, "assistant", answer, { weight: historyWeight, auditStatus });
+  state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult };
   saveState();
   render();
 }
@@ -578,7 +969,7 @@ function renderUsers() {
     )
     .join("");
   const user = activeUser();
-  document.querySelector("#activeUserBadge").textContent = `${user.name} · ${user.wardrobeIds.length} 件衣柜 · ${user.history.length} 条历史`;
+  document.querySelector("#activeUserBadge").textContent = `${user.name} · ${profileSummary(user)} · ${user.history.length} 条历史`;
 }
 
 function renderCloset() {
@@ -633,9 +1024,12 @@ function renderEvidence() {
     .map(
       (example) => `
         <div class="example-row">
-          <strong>${example.id} · ${example.title}</strong>
+          <strong>${example.id} · ${(example.title || example.description || "").slice(0, 42)}</strong>
           <div class="tag-row">
-            ${example.tags.map((tag) => `<span class="match-tag">${tag}</span>`).join("")}
+            ${exampleTags(example)
+              .slice(0, 8)
+              .map((tag) => `<span class="match-tag">${tag}</span>`)
+              .join("")}
           </div>
         </div>
       `
@@ -667,10 +1061,18 @@ function renderEvidence() {
     user: {
       id: user.id,
       name: user.name,
+      profile: user.profile,
       wardrobe_ids: user.wardrobeIds,
-      history_as_preference: preferences.map((pref) => pref.word)
+    history_as_preference: preferences.map((pref) => pref.word),
+    preference_memory: user.preferenceMemory || createPreferenceMemory()
     },
     intent,
+    api_analysis: state.lastRun?.analysis || null,
+    mechanical_audit: state.lastRun?.mechanicalAudit || null,
+    rag: {
+      mode: state.lastRun?.ragResult?.mode || "mock_preview",
+      retrieval_query: intent.retrievalQuery || intent.parsed?.retrieval_query || null
+    },
     retrieved_examples: examples.map((example) => example.id),
     output_contract: {
       style: "自然语言 + 具体衣物编号",
@@ -708,19 +1110,71 @@ function bindControls() {
   });
 
   document.querySelector("#newUserButton").addEventListener("click", () => {
-    const nextIndex = state.users.length + 1;
-    const name = window.prompt("新用户名称", `用户${nextIndex}`);
-    if (!name) return;
+    openProfileDialog("create");
+  });
+
+  document.querySelector("#editProfileButton").addEventListener("click", () => {
+    openProfileDialog("edit", activeUser());
+  });
+
+  document.querySelector("#cancelProfileButton").addEventListener("click", () => {
+    document.querySelector("#userProfileDialog").close();
+  });
+
+  document.querySelector("#userProfileForm").addEventListener("change", (event) => {
+    if (event.target.matches('input[type="checkbox"]')) {
+      syncNoneOption(event.target);
+    }
+  });
+
+  document.querySelector("#userProfileForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const name = document.querySelector("#profileNameInput").value.trim();
+    const gender = form.querySelector('input[name="profileGender"]:checked')?.value;
+    if (!name || !gender) return;
+
+    const profile = createUserProfile({
+      gender,
+      preferredStyles: selectedValues(form, "profileStyles"),
+      preferredItems: selectedValues(form, "profileItems"),
+      preferredColors: selectedValues(form, "profileColors")
+    });
+
+    if (state.profileDialogMode === "edit") {
+      const user = activeUser();
+      user.name = name;
+      user.profile = {
+        ...profile,
+        createdAt: user.profile?.createdAt || profile.createdAt,
+        updatedAt: new Date().toISOString()
+      };
+      state.lastRun = null;
+      saveState();
+      document.querySelector("#userProfileDialog").close();
+      render();
+      return;
+    }
+
     const id = `user-${Date.now()}`;
+    const profileText = profileSummary({ profile });
     state.users.push({
       id,
-      name: name.trim(),
+      name,
+      profile,
       wardrobeIds: ["top-001", "bottom-003", "outer-001", "shoes-002", "bag-001"],
-      history: [{ role: "assistant", text: "新用户已创建。之后的聊天记录会作为你的偏好记忆。" }]
+      history: [
+        {
+          role: "assistant",
+          text: `新用户已创建。你的基础资料是：${profileText}。之后的聊天记录会自动保存为历史偏好。`,
+          createdAt: new Date().toISOString()
+        }
+      ]
     });
     state.activeUserId = id;
     state.lastRun = null;
     saveState();
+    document.querySelector("#userProfileDialog").close();
     render();
   });
 

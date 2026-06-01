@@ -1,6 +1,6 @@
 # AIWardrobe 对话样本
 
-这是第一步原型：本地网页展示“多用户 -> 对话需求 -> 样例检索 -> 衣柜推荐 -> 校验结果”的效果，暂时不接 LLM API、embedding API 或真人试穿 API。
+这是本地原型：网页展示“用户资料 -> 对话需求 -> LLM 需求解析/偏好抽取 -> 机械审核 -> RAG 样例检索 -> 推荐结果/校验摘要”的流程。
 
 运行：
 
@@ -14,7 +14,35 @@ node server.js
 http://127.0.0.1:4173
 ```
 
-当前样本只使用前端模拟数据，并用 localStorage 保存用户、衣柜和聊天历史。历史聊天会被当作偏好信号参与下一次推荐。
+当前用户资料和历史对话仍会在浏览器 localStorage 中运行时保存；`Dataset/users.json` 和 `Dataset/chat_history.json` 是未来迁移到真实数据库前的数据结构样例。
+
+## 项目结构
+
+```text
+Dataset/
+  data_example/                # 统一编号后的穿搭样例图片
+  Description_example.json     # 样例图片描述
+  example_embeddings.json      # 生成后出现，RAG 向量索引
+  users.json                   # 用户资料数据样例
+  chat_history.json            # 用户历史对话数据样例
+
+prompt/
+  inspiration_mode_v1.md       # Prompt 工作流模板
+  build_example_embeddings.js  # 生成 example_embeddings.json
+  README.md                    # prompt/RAG 说明
+
+index.html                     # 前端页面结构
+styles.css                     # 前端样式
+app.js                         # 前端交互、用户资料、审核门控、RAG 调用
+server.js                      # 本地服务和 OpenAI API 代理
+流程.md                         # 项目路线记录
+```
+
+生成 RAG 向量索引：
+
+```bash
+node prompt/build_example_embeddings.js
+```
 
 现在可以试：
 

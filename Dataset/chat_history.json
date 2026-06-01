@@ -1,0 +1,24 @@
+[
+  {
+    "userId": "user-1",
+    "messages": [
+      {
+        "role": "assistant",
+        "text": "欢迎回来。你之前更偏好松弛、低饱和、约会可穿的组合，我会优先用这些信号。",
+        "weight": 1,
+        "auditStatus": "seed"
+      }
+    ]
+  },
+  {
+    "userId": "user-2",
+    "messages": [
+      {
+        "role": "assistant",
+        "text": "欢迎回来。你之前更常选择通勤、利落、深色基底和正式度偏高的穿搭。",
+        "weight": 1,
+        "auditStatus": "seed"
+      }
+    ]
+  }
+]
