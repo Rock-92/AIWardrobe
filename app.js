@@ -686,6 +686,53 @@ function mergeIntentWithMessage(intent, message) {
   return next;
 }
 
+function createLocalAnalysis(message) {
+  const localIntent = mergeIntentWithMessage(getIntent(), message);
+  const queryParts = [
+    localIntent.weather,
+    localIntent.temp === null ? null : `${localIntent.temp}度`,
+    localIntent.occasion,
+    localIntent.mood,
+    localIntent.freeText
+  ].filter((item) => item && item !== "无");
+
+  return {
+    local_fallback: true,
+    guard: {
+      safe: true,
+      risk_types: [],
+      sanitized_input: message,
+      blocked_reason: null,
+      user_message: null
+    },
+    intent: {
+      mode: localIntent.mode,
+      occasion: localIntent.occasion === "无" ? null : localIntent.occasion,
+      weather: localIntent.weather === "无" ? null : localIntent.weather,
+      temperature: localIntent.temp,
+      season: null,
+      time_of_day: null,
+      gender_presentation: null,
+      style_keywords: localIntent.mood === "无" ? [] : [localIntent.mood],
+      color_preferences: [],
+      item_preferences: [],
+      avoid: [],
+      formality: null,
+      comfort_priority: localIntent.mood === "松弛" ? "high" : null,
+      body_or_fit_preferences: [],
+      needs_clarification: false,
+      clarifying_question: null,
+      retrieval_query: queryParts.join(" ") || message
+    },
+    preference_delta: {
+      likes: [],
+      dislikes: [],
+      contextual_preferences: [],
+      do_not_store: [],
+      summary: "本地规则解析，未调用外部 API。"
+    }
+  };
+}
 function withinTemp(range, temp) {
   if (temp === null || Number.isNaN(temp)) return false;
   return temp >= range[0] && temp <= range[1];
@@ -890,6 +937,7 @@ async function runRecommendation(message) {
   const user = activeUser();
   let analysis = null;
   let mechanicalAudit = null;
+  let usedLocalFallback = false;
   try {
     analysis = await analyzeUserMessage(message, user);
     mechanicalAudit = mechanicalAuditAnalysis(analysis, message);
@@ -910,14 +958,17 @@ async function runRecommendation(message) {
       mergePreferenceMemory(user, mechanicalAudit.sanitizedPreferenceDelta);
     }
   } catch (error) {
-    pushHistory(user, "user", message, { weight: 0.2, auditStatus: "api_failed" });
-    pushHistory(user, "assistant", `需求解析 API 暂时不可用：${error.message}。请确认本地 .env 已配置 OPENAI_API_KEY。`, {
-      weight: 0,
-      auditStatus: "system_notice"
-    });
-    saveState();
-    render();
-    return;
+    usedLocalFallback = true;
+    analysis = createLocalAnalysis(message);
+    mechanicalAudit = {
+      ok: true,
+      errors: [],
+      warnings: [`api_unavailable: ${error.message}`],
+      safeForPrompt: true,
+      safeForMemory: false,
+      sanitizedPreferenceDelta: analysis.preference_delta,
+      historyPolicy: "normal"
+    };
   }
 
   const sanitizedMessage = analysis.guard?.sanitized_input || message;
@@ -950,7 +1001,7 @@ async function runRecommendation(message) {
   const validation = outfits.map((outfit) => validateOutfit(outfit, user));
 
   const historyWeight = mechanicalAudit.historyPolicy === "low_weight" ? 0.2 : 1;
-  const auditStatus = mechanicalAudit.historyPolicy === "low_weight" ? "low_weight_audit" : "ok";
+  const auditStatus = usedLocalFallback ? "local_fallback" : mechanicalAudit.historyPolicy === "low_weight" ? "low_weight_audit" : "ok";
   pushHistory(user, "user", message, { weight: historyWeight, auditStatus });
   pushHistory(user, "assistant", answer, { weight: historyWeight, auditStatus });
   state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult };

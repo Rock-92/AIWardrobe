@@ -35,12 +35,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-001",
-      "dataset": "ljly",
-      "original_pic": "ljly_001.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_001.jpg"
     }
   },
   {
@@ -75,12 +69,6 @@
         "长裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-002",
-      "dataset": "ljly",
-      "original_pic": "ljly_002.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_002.jpg"
     }
   },
   {
@@ -114,12 +102,6 @@
         "半身裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-003",
-      "dataset": "ljly",
-      "original_pic": "ljly_003.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_003.jpg"
     }
   },
   {
@@ -153,12 +135,6 @@
         "夹克",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-004",
-      "dataset": "ljly",
-      "original_pic": "ljly_004.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_004.jpg"
     }
   },
   {
@@ -192,12 +168,6 @@
         "连衣裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-005",
-      "dataset": "ljly",
-      "original_pic": "ljly_005.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_005.jpg"
     }
   },
   {
@@ -230,12 +200,6 @@
         "工装裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-006",
-      "dataset": "ljly",
-      "original_pic": "ljly_006.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_006.jpg"
     }
   },
   {
@@ -270,12 +234,6 @@
         "外套",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-007",
-      "dataset": "ljly",
-      "original_pic": "ljly_007.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_007.jpg"
     }
   },
   {
@@ -310,12 +268,6 @@
         "长裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-008",
-      "dataset": "ljly",
-      "original_pic": "ljly_008.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_008.jpg"
     }
   },
   {
@@ -351,12 +303,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-009",
-      "dataset": "ljly",
-      "original_pic": "ljly_009.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_009.jpg"
     }
   },
   {
@@ -392,12 +338,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-010",
-      "dataset": "ljly",
-      "original_pic": "ljly_010.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_010.jpg"
     }
   },
   {
@@ -432,12 +372,6 @@
         "半身裙",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-011",
-      "dataset": "ljly",
-      "original_pic": "ljly_011.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_011.jpg"
     }
   },
   {
@@ -469,12 +403,6 @@
         "半身裙",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-012",
-      "dataset": "ljly",
-      "original_pic": "ljly_012.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_012.jpg"
     }
   },
   {
@@ -509,12 +437,6 @@
         "半身裙",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-013",
-      "dataset": "ljly",
-      "original_pic": "ljly_013.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_013.jpg"
     }
   },
   {
@@ -551,12 +473,6 @@
         "半身裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-014",
-      "dataset": "ljly",
-      "original_pic": "ljly_014.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_014.jpg"
     }
   },
   {
@@ -590,12 +506,6 @@
         "半身裙",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-015",
-      "dataset": "ljly",
-      "original_pic": "ljly_015.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_015.jpg"
     }
   },
   {
@@ -630,12 +540,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-016",
-      "dataset": "ljly",
-      "original_pic": "ljly_016.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_016.jpg"
     }
   },
   {
@@ -668,12 +572,6 @@
         "连衣裙",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-017",
-      "dataset": "ljly",
-      "original_pic": "ljly_017.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_017.jpg"
     }
   },
   {
@@ -708,12 +606,6 @@
         "连衣裙",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-018",
-      "dataset": "ljly",
-      "original_pic": "ljly_018.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_018.jpg"
     }
   },
   {
@@ -749,12 +641,6 @@
         "半身裙",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-019",
-      "dataset": "ljly",
-      "original_pic": "ljly_019.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_019.jpg"
     }
   },
   {
@@ -785,12 +671,6 @@
         "连衣裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-020",
-      "dataset": "ljly",
-      "original_pic": "ljly_020.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_020.jpg"
     }
   },
   {
@@ -824,12 +704,6 @@
         "半身裙",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-021",
-      "dataset": "ljly",
-      "original_pic": "ljly_021.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_021.jpg"
     }
   },
   {
@@ -862,12 +736,6 @@
         "短裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-022",
-      "dataset": "ljly",
-      "original_pic": "ljly_022.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_022.jpg"
     }
   },
   {
@@ -904,12 +772,6 @@
         "针织",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-023",
-      "dataset": "ljly",
-      "original_pic": "ljly_023.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_023.jpg"
     }
   },
   {
@@ -946,12 +808,6 @@
         "外套",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-024",
-      "dataset": "ljly",
-      "original_pic": "ljly_024.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_024.jpg"
     }
   },
   {
@@ -986,12 +842,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-025",
-      "dataset": "ljly",
-      "original_pic": "ljly_025.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_025.jpg"
     }
   },
   {
@@ -1028,12 +878,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-026",
-      "dataset": "ljly",
-      "original_pic": "ljly_026.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_026.jpg"
     }
   },
   {
@@ -1067,12 +911,6 @@
         "T恤",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-027",
-      "dataset": "ljly",
-      "original_pic": "ljly_027.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_027.jpg"
     }
   },
   {
@@ -1108,12 +946,6 @@
         "针织",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-028",
-      "dataset": "ljly",
-      "original_pic": "ljly_028.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_028.jpg"
     }
   },
   {
@@ -1146,12 +978,6 @@
         "T恤",
         "外套"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-029",
-      "dataset": "ljly",
-      "original_pic": "ljly_029.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_029.jpg"
     }
   },
   {
@@ -1188,12 +1014,6 @@
         "牛仔裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-030",
-      "dataset": "ljly",
-      "original_pic": "ljly_030.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_030.jpg"
     }
   },
   {
@@ -1228,12 +1048,6 @@
         "短裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-031",
-      "dataset": "ljly",
-      "original_pic": "ljly_031.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_031.jpg"
     }
   },
   {
@@ -1268,12 +1082,6 @@
         "短裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-032",
-      "dataset": "ljly",
-      "original_pic": "ljly_032.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_032.jpg"
     }
   },
   {
@@ -1310,12 +1118,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-033",
-      "dataset": "ljly",
-      "original_pic": "ljly_033.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_033.jpg"
     }
   },
   {
@@ -1353,12 +1155,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-034",
-      "dataset": "ljly",
-      "original_pic": "ljly_034.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_034.jpg"
     }
   },
   {
@@ -1391,12 +1187,6 @@
         "靴子",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-035",
-      "dataset": "ljly",
-      "original_pic": "ljly_035.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_035.jpg"
     }
   },
   {
@@ -1432,12 +1222,6 @@
         "半身裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-036",
-      "dataset": "ljly",
-      "original_pic": "ljly_036.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_036.jpg"
     }
   },
   {
@@ -1470,12 +1254,6 @@
         "靴子",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-037",
-      "dataset": "ljly",
-      "original_pic": "ljly_037.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_037.jpg"
     }
   },
   {
@@ -1510,12 +1288,6 @@
         "连衣裙",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-038",
-      "dataset": "ljly",
-      "original_pic": "ljly_038.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_038.jpg"
     }
   },
   {
@@ -1550,12 +1322,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-039",
-      "dataset": "ljly",
-      "original_pic": "ljly_039.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_039.jpg"
     }
   },
   {
@@ -1586,12 +1352,6 @@
         "衬衫",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-040",
-      "dataset": "ljly",
-      "original_pic": "ljly_040.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_040.jpg"
     }
   },
   {
@@ -1626,12 +1386,6 @@
         "外套",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-041",
-      "dataset": "ljly",
-      "original_pic": "ljly_041.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_041.jpg"
     }
   },
   {
@@ -1665,12 +1419,6 @@
         "T恤",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-042",
-      "dataset": "ljly",
-      "original_pic": "ljly_042.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_042.jpg"
     }
   },
   {
@@ -1703,12 +1451,6 @@
         "T恤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-043",
-      "dataset": "ljly",
-      "original_pic": "ljly_043.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_043.jpg"
     }
   },
   {
@@ -1742,12 +1484,6 @@
         "长裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-044",
-      "dataset": "ljly",
-      "original_pic": "ljly_044.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_044.jpg"
     }
   },
   {
@@ -1782,12 +1518,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-045",
-      "dataset": "ljly",
-      "original_pic": "ljly_045.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_045.jpg"
     }
   },
   {
@@ -1818,12 +1548,6 @@
         "T恤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-046",
-      "dataset": "ljly",
-      "original_pic": "ljly_046.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_046.jpg"
     }
   },
   {
@@ -1858,12 +1582,6 @@
         "外套",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-047",
-      "dataset": "ljly",
-      "original_pic": "ljly_047.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_047.jpg"
     }
   },
   {
@@ -1898,12 +1616,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-048",
-      "dataset": "ljly",
-      "original_pic": "ljly_048.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_048.jpg"
     }
   },
   {
@@ -1940,12 +1652,6 @@
         "夹克",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-049",
-      "dataset": "ljly",
-      "original_pic": "ljly_049.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_049.jpg"
     }
   },
   {
@@ -1976,12 +1682,6 @@
       "items": [
         "夹克"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-050",
-      "dataset": "ljly",
-      "original_pic": "ljly_050.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_050.jpg"
     }
   },
   {
@@ -2016,12 +1716,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-051",
-      "dataset": "ljly",
-      "original_pic": "ljly_051.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_051.jpg"
     }
   },
   {
@@ -2056,12 +1750,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-052",
-      "dataset": "ljly",
-      "original_pic": "ljly_052.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_052.jpg"
     }
   },
   {
@@ -2097,12 +1785,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-053",
-      "dataset": "ljly",
-      "original_pic": "ljly_053.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_053.jpg"
     }
   },
   {
@@ -2134,12 +1816,6 @@
         "外套",
         "工装裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-054",
-      "dataset": "ljly",
-      "original_pic": "ljly_054.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_054.jpg"
     }
   },
   {
@@ -2172,12 +1848,6 @@
         "西装",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-055",
-      "dataset": "ljly",
-      "original_pic": "ljly_055.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_055.jpg"
     }
   },
   {
@@ -2211,12 +1881,6 @@
         "西装",
         "夹克"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-056",
-      "dataset": "ljly",
-      "original_pic": "ljly_056.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_056.jpg"
     }
   },
   {
@@ -2250,12 +1914,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-057",
-      "dataset": "ljly",
-      "original_pic": "ljly_057.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_057.jpg"
     }
   },
   {
@@ -2288,12 +1946,6 @@
         "西装",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-058",
-      "dataset": "ljly",
-      "original_pic": "ljly_058.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_058.jpg"
     }
   },
   {
@@ -2321,12 +1973,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-059",
-      "dataset": "ljly",
-      "original_pic": "ljly_059.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_059.jpg"
     }
   },
   {
@@ -2355,12 +2001,6 @@
       "items": [
         "夹克"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-060",
-      "dataset": "ljly",
-      "original_pic": "ljly_060.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_060.jpg"
     }
   },
   {
@@ -2393,12 +2033,6 @@
         "夹克",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-061",
-      "dataset": "ljly",
-      "original_pic": "ljly_061.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_061.jpg"
     }
   },
   {
@@ -2432,12 +2066,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ljly-062",
-      "dataset": "ljly",
-      "original_pic": "ljly_062.jpg",
-      "original_path": "Dataset/Pics_ljly/ljly_062.jpg"
     }
   },
   {
@@ -2462,12 +2090,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-001",
-      "dataset": "wad",
-      "original_pic": "wad_001.jpg",
-      "original_path": "Dataset/Pics_wad/wad_001.jpg"
     }
   },
   {
@@ -2490,12 +2112,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-002",
-      "dataset": "wad",
-      "original_pic": "wad_002.jpg",
-      "original_path": "Dataset/Pics_wad/wad_002.jpg"
     }
   },
   {
@@ -2516,12 +2132,6 @@
       "items": [
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-003",
-      "dataset": "wad",
-      "original_pic": "wad_003.jpg",
-      "original_path": "Dataset/Pics_wad/wad_003.jpg"
     }
   },
   {
@@ -2547,12 +2157,6 @@
         "衬衫",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-004",
-      "dataset": "wad",
-      "original_pic": "wad_004.jpg",
-      "original_path": "Dataset/Pics_wad/wad_004.jpg"
     }
   },
   {
@@ -2577,12 +2181,6 @@
         "半身裙",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-005",
-      "dataset": "wad",
-      "original_pic": "wad_005.jpg",
-      "original_path": "Dataset/Pics_wad/wad_005.jpg"
     }
   },
   {
@@ -2607,12 +2205,6 @@
         "衬衫",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-006",
-      "dataset": "wad",
-      "original_pic": "wad_006.jpg",
-      "original_path": "Dataset/Pics_wad/wad_006.jpg"
     }
   },
   {
@@ -2636,12 +2228,6 @@
         "针织",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-007",
-      "dataset": "wad",
-      "original_pic": "wad_007.jpg",
-      "original_path": "Dataset/Pics_wad/wad_007.jpg"
     }
   },
   {
@@ -2666,12 +2252,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-008",
-      "dataset": "wad",
-      "original_pic": "wad_008.jpg",
-      "original_path": "Dataset/Pics_wad/wad_008.jpg"
     }
   },
   {
@@ -2695,12 +2275,6 @@
         "半身裙",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-009",
-      "dataset": "wad",
-      "original_pic": "wad_009.jpg",
-      "original_path": "Dataset/Pics_wad/wad_009.jpg"
     }
   },
   {
@@ -2717,12 +2291,6 @@
       ],
       "colors": [],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-wad-010",
-      "dataset": "wad",
-      "original_pic": "wad_010.jpg",
-      "original_path": "Dataset/Pics_wad/wad_010.jpg"
     }
   },
   {
@@ -2743,12 +2311,6 @@
       "items": [
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-011",
-      "dataset": "wad",
-      "original_pic": "wad_011.jpg",
-      "original_path": "Dataset/Pics_wad/wad_011.jpg"
     }
   },
   {
@@ -2773,12 +2335,6 @@
       "items": [
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-012",
-      "dataset": "wad",
-      "original_pic": "wad_012.jpg",
-      "original_path": "Dataset/Pics_wad/wad_012.jpg"
     }
   },
   {
@@ -2804,12 +2360,6 @@
         "T恤",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-013",
-      "dataset": "wad",
-      "original_pic": "wad_013.jpg",
-      "original_path": "Dataset/Pics_wad/wad_013.jpg"
     }
   },
   {
@@ -2832,12 +2382,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-014",
-      "dataset": "wad",
-      "original_pic": "wad_014.jpg",
-      "original_path": "Dataset/Pics_wad/wad_014.jpg"
     }
   },
   {
@@ -2860,12 +2404,6 @@
       "items": [
         "T恤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-015",
-      "dataset": "wad",
-      "original_pic": "wad_015.jpg",
-      "original_path": "Dataset/Pics_wad/wad_015.jpg"
     }
   },
   {
@@ -2888,12 +2426,6 @@
         "衬衫",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-016",
-      "dataset": "wad",
-      "original_pic": "wad_016.jpg",
-      "original_path": "Dataset/Pics_wad/wad_016.jpg"
     }
   },
   {
@@ -2920,12 +2452,6 @@
       "items": [
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-017",
-      "dataset": "wad",
-      "original_pic": "wad_017.jpg",
-      "original_path": "Dataset/Pics_wad/wad_017.jpg"
     }
   },
   {
@@ -2950,12 +2476,6 @@
         "衬衫",
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-018",
-      "dataset": "wad",
-      "original_pic": "wad_018.jpg",
-      "original_path": "Dataset/Pics_wad/wad_018.jpg"
     }
   },
   {
@@ -2979,12 +2499,6 @@
         "卫衣",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-019",
-      "dataset": "wad",
-      "original_pic": "wad_019.jpg",
-      "original_path": "Dataset/Pics_wad/wad_019.jpg"
     }
   },
   {
@@ -3007,12 +2521,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-020",
-      "dataset": "wad",
-      "original_pic": "wad_020.jpg",
-      "original_path": "Dataset/Pics_wad/wad_020.jpg"
     }
   },
   {
@@ -3035,12 +2543,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-021",
-      "dataset": "wad",
-      "original_pic": "wad_021.jpg",
-      "original_path": "Dataset/Pics_wad/wad_021.jpg"
     }
   },
   {
@@ -3062,12 +2564,6 @@
       "items": [
         "外套"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-022",
-      "dataset": "wad",
-      "original_pic": "wad_022.jpg",
-      "original_path": "Dataset/Pics_wad/wad_022.jpg"
     }
   },
   {
@@ -3091,12 +2587,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-023",
-      "dataset": "wad",
-      "original_pic": "wad_023.jpg",
-      "original_path": "Dataset/Pics_wad/wad_023.jpg"
     }
   },
   {
@@ -3121,12 +2611,6 @@
       "items": [
         "衬衫"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-024",
-      "dataset": "wad",
-      "original_pic": "wad_024.jpg",
-      "original_path": "Dataset/Pics_wad/wad_024.jpg"
     }
   },
   {
@@ -3149,12 +2633,6 @@
         "外套",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-025",
-      "dataset": "wad",
-      "original_pic": "wad_025.jpg",
-      "original_path": "Dataset/Pics_wad/wad_025.jpg"
     }
   },
   {
@@ -3179,12 +2657,6 @@
         "半身裙",
         "靴子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-026",
-      "dataset": "wad",
-      "original_pic": "wad_026.jpg",
-      "original_path": "Dataset/Pics_wad/wad_026.jpg"
     }
   },
   {
@@ -3207,12 +2679,6 @@
         "卫衣",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-027",
-      "dataset": "wad",
-      "original_pic": "wad_027.jpg",
-      "original_path": "Dataset/Pics_wad/wad_027.jpg"
     }
   },
   {
@@ -3235,12 +2701,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-028",
-      "dataset": "wad",
-      "original_pic": "wad_028.jpg",
-      "original_path": "Dataset/Pics_wad/wad_028.jpg"
     }
   },
   {
@@ -3266,12 +2726,6 @@
         "衬衫",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-029",
-      "dataset": "wad",
-      "original_pic": "wad_029.jpg",
-      "original_path": "Dataset/Pics_wad/wad_029.jpg"
     }
   },
   {
@@ -3288,12 +2742,6 @@
       ],
       "colors": [],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-wad-030",
-      "dataset": "wad",
-      "original_pic": "wad_030.jpg",
-      "original_path": "Dataset/Pics_wad/wad_030.jpg"
     }
   },
   {
@@ -3312,12 +2760,6 @@
       "items": [
         "短裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-031",
-      "dataset": "wad",
-      "original_pic": "wad_031.jpg",
-      "original_path": "Dataset/Pics_wad/wad_031.jpg"
     }
   },
   {
@@ -3344,12 +2786,6 @@
         "衬衫",
         "短裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-032",
-      "dataset": "wad",
-      "original_pic": "wad_032.jpg",
-      "original_path": "Dataset/Pics_wad/wad_032.jpg"
     }
   },
   {
@@ -3364,12 +2800,6 @@
       "style": [],
       "colors": [],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-wad-033",
-      "dataset": "wad",
-      "original_pic": "wad_033.jpg",
-      "original_path": "Dataset/Pics_wad/wad_033.jpg"
     }
   },
   {
@@ -3390,12 +2820,6 @@
       "items": [
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-034",
-      "dataset": "wad",
-      "original_pic": "wad_034.jpg",
-      "original_path": "Dataset/Pics_wad/wad_034.jpg"
     }
   },
   {
@@ -3414,12 +2838,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-035",
-      "dataset": "wad",
-      "original_pic": "wad_035.jpg",
-      "original_path": "Dataset/Pics_wad/wad_035.jpg"
     }
   },
   {
@@ -3437,12 +2855,6 @@
         "蓝色"
       ],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-wad-036",
-      "dataset": "wad",
-      "original_pic": "wad_036.jpg",
-      "original_path": "Dataset/Pics_wad/wad_036.jpg"
     }
   },
   {
@@ -3459,12 +2871,6 @@
         "浅色"
       ],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-wad-037",
-      "dataset": "wad",
-      "original_pic": "wad_037.jpg",
-      "original_path": "Dataset/Pics_wad/wad_037.jpg"
     }
   },
   {
@@ -3487,12 +2893,6 @@
         "牛仔裤",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-038",
-      "dataset": "wad",
-      "original_pic": "wad_038.jpg",
-      "original_path": "Dataset/Pics_wad/wad_038.jpg"
     }
   },
   {
@@ -3516,12 +2916,6 @@
         "外套",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-039",
-      "dataset": "wad",
-      "original_pic": "wad_039.jpg",
-      "original_path": "Dataset/Pics_wad/wad_039.jpg"
     }
   },
   {
@@ -3540,12 +2934,6 @@
       "items": [
         "短裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-040",
-      "dataset": "wad",
-      "original_pic": "wad_040.jpg",
-      "original_path": "Dataset/Pics_wad/wad_040.jpg"
     }
   },
   {
@@ -3569,12 +2957,6 @@
         "外套",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-041",
-      "dataset": "wad",
-      "original_pic": "wad_041.jpg",
-      "original_path": "Dataset/Pics_wad/wad_041.jpg"
     }
   },
   {
@@ -3598,12 +2980,6 @@
         "牛仔裤",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-042",
-      "dataset": "wad",
-      "original_pic": "wad_042.jpg",
-      "original_path": "Dataset/Pics_wad/wad_042.jpg"
     }
   },
   {
@@ -3625,12 +3001,6 @@
       "items": [
         "夹克"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-043",
-      "dataset": "wad",
-      "original_pic": "wad_043.jpg",
-      "original_path": "Dataset/Pics_wad/wad_043.jpg"
     }
   },
   {
@@ -3657,12 +3027,6 @@
         "牛仔裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-044",
-      "dataset": "wad",
-      "original_pic": "wad_044.jpg",
-      "original_path": "Dataset/Pics_wad/wad_044.jpg"
     }
   },
   {
@@ -3684,12 +3048,6 @@
       "items": [
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-045",
-      "dataset": "wad",
-      "original_pic": "wad_045.jpg",
-      "original_path": "Dataset/Pics_wad/wad_045.jpg"
     }
   },
   {
@@ -3712,12 +3070,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-046",
-      "dataset": "wad",
-      "original_pic": "wad_046.jpg",
-      "original_path": "Dataset/Pics_wad/wad_046.jpg"
     }
   },
   {
@@ -3742,12 +3094,6 @@
         "衬衫",
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-047",
-      "dataset": "wad",
-      "original_pic": "wad_047.jpg",
-      "original_path": "Dataset/Pics_wad/wad_047.jpg"
     }
   },
   {
@@ -3772,12 +3118,6 @@
         "衬衫",
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-048",
-      "dataset": "wad",
-      "original_pic": "wad_048.jpg",
-      "original_path": "Dataset/Pics_wad/wad_048.jpg"
     }
   },
   {
@@ -3802,12 +3142,6 @@
       "items": [
         "衬衫"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-049",
-      "dataset": "wad",
-      "original_pic": "wad_049.jpg",
-      "original_path": "Dataset/Pics_wad/wad_049.jpg"
     }
   },
   {
@@ -3830,12 +3164,6 @@
       "items": [
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-wad-050",
-      "dataset": "wad",
-      "original_pic": "wad_050.jpg",
-      "original_path": "Dataset/Pics_wad/wad_050.jpg"
     }
   },
   {
@@ -3862,12 +3190,6 @@
         "衬衫",
         "工装裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-001",
-      "dataset": "ywx",
-      "original_pic": "ywx_001.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_001.jpg"
     }
   },
   {
@@ -3894,12 +3216,6 @@
         "外套",
         "工装裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-002",
-      "dataset": "ywx",
-      "original_pic": "ywx_002.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_002.jpg"
     }
   },
   {
@@ -3923,12 +3239,6 @@
         "T恤",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-004",
-      "dataset": "ywx",
-      "original_pic": "ywx_004.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_004.jpg"
     }
   },
   {
@@ -3953,12 +3263,6 @@
         "衬衫",
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-006",
-      "dataset": "ywx",
-      "original_pic": "ywx_006.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_006.jpg"
     }
   },
   {
@@ -3984,12 +3288,6 @@
         "T恤",
         "短裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-007",
-      "dataset": "ywx",
-      "original_pic": "ywx_007.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_007.jpg"
     }
   },
   {
@@ -4012,12 +3310,6 @@
       "items": [
         "短裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-008",
-      "dataset": "ywx",
-      "original_pic": "ywx_008.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_008.jpg"
     }
   },
   {
@@ -4041,12 +3333,6 @@
         "T恤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-009",
-      "dataset": "ywx",
-      "original_pic": "ywx_009.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_009.jpg"
     }
   },
   {
@@ -4071,12 +3357,6 @@
         "T恤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-010",
-      "dataset": "ywx",
-      "original_pic": "ywx_010.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_010.jpg"
     }
   },
   {
@@ -4097,12 +3377,6 @@
         "蓝色"
       ],
       "items": []
-    },
-    "source": {
-      "sample_id": "sample-ywx-011",
-      "dataset": "ywx",
-      "original_pic": "ywx_011.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_011.jpg"
     }
   },
   {
@@ -4121,12 +3395,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-014",
-      "dataset": "ywx",
-      "original_pic": "ywx_014.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_014.jpg"
     }
   },
   {
@@ -4148,12 +3416,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-015",
-      "dataset": "ywx",
-      "original_pic": "ywx_015.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_015.jpg"
     }
   },
   {
@@ -4180,12 +3442,6 @@
         "包",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-016",
-      "dataset": "ywx",
-      "original_pic": "ywx_016.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_016.jpg"
     }
   },
   {
@@ -4215,12 +3471,6 @@
         "短裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-017",
-      "dataset": "ywx",
-      "original_pic": "ywx_017.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_017.jpg"
     }
   },
   {
@@ -4246,12 +3496,6 @@
         "牛仔裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-018",
-      "dataset": "ywx",
-      "original_pic": "ywx_018.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_018.jpg"
     }
   },
   {
@@ -4280,12 +3524,6 @@
         "卫衣",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-019",
-      "dataset": "ywx",
-      "original_pic": "ywx_019.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_019.jpg"
     }
   },
   {
@@ -4311,12 +3549,6 @@
         "牛仔裤",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-020",
-      "dataset": "ywx",
-      "original_pic": "ywx_020.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_020.jpg"
     }
   },
   {
@@ -4340,12 +3572,6 @@
         "长裤",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-021",
-      "dataset": "ywx",
-      "original_pic": "ywx_021.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_021.jpg"
     }
   },
   {
@@ -4370,12 +3596,6 @@
         "长裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-022",
-      "dataset": "ywx",
-      "original_pic": "ywx_022.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_022.jpg"
     }
   },
   {
@@ -4406,12 +3626,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-023",
-      "dataset": "ywx",
-      "original_pic": "ywx_023.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_023.jpg"
     }
   },
   {
@@ -4436,12 +3650,6 @@
         "长裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-024",
-      "dataset": "ywx",
-      "original_pic": "ywx_024.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_024.jpg"
     }
   },
   {
@@ -4463,12 +3671,6 @@
         "T恤",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-025",
-      "dataset": "ywx",
-      "original_pic": "ywx_025.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_025.jpg"
     }
   },
   {
@@ -4491,12 +3693,6 @@
         "T恤",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-026",
-      "dataset": "ywx",
-      "original_pic": "ywx_026.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_026.jpg"
     }
   },
   {
@@ -4523,12 +3719,6 @@
         "针织",
         "牛仔裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-027",
-      "dataset": "ywx",
-      "original_pic": "ywx_027.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_027.jpg"
     }
   },
   {
@@ -4555,12 +3745,6 @@
         "包",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-028",
-      "dataset": "ywx",
-      "original_pic": "ywx_028.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_028.jpg"
     }
   },
   {
@@ -4586,12 +3770,6 @@
         "长裤",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-030",
-      "dataset": "ywx",
-      "original_pic": "ywx_030.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_030.jpg"
     }
   },
   {
@@ -4618,12 +3796,6 @@
         "短裤",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-031",
-      "dataset": "ywx",
-      "original_pic": "ywx_031.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_031.jpg"
     }
   },
   {
@@ -4652,12 +3824,6 @@
         "短裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-032",
-      "dataset": "ywx",
-      "original_pic": "ywx_032.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_032.jpg"
     }
   },
   {
@@ -4675,12 +3841,6 @@
         "T恤",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-033",
-      "dataset": "ywx",
-      "original_pic": "ywx_033.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_033.jpg"
     }
   },
   {
@@ -4701,12 +3861,6 @@
       "items": [
         "长裤"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-035",
-      "dataset": "ywx",
-      "original_pic": "ywx_035.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_035.jpg"
     }
   },
   {
@@ -4732,12 +3886,6 @@
         "长裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-036",
-      "dataset": "ywx",
-      "original_pic": "ywx_036.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_036.jpg"
     }
   },
   {
@@ -4756,12 +3904,6 @@
       "items": [
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-037",
-      "dataset": "ywx",
-      "original_pic": "ywx_037.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_037.jpg"
     }
   },
   {
@@ -4789,12 +3931,6 @@
         "运动鞋",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-038",
-      "dataset": "ywx",
-      "original_pic": "ywx_038.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_038.jpg"
     }
   },
   {
@@ -4821,12 +3957,6 @@
         "短裤",
         "运动鞋"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-039",
-      "dataset": "ywx",
-      "original_pic": "ywx_039.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_039.jpg"
     }
   },
   {
@@ -4854,12 +3984,6 @@
         "包",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-041",
-      "dataset": "ywx",
-      "original_pic": "ywx_041.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_041.jpg"
     }
   },
   {
@@ -4887,12 +4011,6 @@
         "靴子",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-042",
-      "dataset": "ywx",
-      "original_pic": "ywx_042.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_042.jpg"
     }
   },
   {
@@ -4917,12 +4035,6 @@
         "牛仔裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-043",
-      "dataset": "ywx",
-      "original_pic": "ywx_043.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_043.jpg"
     }
   },
   {
@@ -4950,12 +4062,6 @@
         "运动鞋",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-044",
-      "dataset": "ywx",
-      "original_pic": "ywx_044.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_044.jpg"
     }
   },
   {
@@ -4981,12 +4087,6 @@
         "牛仔裤",
         "帽子"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-045",
-      "dataset": "ywx",
-      "original_pic": "ywx_045.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_045.jpg"
     }
   },
   {
@@ -5011,12 +4111,6 @@
         "西装",
         "外套"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-046",
-      "dataset": "ywx",
-      "original_pic": "ywx_046.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_046.jpg"
     }
   },
   {
@@ -5044,12 +4138,6 @@
         "外套",
         "包"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-047",
-      "dataset": "ywx",
-      "original_pic": "ywx_047.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_047.jpg"
     }
   },
   {
@@ -5076,12 +4164,6 @@
         "西装",
         "外套"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-048",
-      "dataset": "ywx",
-      "original_pic": "ywx_048.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_048.jpg"
     }
   },
   {
@@ -5109,12 +4191,6 @@
         "衬衫",
         "西装"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-049",
-      "dataset": "ywx",
-      "original_pic": "ywx_049.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_049.jpg"
     }
   },
   {
@@ -5141,12 +4217,6 @@
         "外套",
         "半身裙"
       ]
-    },
-    "source": {
-      "sample_id": "sample-ywx-050",
-      "dataset": "ywx",
-      "original_pic": "ywx_050.jpg",
-      "original_path": "Dataset/Pics_ywx/ywx_050.jpg"
     }
   }
 ]
