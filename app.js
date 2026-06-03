@@ -323,7 +323,8 @@ const state = {
   users: structuredClone(defaultUsers),
   lastRun: null,
   profileDialogMode: "create",
-  pendingReply: null
+  pendingReply: null,
+  closetEditMode: false
 };
 
 const blockedMemoryTerms = ["忽略规则", "忽略之前", "系统提示", "system prompt", "越狱", "破解"];
@@ -400,6 +401,29 @@ function profileSummary(user) {
     ...(profile.preferredColors || []).filter((item) => item !== "无")
   ].filter(Boolean);
   return parts.length ? parts.join(" · ") : "暂无特别偏好";
+}
+
+function compactProfileSummary(user) {
+  const profile = user.profile || {};
+  const styles = (profile.preferredStyles || []).filter((item) => item && item !== "无").slice(0, 2);
+  const items = (profile.preferredItems || []).filter((item) => item && item !== "无").slice(0, 2);
+  const parts = [...styles, ...items];
+  return parts.length ? parts.join(" · ") : "暂无特别偏好";
+}
+
+function realHistoryCount(user) {
+  return (user.history || []).filter((message) => message.role === "user").length;
+}
+
+function countPreferenceWords(text, candidates, limit = 8) {
+  return candidates
+    .map((word) => ({
+      word,
+      count: (text.match(new RegExp(word, "g")) || []).length
+    }))
+    .filter((item) => item.count > 0)
+    .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
+    .slice(0, limit);
 }
 
 function selectedValues(form, name) {
@@ -793,7 +817,8 @@ function derivePreferenceSignals(user) {
   ]
     .filter((item) => item && item !== "无")
     .join(" ");
-  const trustedHistoryText = user.history
+  const trustedHistoryText = (user.history || [])
+    .filter((message) => message.role === "user")
     .filter((message) => (message.weight ?? 1) >= 0.5 && !["failed_audit", "api_failed"].includes(message.auditStatus))
     .map((message) => message.text)
     .join(" ");
@@ -818,14 +843,37 @@ function derivePreferenceSignals(user) {
     "西装",
     "外套"
   ];
-  const counts = candidates
-    .map((word) => ({
-      word,
-      count: (text.match(new RegExp(word, "g")) || []).length
-    }))
-    .filter((item) => item.count > 0)
-    .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word));
-  return counts.slice(0, 8);
+  return countPreferenceWords(text, candidates);
+}
+
+function deriveLearnedPreferenceSignals(user) {
+  const trustedHistoryText = (user.history || [])
+    .filter((message) => message.role === "user")
+    .filter((message) => (message.weight ?? 1) >= 0.5 && !["failed_audit", "api_failed"].includes(message.auditStatus))
+    .map((message) => message.text)
+    .join(" ");
+  const text = `${memoryWords(user).join(" ")} ${trustedHistoryText}`;
+  const candidates = [
+    "松弛",
+    "精致",
+    "明亮",
+    "利落",
+    "温柔",
+    "通勤",
+    "约会",
+    "周末",
+    "晚餐",
+    "浅色",
+    "深色",
+    "低饱和",
+    "正式",
+    "舒适",
+    "半裙",
+    "牛仔",
+    "西装",
+    "外套"
+  ];
+  return countPreferenceWords(text, candidates);
 }
 
 function scoreEntity(entity, intent, preferences) {
@@ -1220,7 +1268,7 @@ function renderUsers() {
     )
     .join("");
   const user = activeUser();
-  document.querySelector("#activeUserBadge").textContent = `${user.name} · ${profileSummary(user)} · ${user.history.length} 条历史`;
+  document.querySelector("#activeUserBadge").textContent = `资料偏好：${compactProfileSummary(user)} · ${realHistoryCount(user)} 条对话`;
 }
 
 function renderCloset() {
@@ -1228,15 +1276,21 @@ function renderCloset() {
   document.querySelector("#closetRail").innerHTML = wardrobe
     .map(
       (item) => `
-        <div class="closet-tile">
+        <div class="closet-tile${state.closetEditMode ? " is-editing" : ""}">
+          <button class="closet-delete" type="button" data-delete-item-id="${escapeHtml(item.id)}" aria-label="删除 ${escapeHtml(item.name)}" title="删除这件衣服">×</button>
           <div class="thumb" style="--c1:${item.colors[0]}; --c2:${item.colors[1]}"></div>
-          <small>${item.id}</small>
-          <strong>${item.name}</strong>
+          <small>${escapeHtml(item.id)}</small>
+          <strong>${escapeHtml(item.name)}</strong>
         </div>
       `
     )
     .join("");
   document.querySelector("#closetCount").textContent = wardrobe.length;
+  const editButton = document.querySelector("#closetEditButton");
+  if (editButton) {
+    editButton.textContent = state.closetEditMode ? "完成" : "编辑";
+    editButton.setAttribute("aria-pressed", String(state.closetEditMode));
+  }
 }
 
 function renderChat() {
@@ -1278,6 +1332,7 @@ function renderChat() {
 function renderEvidence() {
   const user = activeUser();
   const preferences = state.lastRun?.preferences || derivePreferenceSignals(user);
+  const learnedPreferences = deriveLearnedPreferenceSignals(user);
   const latestUserMessage = [...user.history].reverse().find((message) => message.role === "user")?.text || "";
   const previewIntent = latestUserMessage ? mergeIntentWithMessage(getIntent(), latestUserMessage) : getIntent();
   const intent = state.lastRun?.intent || previewIntent;
@@ -1286,8 +1341,8 @@ function renderEvidence() {
   const validation =
     state.lastRun?.validation || (outfits.length ? outfits.map((outfit) => validateOutfit(outfit, user)) : []);
 
-  document.querySelector("#preferenceList").innerHTML = preferences.length
-    ? preferences.map((pref) => `<span class="match-tag">${pref.word} ×${pref.count}</span>`).join("")
+  document.querySelector("#preferenceList").innerHTML = learnedPreferences.length
+    ? learnedPreferences.map((pref) => `<span class="match-tag">${pref.word} ×${pref.count}</span>`).join("")
     : `<span class="match-tag">暂无历史偏好</span>`;
 
   document.querySelector("#exampleList").innerHTML = examples
@@ -1333,8 +1388,10 @@ function renderEvidence() {
       name: user.name,
       profile: user.profile,
       wardrobe_ids: user.wardrobeIds,
-    history_as_preference: preferences.map((pref) => pref.word),
-    preference_memory: user.preferenceMemory || createPreferenceMemory()
+      profile_preference_summary: profileSummary(user),
+      learned_preferences: learnedPreferences.map((pref) => pref.word),
+      recommendation_signals: preferences.map((pref) => pref.word),
+      preference_memory: user.preferenceMemory || createPreferenceMemory()
     },
     intent,
     api_analysis: state.lastRun?.analysis || null,
@@ -1494,9 +1551,24 @@ function bindControls() {
     const button = event.target.closest("button[data-user-id]");
     if (!button) return;
     state.activeUserId = button.dataset.userId;
+    state.closetEditMode = false;
     state.lastRun = null;
     saveState();
     render();
+  });
+
+  document.querySelector("#closetRail").addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-delete-item-id]");
+    if (!button) return;
+    const user = activeUser();
+    user.wardrobeIds = (user.wardrobeIds || []).filter((id) => id !== button.dataset.deleteItemId);
+    state.lastRun = null;
+    saveState();
+    render();
+  });
+  document.querySelector("#closetEditButton").addEventListener("click", () => {
+    state.closetEditMode = !state.closetEditMode;
+    renderCloset();
   });
 
   document.querySelector("#newUserButton").addEventListener("click", () => {
@@ -1552,6 +1624,7 @@ function bindControls() {
       id,
       name,
       profile,
+      preferenceMemory: createPreferenceMemory(),
       wardrobeIds: ["top-001", "bottom-003", "outer-001", "shoes-002", "bag-001"],
       history: [
         {
@@ -1580,7 +1653,20 @@ function bindControls() {
   document.querySelector("#clearHistoryButton").addEventListener("click", () => {
     const user = activeUser();
     if (!window.confirm(`清空 ${user.name} 的聊天历史？`)) return;
-    user.history = [{ role: "assistant", text: "历史已清空。新的聊天会重新形成偏好记忆。" }];
+    const clearMemory = window.confirm(
+      "同时清空从聊天里提取的偏好记忆吗？\n\n确定：清空聊天历史和偏好记忆。\n取消：只清空聊天历史，保留已学习的偏好。"
+    );
+    user.history = [
+      {
+        role: "assistant",
+        text: clearMemory
+          ? "历史和偏好记忆已清空。新的聊天会重新形成偏好记忆。"
+          : "历史已清空。已学习的偏好记忆仍会保留，你也可以再次清空并选择同时清除偏好记忆。"
+      }
+    ];
+    if (clearMemory) {
+      user.preferenceMemory = createPreferenceMemory();
+    }
     state.lastRun = null;
     saveState();
     render();

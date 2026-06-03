@@ -342,6 +342,29 @@ textarea:focus {
   font-size: 12px;
   font-weight: 750;
 }
+.closet-title-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.closet-edit-button {
+  min-height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.closet-edit-button[aria-pressed="true"] {
+  border-color: var(--teal);
+  background: var(--teal-soft);
+  color: #174a45;
+}
 
 .closet-rail {
   display: grid;
@@ -353,6 +376,7 @@ textarea:focus {
 }
 
 .closet-tile {
+  position: relative;
   display: grid;
   gap: 5px;
   min-width: 0;
@@ -361,6 +385,50 @@ textarea:focus {
   padding: 7px;
   background: #ffffff;
   overflow: hidden;
+}
+
+.closet-delete {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(10px) saturate(1.35);
+  -webkit-backdrop-filter: blur(10px) saturate(1.35);
+  color: rgba(32, 37, 43, 0.88);
+  font-size: 0;
+  line-height: 0;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(32, 37, 43, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.closet-delete::before {
+  content: "×";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 19px;
+  line-height: 1;
+  transform: translate(-50%, -61%);
+}
+
+.closet-tile.is-editing .closet-delete {
+  display: grid;
+}
+
+.closet-delete:hover,
+.closet-delete:focus-visible {
+  border-color: #d9534f;
+  color: #b42318;
+  background: rgba(255, 245, 244, 0.68);
 }
 
 .thumb {
@@ -734,4 +802,14 @@ textarea:focus {
   .user-actions {
     grid-template-columns: 1fr;
   }
+}
+.chat-header > div {
+  min-width: 0;
+}
+
+.active-user-badge {
+  flex: 0 1 auto;
+  max-width: min(520px, 54vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
