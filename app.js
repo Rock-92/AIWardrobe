@@ -1,8 +1,7 @@
-const storageKey = "aiwardrobe-chat-prototype-v3";
+const storageKey = "aiwardrobe-chat-prototype-v6";
 
 const wardrobeCatalog = [
   {
-    id: "top-001",
     name: "象牙针织短袖",
     category: "上装",
     colors: ["#efe5d4", "#7d9a89"],
@@ -13,7 +12,6 @@ const wardrobeCatalog = [
     formality: 3
   },
   {
-    id: "top-002",
     name: "雾蓝衬衫",
     category: "上装",
     colors: ["#aebfd0", "#496b89"],
@@ -24,7 +22,6 @@ const wardrobeCatalog = [
     formality: 4
   },
   {
-    id: "top-003",
     name: "条纹棉质上衣",
     category: "上装",
     colors: ["#f7f1e8", "#3f4f66"],
@@ -35,7 +32,6 @@ const wardrobeCatalog = [
     formality: 2
   },
   {
-    id: "top-004",
     name: "黑色修身背心",
     category: "上装",
     colors: ["#202126", "#6c6d73"],
@@ -46,7 +42,6 @@ const wardrobeCatalog = [
     formality: 3
   },
   {
-    id: "bottom-001",
     name: "炭灰直筒裤",
     category: "下装",
     colors: ["#464950", "#22252b"],
@@ -57,7 +52,6 @@ const wardrobeCatalog = [
     formality: 4
   },
   {
-    id: "bottom-002",
     name: "浅卡其半裙",
     category: "下装",
     colors: ["#cbb993", "#836f4f"],
@@ -68,7 +62,6 @@ const wardrobeCatalog = [
     formality: 3
   },
   {
-    id: "bottom-003",
     name: "深靛牛仔裤",
     category: "下装",
     colors: ["#28425e", "#102033"],
@@ -79,7 +72,6 @@ const wardrobeCatalog = [
     formality: 2
   },
   {
-    id: "outer-001",
     name: "鼠尾草薄风衣",
     category: "外套",
     colors: ["#9eaa91", "#56684e"],
@@ -90,7 +82,6 @@ const wardrobeCatalog = [
     formality: 3
   },
   {
-    id: "outer-002",
     name: "海军蓝西装",
     category: "外套",
     colors: ["#1f314a", "#536985"],
@@ -101,7 +92,6 @@ const wardrobeCatalog = [
     formality: 5
   },
   {
-    id: "dress-001",
     name: "墨绿针织连衣裙",
     category: "连衣裙",
     colors: ["#263f35", "#6f8b73"],
@@ -112,7 +102,6 @@ const wardrobeCatalog = [
     formality: 4
   },
   {
-    id: "shoes-001",
     name: "黑色乐福鞋",
     category: "鞋",
     colors: ["#222222", "#66615b"],
@@ -123,7 +112,6 @@ const wardrobeCatalog = [
     formality: 4
   },
   {
-    id: "shoes-002",
     name: "米白低帮鞋",
     category: "鞋",
     colors: ["#eee7d8", "#b9ab91"],
@@ -134,7 +122,6 @@ const wardrobeCatalog = [
     formality: 2
   },
   {
-    id: "bag-001",
     name: "焦糖小肩包",
     category: "包",
     colors: ["#a85d3a", "#6d3924"],
@@ -222,7 +209,68 @@ const outfitExamples = [
   }
 ];
 
-const catalogById = new Map(wardrobeCatalog.map((item) => [item.id, item]));
+const catalogByName = new Map(wardrobeCatalog.map((item) => [item.name, item]));
+
+function placeholderWardrobeImage(name, colors = ["#edf1f4", "#8b98a5"]) {
+  const label = String(name || "衣物").slice(0, 5);
+  const svg = [
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 256">',
+    '<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">',
+    '<stop offset="0" stop-color="' + (colors[0] || "#edf1f4") + '"/>',
+    '<stop offset="1" stop-color="' + (colors[1] || "#8b98a5") + '"/>',
+    '</linearGradient></defs>',
+    '<rect width="320" height="256" rx="18" fill="url(#bg)"/>',
+    '<path d="M116 64h48l16 24 16-24h48l32 46-34 30-18-21v90H96v-90l-18 21-34-30 32-46z" fill="rgba(255,255,255,.52)" stroke="rgba(255,255,255,.78)" stroke-width="5"/>',
+    '<text x="160" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="rgba(32,37,43,.78)">' + label + '</text>',
+    '</svg>'
+  ].join("");
+  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+}
+
+function imageForWardrobeName(name) {
+  const catalogItem = catalogByName.get(name);
+  return placeholderWardrobeImage(name, catalogItem?.colors || ["#edf1f4", "#8b98a5"]);
+}
+
+function normalizeWardrobeItem(item) {
+  if (typeof item === "string") {
+    const name = item.trim();
+    return name ? { name, image: imageForWardrobeName(name) } : null;
+  }
+  if (!item || typeof item !== "object") return null;
+  const name = String(item.name || "").trim();
+  if (!name) return null;
+  return {
+    name,
+    image: item.image || imageForWardrobeName(name)
+  };
+}
+
+function createWardrobeItems(names) {
+  return names.map((name) => normalizeWardrobeItem(name)).filter(Boolean);
+}
+
+function wardrobeItemName(item) {
+  return typeof item === "string" ? item : item?.name;
+}
+
+function wardrobeEntryToRecommendationItem(entry) {
+  const catalogItem = catalogByName.get(entry.name);
+  return {
+    ...(catalogItem || {
+      name: entry.name,
+      category: "衣物",
+      colors: ["#edf1f4", "#8b98a5"],
+      scenes: [],
+      moods: [],
+      temp: [0, 40],
+      tags: ["用户导入"],
+      formality: 3
+    }),
+    name: entry.name,
+    image: entry.image || imageForWardrobeName(entry.name)
+  };
+}
 
 function createUserProfile({
   gender,
@@ -259,17 +307,17 @@ const defaultUsers = [
       preferredColors: ["浅色", "低饱和"]
     }),
     preferenceMemory: createPreferenceMemory(),
-    wardrobeIds: [
-      "top-001",
-      "top-002",
-      "bottom-001",
-      "bottom-002",
-      "outer-001",
-      "dress-001",
-      "shoes-001",
-      "shoes-002",
-      "bag-001"
-    ],
+    wardrobeItems: createWardrobeItems([
+      "象牙针织短袖",
+      "雾蓝衬衫",
+      "炭灰直筒裤",
+      "浅卡其半裙",
+      "鼠尾草薄风衣",
+      "墨绿针织连衣裙",
+      "黑色乐福鞋",
+      "米白低帮鞋",
+      "焦糖小肩包"
+    ]),
     history: [
       {
         role: "assistant",
@@ -282,7 +330,7 @@ const defaultUsers = [
       {
         role: "assistant",
         text:
-          "你好！针对今天小雨、20度、晚上约会、想轻松但不要太随便的需求，我给你搭了 3 套低饱和、好落地的方案：\n\n方案一【温柔松弛约会】：使用 象牙针织短袖(top-001)、浅卡其半裙(bottom-002)、鼠尾草薄风衣(outer-001)、米白低帮鞋(shoes-002)、焦糖小肩包(bag-001)。浅色内搭和半裙会显得柔和，薄风衣能应对小雨和晚间温差，整体轻松但不随便。\n\n方案二【一件式精致备选】：使用 墨绿针织连衣裙(dress-001)、鼠尾草薄风衣(outer-001)、米白低帮鞋(shoes-002)、焦糖小肩包(bag-001)。连衣裙省心又有完整度，适合约会时想多一点精致感。\n\n方案三【利落清爽转场】：使用 雾蓝衬衫(top-002)、炭灰直筒裤(bottom-001)、黑色乐福鞋(shoes-001)、焦糖小肩包(bag-001)。衬衫和直筒裤更干净利落，适合约会前后还要通勤或处理一点正式事务。\n\n参考样例：我参考了 sample-* 里低饱和、约会、轻通勤的配色和层次组合。\n\n温馨提示：鼠尾草薄风衣(outer-001)更适合小雨，雨势变大时记得带伞；浅卡其半裙(bottom-002)容易被打湿，雨大可以换成长裤。"
+          "你好！针对今天小雨、20度、晚上约会、想轻松但不要太随便的需求，我给你搭了 3 套低饱和、好落地的方案：\n\n方案一【温柔松弛约会】：使用 象牙针织短袖(#1)、浅卡其半裙(#4)、鼠尾草薄风衣(#5)、米白低帮鞋(#8)、焦糖小肩包(#9)。浅色内搭和半裙会显得柔和，薄风衣能应对小雨和晚间温差，整体轻松但不随便。\n\n方案二【一件式精致备选】：使用 墨绿针织连衣裙(#6)、鼠尾草薄风衣(#5)、米白低帮鞋(#8)、焦糖小肩包(#9)。连衣裙省心又有完整度，适合约会时想多一点精致感。\n\n方案三【利落清爽转场】：使用 雾蓝衬衫(#2)、炭灰直筒裤(#3)、黑色乐福鞋(#7)、焦糖小肩包(#9)。衬衫和直筒裤更干净利落，适合约会前后还要通勤或处理一点正式事务。\n\n参考样例：我参考了 sample-* 里低饱和、约会、轻通勤的配色和层次组合。\n\n温馨提示：鼠尾草薄风衣(#5)更适合小雨，雨势变大时记得带伞；浅卡其半裙(#4)容易被打湿，雨大可以换成长裤。"
       }
     ]
   },
@@ -296,16 +344,16 @@ const defaultUsers = [
       preferredColors: ["深色", "黑白灰"]
     }),
     preferenceMemory: createPreferenceMemory(),
-    wardrobeIds: [
-      "top-002",
-      "top-003",
-      "top-004",
-      "bottom-001",
-      "bottom-003",
-      "outer-002",
-      "shoes-001",
-      "bag-001"
-    ],
+    wardrobeItems: createWardrobeItems([
+      "雾蓝衬衫",
+      "条纹棉质上衣",
+      "黑色修身背心",
+      "炭灰直筒裤",
+      "深靛牛仔裤",
+      "海军蓝西装",
+      "黑色乐福鞋",
+      "焦糖小肩包"
+    ]),
     history: [
       {
         role: "assistant",
@@ -324,7 +372,16 @@ const state = {
   lastRun: null,
   profileDialogMode: "create",
   pendingReply: null,
-  closetEditMode: false
+  closetEditMode: false,
+  closetSearchQuery: "",
+  addingWardrobeItem: false,
+  pendingWardrobeImage: "",
+  pendingWardrobeName: "",
+  wardrobeAddNotice: "",
+  visualizingOutfit: false,
+  visualResult: null,
+  visualBusy: false,
+  visualNotice: ""
 };
 
 const blockedMemoryTerms = ["忽略规则", "忽略之前", "系统提示", "system prompt", "越狱", "破解"];
@@ -363,7 +420,7 @@ function normalizeUser(user) {
       ...createPreferenceMemory(),
       ...(user.preferenceMemory || {})
     },
-    wardrobeIds: Array.isArray(user.wardrobeIds) ? user.wardrobeIds : [],
+    wardrobeItems: Array.isArray(user.wardrobeItems) ? user.wardrobeItems.map(normalizeWardrobeItem).filter(Boolean) : [],
     history: Array.isArray(user.history) ? user.history : []
   };
 }
@@ -383,14 +440,55 @@ function activeUser() {
 }
 
 function wardrobeForUser(user) {
-  return (user.wardrobeIds || [])
-    .map((id) => catalogById.get(id))
-    .filter(Boolean);
+  return (user.wardrobeItems || [])
+    .map(normalizeWardrobeItem)
+    .filter(Boolean)
+    .map(wardrobeEntryToRecommendationItem);
 }
 
 function activeWardrobe() {
   return wardrobeForUser(activeUser());
 }
+
+function wardrobeDisplayEntries(user) {
+  return wardrobeForUser(user).map((item, index) => ({
+    item,
+    number: index + 1,
+    displayId: `#${index + 1}`
+  }));
+}
+
+function displayIdForItem(item, user) {
+  if (!item) return "";
+  if (item.id?.startsWith("insp-")) return item.id;
+  return wardrobeDisplayEntries(user).find((entry) => entry.item.name === item.name)?.displayId || item.name;
+}
+
+function itemByDisplayId(user, id) {
+  const clean = String(id || "").trim();
+  const numeric = clean.replace(/^#/, "");
+  if (!/^\d+$/.test(numeric)) return null;
+  const index = Number(numeric) - 1;
+  return wardrobeDisplayEntries(user)[index]?.item || null;
+}
+
+function wardrobeForModel(user) {
+  return wardrobeDisplayEntries(user).map(({ item, displayId }) => ({
+    id: displayId,
+    name: item.name,
+    image: item.image ? "local_image" : ""
+  }));
+}
+
+function wardrobeItemForVisual(item, user) {
+  const displayId = displayIdForItem(item, user);
+  return {
+    id: displayId,
+    name: item.name,
+    image: item.image || imageForWardrobeName(item.name)
+  };
+}
+
 
 function profileSummary(user) {
   const profile = user.profile || {};
@@ -526,6 +624,70 @@ async function retrieveExamplesByRag(query, topK = 8) {
   });
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(payload.error || "样例检索失败");
+  return payload;
+}
+
+function loadImageElement(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("图片读取失败"));
+    image.src = src;
+  });
+}
+
+async function compressImageForVisual(src, maxSize = 768) {
+  if (!src || !src.startsWith("data:image/")) return src;
+  const image = await loadImageElement(src);
+  const scale = Math.min(1, maxSize / Math.max(image.naturalWidth || image.width, image.naturalHeight || image.height));
+  const width = Math.max(1, Math.round((image.naturalWidth || image.width) * scale));
+  const height = Math.max(1, Math.round((image.naturalHeight || image.height) * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const context = canvas.getContext("2d");
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, width, height);
+  context.drawImage(image, 0, 0, width, height);
+  return canvas.toDataURL("image/jpeg", 0.82);
+}
+
+async function prepareVisualItems(items) {
+  const prepared = [];
+  for (const item of items.slice(0, 9)) {
+    try {
+      prepared.push({
+        ...item,
+        image: await compressImageForVisual(item.image)
+      });
+    } catch {
+      prepared.push(item);
+    }
+  }
+  return prepared;
+}
+async function visualizeOutfitByApi({ user, outfit, schemeIndex }) {
+  const items = await prepareVisualItems((outfit.items || []).map((item) => wardrobeItemForVisual(item, user)));
+  const response = await fetch("/api/visualize-outfit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user: {
+        id: user.id,
+        name: user.name,
+        profile: user.profile || {}
+      },
+      scheme: {
+        index: schemeIndex + 1,
+        title: outfit.title,
+        reason: outfit.reason || outfitReasonText(outfit, state.lastRun?.intent || getIntent(), schemeIndex),
+        text: describeOutfitItems(outfit.items || [], user)
+      },
+      items
+    })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error || "上身效果生成失败");
   return payload;
 }
 
@@ -900,14 +1062,14 @@ function scoreEntity(entity, intent, preferences) {
 
 function pickBest(category, wardrobe, intent, preferences, excluded = []) {
   return wardrobe
-    .filter((item) => item.category === category && !excluded.includes(item.id))
+    .filter((item) => item.category === category && !excluded.includes(item.name))
     .map((item) => ({ item, score: scoreEntity(item, intent, preferences) }))
     .sort((a, b) => b.score - a.score)[0]?.item;
 }
 
 function pickAlt(category, wardrobe, intent, preferences, excluded = []) {
   const ranked = wardrobe
-    .filter((item) => item.category === category && !excluded.includes(item.id))
+    .filter((item) => item.category === category && !excluded.includes(item.name))
     .map((item) => ({ item, score: scoreEntity(item, intent, preferences) }))
     .sort((a, b) => b.score - a.score);
   return ranked[1]?.item || ranked[0]?.item;
@@ -933,9 +1095,9 @@ function buildOutfits(intent, user) {
   const bag = pickBest("包", wardrobe, intent, preferences);
   const dress = pickBest("连衣裙", wardrobe, intent, preferences);
 
-  const altTop = pickAlt("上装", wardrobe, intent, preferences, [top?.id]);
-  const altBottom = pickAlt("下装", wardrobe, intent, preferences, [bottom?.id]);
-  const casualShoes = pickAlt("鞋", wardrobe, intent, preferences, [shoes?.id]);
+  const altTop = pickAlt("上装", wardrobe, intent, preferences, [top?.name]);
+  const altBottom = pickAlt("下装", wardrobe, intent, preferences, [bottom?.name]);
+  const casualShoes = pickAlt("鞋", wardrobe, intent, preferences, [shoes?.name]);
 
   const temp = intent.temp ?? 20;
   const needOuter = temp <= 22 || intent.weather.includes("雨") || intent.weather === "降温";
@@ -977,9 +1139,9 @@ function buildOutfits(intent, user) {
 }
 
 function validateOutfit(outfit, user) {
-  const ownedIds = new Set(user.wardrobeIds);
-  const missing = outfit.items.filter((item) => !ownedIds.has(item.id) && !item.id.startsWith("insp-"));
-  const inspiration = outfit.items.filter((item) => item.id.startsWith("insp-"));
+  const ownedNames = new Set((user.wardrobeItems || []).map(wardrobeItemName));
+  const missing = outfit.items.filter((item) => !ownedNames.has(item.name) && !item.id?.startsWith("insp-"));
+  const inspiration = outfit.items.filter((item) => item.id?.startsWith("insp-"));
   const unknownOwned = outfit.source === "owned" && inspiration.length > 0;
   return {
     ok: missing.length === 0 && !unknownOwned,
@@ -988,16 +1150,17 @@ function validateOutfit(outfit, user) {
   };
 }
 
-function itemIds(items) {
-  return items.map((item) => `${item.id} ${item.name}`).join("、");
+function itemIds(items, user) {
+  return items.map((item) => `${displayIdForItem(item, user)} ${item.name}`).join("、");
 }
 
-function formatOutfitItem(item) {
-  return `${item.name}(${item.id})`;
+function formatOutfitItem(item, user) {
+  if (!item) return "未知衣物";
+  return `${item.name}(${displayIdForItem(item, user)})`;
 }
 
-function describeOutfitItems(items) {
-  return items.map(formatOutfitItem).join("、");
+function describeOutfitItems(items, user) {
+  return items.map((item) => formatOutfitItem(item, user)).join("、");
 }
 
 function outfitReferenceIds(outfit, examples, index) {
@@ -1029,22 +1192,22 @@ function outfitReasonText(outfit, intent, index) {
   return [starters[index] || starters[0], weatherHint, tempHint].filter(Boolean).join("");
 }
 
-function buildOutfitWarnings(intent, outfits) {
+function buildOutfitWarnings(intent, outfits, user) {
   const warnings = [];
   const allItems = outfits.flatMap((outfit) => outfit.items || []);
   const hasRain = intent.weather.includes("雨");
-  const hasLightRainOuter = allItems.some((item) => item.id === "outer-001");
-  const hasSkirt = allItems.some((item) => item.id === "bottom-002");
+  const hasLightRainOuter = allItems.some((item) => item.name === "鼠尾草薄风衣");
+  const hasSkirt = allItems.some((item) => item.name === "浅卡其半裙");
   const hasWaterproofShoes = allItems.some((item) => (item.tags || []).some((tag) => tag.includes("防水")));
 
   if (hasRain && hasLightRainOuter) {
-    warnings.push("鼠尾草薄风衣(outer-001)更适合小雨或短时间通勤，雨势大时记得带结实雨伞。");
+    warnings.push(`${formatOutfitItem(catalogByName.get("鼠尾草薄风衣"), user)} 更适合小雨或短时间通勤，雨势大时记得带结实雨伞。`);
   }
   if (hasRain && !hasWaterproofShoes) {
     warnings.push("当前衣柜里没有明确防水鞋靴，雨天出门建议避开积水路段，后续可以补一双防水鞋。");
   }
   if (hasRain && hasSkirt) {
-    warnings.push("浅卡其半裙(bottom-002)在雨天容易被打湿，雨势大时可以换成长裤，或者搭配长筒袜保暖。");
+    warnings.push(`${formatOutfitItem(catalogByName.get("浅卡其半裙"), user)} 在雨天容易被打湿，雨势大时可以换成长裤，或者搭配长筒袜保暖。`);
   }
   if (intent.temp !== null && intent.temp <= 15 && !allItems.some((item) => (item.tags || []).some((tag) => tag.includes("厚")))) {
     warnings.push("如果体感偏冷，当前衣柜的外套厚度可能不够，建议额外加保暖内搭。");
@@ -1054,8 +1217,9 @@ function buildOutfitWarnings(intent, outfits) {
 
 function normalizeApiItem(item, user) {
   const id = String(item?.id || "").trim();
-  const owned = catalogById.get(id);
-  if (owned && user.wardrobeIds.includes(id)) {
+  const displayOwned = itemByDisplayId(user, id);
+  const owned = displayOwned || catalogByName.get(id) || catalogByName.get(String(item?.name || "").trim());
+  if (owned && (user.wardrobeItems || []).some((entry) => wardrobeItemName(entry) === owned.name)) {
     return {
       ...owned,
       reason: item.reason || ""
@@ -1096,7 +1260,7 @@ function normalizeApiOutfits(result, user) {
       id: outfit.id || `look-${index + 1}`,
       title: outfit.title || `方案${index + 1}`,
       source: outfit.source === "mixed" ? "mixed" : "owned",
-      items: (outfit.items || []).map((item) => normalizeApiItem(item, user)).filter((item) => item.id),
+      items: (outfit.items || []).map((item) => normalizeApiItem(item, user)).filter((item) => item.name || item.id),
       confidence: Number(outfit.confidence || 0.75),
       referenceExamples: outfit.reference_examples || [],
       reason: outfit.reason || ""
@@ -1131,12 +1295,12 @@ function naturalLanguageAnswer(intent, outfits, user, examples, preferences) {
       outfit.source === "mixed" ? "其中 insp-* 是灵感单品，不在当前衣柜里，我已经单独标出来。" : "";
     lines.push(
       "",
-      `${schemeNames[index]}【${outfit.title}】：使用 ${describeOutfitItems(outfit.items)}。${refText}${outfitReasonText(outfit, intent, index)}${inspirationText}`
+      `${schemeNames[index]}【${outfit.title}】：使用 ${describeOutfitItems(outfit.items, user)}。${refText}${outfitReasonText(outfit, intent, index)}${inspirationText}`
     );
   });
 
   lines.push("", `参考样例：${referenceSummary(examples)}`);
-  const warnings = buildOutfitWarnings(intent, safeOutfits);
+  const warnings = buildOutfitWarnings(intent, safeOutfits, user);
   if (warnings.length) {
     lines.push("", `温馨提示：${warnings.join(" ")}`);
   }
@@ -1221,7 +1385,7 @@ async function runRecommendation(message, userMessageEntry = null) {
     generationResult = await generateOutfitsByApi({
       user,
       intent,
-      wardrobe: wardrobeForUser(user),
+      wardrobe: wardrobeForModel(user),
       examples,
       preferences
     });
@@ -1251,7 +1415,7 @@ async function runRecommendation(message, userMessageEntry = null) {
     pushHistory(user, "user", message, { weight: historyWeight, auditStatus });
   }
   pushHistory(user, "assistant", answer, { weight: historyWeight, auditStatus });
-  state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult, generationResult };
+  state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult, generationResult, visualResults: {} };
   state.pendingReply = null;
   saveState();
   render();
@@ -1273,28 +1437,128 @@ function renderUsers() {
 
 function renderCloset() {
   const wardrobe = activeWardrobe();
-  document.querySelector("#closetRail").innerHTML = wardrobe
-    .map(
-      (item) => `
+  const query = state.closetSearchQuery.trim().toLowerCase();
+  const numberedWardrobe = wardrobe.map((item, index) => ({
+    item,
+    number: index + 1,
+    displayId: `#${index + 1}`,
+    wardrobeIndex: index
+  }));
+  const visibleWardrobe = query
+    ? numberedWardrobe.filter(({ item, number, displayId }) => {
+        const numericQuery = query.replace(/^#/, "");
+        return (
+          displayId.toLowerCase().includes(query) ||
+          String(number) === numericQuery ||
+          item.name.toLowerCase().includes(query)
+        );
+      })
+    : numberedWardrobe;
+
+  document.querySelector("#closetRail").innerHTML = visibleWardrobe.length
+    ? visibleWardrobe
+        .map(
+          ({ item, displayId, wardrobeIndex }) => `
         <div class="closet-tile${state.closetEditMode ? " is-editing" : ""}">
-          <button class="closet-delete" type="button" data-delete-item-id="${escapeHtml(item.id)}" aria-label="删除 ${escapeHtml(item.name)}" title="删除这件衣服">×</button>
-          <div class="thumb" style="--c1:${item.colors[0]}; --c2:${item.colors[1]}"></div>
-          <small>${escapeHtml(item.id)}</small>
+          <button class="closet-delete" type="button" data-delete-wardrobe-index="${wardrobeIndex}" aria-label="删除 ${escapeHtml(displayId)} ${escapeHtml(item.name)}" title="删除这件衣服">×</button>
+          <img class="closet-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" />
+          <small>${escapeHtml(displayId)}</small>
           <strong>${escapeHtml(item.name)}</strong>
         </div>
       `
-    )
-    .join("");
+        )
+        .join("")
+    : `<div class="closet-empty">没有找到匹配衣物</div>`;
   document.querySelector("#closetCount").textContent = wardrobe.length;
+  const searchInput = document.querySelector("#closetSearchInput");
+  if (searchInput && searchInput.value !== state.closetSearchQuery) {
+    searchInput.value = state.closetSearchQuery;
+  }
   const editButton = document.querySelector("#closetEditButton");
   if (editButton) {
     editButton.textContent = state.closetEditMode ? "完成" : "编辑";
     editButton.setAttribute("aria-pressed", String(state.closetEditMode));
   }
+  const addButton = document.querySelector("#closetAddButton");
+  if (addButton) {
+    addButton.hidden = !state.closetEditMode;
+  }
+}
+
+function renderOutfitVisualPanel() {
+  const user = activeUser();
+  const outfits = state.lastRun?.outfits || [];
+  const visualResults = state.lastRun?.visualResults || {};
+  const resultImage = state.visualResult?.images?.[0];
+  return `
+    <section class="outfit-visual-panel">
+      <div class="outfit-visual-header">
+        <div>
+          <p class="eyebrow">Try On Preview</p>
+          <h2>看看搭配上身</h2>
+        </div>
+        <button id="backToChatButton" type="button">返回聊天</button>
+      </div>
+      <div class="visual-scheme-grid">
+        ${outfits.slice(0, 3).map((outfit, index) => `
+          <button class="visual-scheme-button${visualResults[index] ? " is-generated" : ""}" type="button" data-visual-scheme="${index}" ${state.visualBusy ? "disabled" : ""}>
+            <span>方案${index + 1}${visualResults[index] ? " · 已生成" : ""}</span>
+            <strong>${escapeHtml(outfit.title || `方案${index + 1}`)}</strong>
+            <small>${escapeHtml(describeOutfitItems(outfit.items || [], user))}</small>
+          </button>
+        `).join("")}
+      </div>
+      <div class="visual-result-box">
+        ${state.visualBusy ? `<div class="visual-loading">正在生成上身效果，请稍候</div>` : ""}
+        ${resultImage ? `<img src="${escapeHtml(resultImage)}" alt="生成的搭配上身效果图" />` : ""}
+        ${!state.visualBusy && !resultImage ? `<div class="visual-empty">选择一个方案后生成效果图</div>` : ""}
+      </div>
+      <p class="visual-notice">${escapeHtml(state.visualNotice || "使用万相生成虚拟模特效果图，不代表真实试穿结果。")}</p>
+    </section>
+  `;
+}
+function renderAddWardrobePanel() {
+  const preview = state.pendingWardrobeImage
+    ? `<img src="${escapeHtml(state.pendingWardrobeImage)}" alt="已导入衣物图片" />`
+    : `<span>选择本地图片</span>`;
+  return `
+    <form id="wardrobeAddForm" class="wardrobe-add-panel">
+      <div class="wardrobe-add-header">
+        <p class="eyebrow">Add Item</p>
+        <h2>添加衣物</h2>
+      </div>
+      <label class="wardrobe-image-import">
+        <input id="wardrobeImageInput" type="file" accept="image/*" />
+        <div class="wardrobe-image-preview">${preview}</div>
+        <strong>本地导入图片</strong>
+      </label>
+      <label class="wardrobe-name-field">
+        <span>添加名称</span>
+        <input id="wardrobeNameInput" type="text" maxlength="28" placeholder="比如：白色短袖" autocomplete="off" value="${escapeHtml(state.pendingWardrobeName || "")}" required />
+      </label>
+      <p id="wardrobeAddNotice" class="wardrobe-add-notice" aria-live="polite">${escapeHtml(state.wardrobeAddNotice || "")}</p>
+      <div class="wardrobe-add-actions">
+        <button id="cancelWardrobeAddButton" type="button">取消</button>
+        <button id="completeWardrobeAddButton" class="send-button compact" type="submit">完成</button>
+      </div>
+    </form>
+  `;
 }
 
 function renderChat() {
   const user = activeUser();
+  const chatForm = document.querySelector("#chatForm");
+  if (state.visualizingOutfit) {
+    document.querySelector("#chatMessages").innerHTML = renderOutfitVisualPanel();
+    if (chatForm) chatForm.hidden = true;
+    return;
+  }
+  if (state.addingWardrobeItem) {
+    document.querySelector("#chatMessages").innerHTML = renderAddWardrobePanel();
+    if (chatForm) chatForm.hidden = true;
+    return;
+  }
+  if (chatForm) chatForm.hidden = false;
   const messages = [...user.history];
   if (state.pendingReply?.userId === user.id) {
     messages.push({
@@ -1304,8 +1568,13 @@ function renderChat() {
     });
   }
   document.querySelector("#chatMessages").innerHTML = messages
-    .map(
-      (message) => `
+    .map((message, index) => {
+      const canVisualize =
+        message.role === "assistant" &&
+        !message.pending &&
+        index === messages.length - 1 &&
+        (state.lastRun?.outfits || []).length >= 3;
+      return `
         <article class="message ${message.role}${message.pending ? " pending" : ""}">
           <div class="message-role">${message.role === "user" ? user.name : "AIWardrobe"}</div>
           ${
@@ -1313,9 +1582,10 @@ function renderChat() {
               ? `<p><span>${escapeHtml(message.text)}</span><span class="typing-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></p>`
               : `<p>${escapeHtml(message.text).replace(/\n/g, "<br>")}</p>`
           }
+          ${canVisualize ? `<button class="visualize-entry-button" type="button" data-open-visualizer>看看搭配上身</button>` : ""}
         </article>
-      `
-    )
+      `;
+    })
     .join("");
   const box = document.querySelector("#chatMessages");
   box.scrollTop = box.scrollHeight;
@@ -1387,7 +1657,7 @@ function renderEvidence() {
       id: user.id,
       name: user.name,
       profile: user.profile,
-      wardrobe_ids: user.wardrobeIds,
+      wardrobe_items: wardrobeDisplayEntries(user).map((entry) => entry.displayId),
       profile_preference_summary: profileSummary(user),
       learned_preferences: learnedPreferences.map((pref) => pref.word),
       recommendation_signals: preferences.map((pref) => pref.word),
@@ -1404,7 +1674,7 @@ function renderEvidence() {
     retrieved_examples: examples.map((example) => example.id),
     output_contract: {
       style: "自然语言 + 具体衣物编号",
-      closet_mode: "只能使用当前用户 wardrobe_ids",
+      closet_mode: "只能使用当前用户 wardrobe_items（#编号）",
       inspiration_mode: "非衣柜单品必须标为 insp-*"
     }
   };
@@ -1552,22 +1822,49 @@ function bindControls() {
     if (!button) return;
     state.activeUserId = button.dataset.userId;
     state.closetEditMode = false;
+    state.closetSearchQuery = "";
+    state.addingWardrobeItem = false;
+    state.visualizingOutfit = false;
+    state.visualResult = null;
+    state.visualBusy = false;
+    state.visualNotice = "";
+    state.pendingWardrobeImage = "";
+    state.pendingWardrobeName = "";
+    state.wardrobeAddNotice = "";
     state.lastRun = null;
     saveState();
     render();
   });
 
   document.querySelector("#closetRail").addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-delete-item-id]");
+    const button = event.target.closest("button[data-delete-wardrobe-index]");
     if (!button) return;
+    const deleteIndex = Number(button.dataset.deleteWardrobeIndex);
     const user = activeUser();
-    user.wardrobeIds = (user.wardrobeIds || []).filter((id) => id !== button.dataset.deleteItemId);
+    user.wardrobeItems = (user.wardrobeItems || []).filter((_, index) => index !== deleteIndex);
     state.lastRun = null;
     saveState();
     render();
   });
   document.querySelector("#closetEditButton").addEventListener("click", () => {
     state.closetEditMode = !state.closetEditMode;
+    if (!state.closetEditMode) {
+      state.addingWardrobeItem = false;
+      state.pendingWardrobeImage = "";
+      state.pendingWardrobeName = "";
+      state.wardrobeAddNotice = "";
+    }
+    render();
+  });
+  document.querySelector("#closetAddButton").addEventListener("click", () => {
+    state.addingWardrobeItem = true;
+    state.pendingWardrobeImage = "";
+    state.pendingWardrobeName = "";
+    state.wardrobeAddNotice = "";
+    render();
+  });
+  document.querySelector("#closetSearchInput").addEventListener("input", (event) => {
+    state.closetSearchQuery = event.target.value;
     renderCloset();
   });
 
@@ -1625,7 +1922,7 @@ function bindControls() {
       name,
       profile,
       preferenceMemory: createPreferenceMemory(),
-      wardrobeIds: ["top-001", "bottom-003", "outer-001", "shoes-002", "bag-001"],
+      wardrobeItems: createWardrobeItems(["象牙针织短袖", "深靛牛仔裤", "鼠尾草薄风衣", "米白低帮鞋", "焦糖小肩包"]),
       history: [
         {
           role: "assistant",
@@ -1686,6 +1983,114 @@ function bindControls() {
   ["#cityInput", "#tempInput", "#weatherInput"].forEach((selector) => {
     document.querySelector(selector).addEventListener("input", renderEvidence);
     document.querySelector(selector).addEventListener("change", renderEvidence);
+  });
+
+  document.querySelector("#chatMessages").addEventListener("click", async (event) => {
+    if (event.target.closest("[data-open-visualizer]")) {
+      state.visualizingOutfit = true;
+      state.visualResult = null;
+      state.visualNotice = "选择一个方案后生成效果图。";
+      render();
+      return;
+    }
+    if (event.target.closest("#backToChatButton")) {
+      state.visualizingOutfit = false;
+      state.visualBusy = false;
+      render();
+      return;
+    }
+    const visualButton = event.target.closest("button[data-visual-scheme]");
+    if (!visualButton || state.visualBusy) return;
+    const schemeIndex = Number(visualButton.dataset.visualScheme);
+    const outfit = state.lastRun?.outfits?.[schemeIndex];
+    if (!outfit) return;
+    const user = activeUser();
+    state.lastRun.visualResults = state.lastRun.visualResults || {};
+    const cachedResult = state.lastRun.visualResults[schemeIndex];
+    if (cachedResult?.images?.length) {
+      state.visualResult = cachedResult;
+      state.visualNotice = `已显示本次聊天中方案${schemeIndex + 1}生成过的效果图，没有重复调用万相。`;
+      renderChat();
+      return;
+    }
+    state.visualBusy = true;
+    state.visualResult = null;
+    state.visualNotice = `正在调用万相生成方案${schemeIndex + 1}的上身效果。`;
+    renderChat();
+    try {
+      const result = await visualizeOutfitByApi({ user, outfit, schemeIndex });
+      state.lastRun.visualResults[schemeIndex] = result;
+      state.visualResult = result;
+      state.visualNotice = `生成完成：${result.model || "wan2.7-image-pro"}，耗时 ${((result.elapsedMs || 0) / 1000).toFixed(1)} 秒。图片链接 24 小时内有效。`;
+    } catch (error) {
+      state.visualNotice = `生成失败：${error.message}`;
+    } finally {
+      state.visualBusy = false;
+      renderChat();
+    }
+  });
+
+  document.querySelector("#chatMessages").addEventListener("change", (event) => {
+    if (!event.target.matches("#wardrobeImageInput")) return;
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      state.wardrobeAddNotice = "请选择图片文件。";
+      renderChat();
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      state.pendingWardrobeImage = String(reader.result || "");
+      state.wardrobeAddNotice = "图片导入成功。";
+      renderChat();
+    };
+    reader.onerror = () => {
+      state.wardrobeAddNotice = "图片导入失败，请重新选择。";
+      renderChat();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.querySelector("#chatMessages").addEventListener("input", (event) => {
+    if (!event.target.matches("#wardrobeNameInput")) return;
+    state.pendingWardrobeName = event.target.value;
+  });
+
+  document.querySelector("#chatMessages").addEventListener("click", (event) => {
+    if (!event.target.closest("#cancelWardrobeAddButton")) return;
+    state.addingWardrobeItem = false;
+    state.pendingWardrobeImage = "";
+    state.pendingWardrobeName = "";
+    state.wardrobeAddNotice = "";
+    render();
+  });
+
+  document.querySelector("#chatMessages").addEventListener("submit", (event) => {
+    if (!event.target.matches("#wardrobeAddForm")) return;
+    event.preventDefault();
+    const name = (document.querySelector("#wardrobeNameInput")?.value || state.pendingWardrobeName).trim();
+    if (!state.pendingWardrobeImage) {
+      state.wardrobeAddNotice = "请先导入一张衣物图片。";
+      renderChat();
+      return;
+    }
+    if (!name) {
+      state.wardrobeAddNotice = "请填写衣物名称。";
+      renderChat();
+      return;
+    }
+    const user = activeUser();
+    user.wardrobeItems = [...(user.wardrobeItems || []), { name, image: state.pendingWardrobeImage }];
+    const displayId = `#${user.wardrobeItems.length}`;
+    state.addingWardrobeItem = false;
+    state.pendingWardrobeImage = "";
+    state.pendingWardrobeName = "";
+    state.wardrobeAddNotice = "";
+    state.lastRun = null;
+    saveState();
+    render();
+    window.alert(`${name}(${displayId}) 已添加到当前衣柜。`);
   });
 
   document.querySelector("#chatForm").addEventListener("submit", async (event) => {

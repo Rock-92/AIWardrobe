@@ -92,10 +92,12 @@
           </form>
 
           <div>
-            <div class="section-title">
-              <h3>当前衣柜</h3>
+            <div class="section-title closet-title">
+              <h3>衣柜</h3>
+              <input id="closetSearchInput" class="closet-search" type="search" placeholder="搜索编号或名称" aria-label="搜索衣柜衣物" />
               <div class="closet-title-actions">
                 <span id="closetCount">0</span>
+                <button id="closetAddButton" class="closet-edit-button closet-add-button" type="button" hidden>添加</button>
                 <button id="closetEditButton" class="closet-edit-button" type="button" aria-pressed="false">编辑</button>
               </div>
             </div>

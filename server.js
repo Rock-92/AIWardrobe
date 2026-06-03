@@ -14,6 +14,9 @@ const dashscopeBaseUrl = (process.env.DASHSCOPE_BASE_URL || "https://dashscope.a
 );
 const quickCheckTimeoutMs = Number(process.env.QWEN_CHECK_TIMEOUT_MS || 12000);
 const chatTimeoutMs = Number(process.env.QWEN_TIMEOUT_MS || 180000);
+const imageTimeoutMs = Number(process.env.WAN_IMAGE_TIMEOUT_MS || 240000);
+const maxJsonBodyBytes = Number(process.env.MAX_JSON_BODY_BYTES || 32 * 1024 * 1024);
+const dashscopeNativeBaseUrl = (process.env.DASHSCOPE_NATIVE_BASE_URL || dashscopeBaseUrl.replace(/\/compatible-mode\/v1$/, "/api/v1")).replace(/\/+$/, "");
 
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -48,9 +51,9 @@ function readJsonBody(request) {
     let raw = "";
     request.on("data", (chunk) => {
       raw += chunk;
-      if (raw.length > 64 * 1024) {
+      if (raw.length > maxJsonBodyBytes) {
         request.destroy();
-        reject(new Error("Request body too large"));
+        reject(new Error(`Request body too large，当前上限 ${Math.round(maxJsonBodyBytes / 1024 / 1024)}MB`));
       }
     });
     request.on("end", () => {
@@ -84,6 +87,10 @@ function parseJsonText(text) {
 
 function dashscopeUrl(route) {
   return `${dashscopeBaseUrl}${route}`;
+}
+
+function dashscopeNativeUrl(route) {
+  return `${dashscopeNativeBaseUrl}${route}`;
 }
 
 async function fetchWithTimeout(url, options, timeoutMs) {
@@ -502,11 +509,13 @@ function buildOutfitGenerationMessages({ user = {}, intent = {}, wardrobe = [], 
       content: [
         "你是 AIWardrobe 的穿搭搭配生成器。",
         "你必须基于当前用户资料、前端条件、当前用户衣柜、历史偏好和 RAG 检索样例生成搭配。",
-        "衣柜模式 closet：只能使用 wardrobe 中真实存在的 item.id，不能编造衣物编号。",
+        "衣柜模式 closet：只能使用 wardrobe 中真实存在的 item.id，当前衣柜 item.id 是 #1、#2 这类展示编号，不能编造衣物编号。",
         "灵感模式 inspiration：可以加入非衣柜灵感单品，但 id 必须以 insp- 开头，并且 source 使用 mixed。",
         "retrieved_examples 中的 sample-* 只能作为风格、场景、颜色、单品组合参考，禁止把 sample-* 当作用户衣物。",
         "语气要轻松、自然、像真人穿搭顾问，不要机械堆砌字段。",
-        "answer 必须是结构化中文自然语言：开头一句问候并概括用户需求；然后固定输出三套方案，格式为“方案一【标题】：...”“方案二【标题】：...”“方案三【标题】：...”；每套都要写清楚使用的衣物名称和 item.id、为什么适合用户的天气/温度/场合/风格；最后输出“参考样例：...”说明参考了哪些 sample-* 以及借鉴了什么；如有天气、保暖、防水、衣柜缺口等风险，最后输出“温馨提示：...”。",
+        "answer 必须是结构化中文自然语言：开头一句问候并概括用户需求；然后固定输出三套方案，格式为“方案一【标题】：...”“方案二【标题】：...”“方案三【标题】：...”；每套都要写清楚使用的衣物名称和 #编号、为什么适合用户的天气/温度/场合/风格；最后输出“参考样例：...”说明参考了哪些 sample-* 以及借鉴了什么；如有天气、保暖、防水、衣柜缺口等风险，最后输出“温馨提示：...”。",
+        "强制编号格式：answer 中每一次提到当前衣柜衣物，都必须写成“衣物名称(#编号)”，例如“象牙针织短袖(#1)”。禁止只写“象牙针织短袖”而不带编号。",
+        "items 数组中每个当前衣柜单品的 id 也必须使用 wardrobe.id 中的 #编号，例如 #1；不要输出旧内部编号或任何不在 wardrobe.id 中的编号。",
         "answer 必须清晰分段：问候总述单独一段；方案一、方案二、方案三各自单独成段；参考样例单独一段；温馨提示单独一段。段落之间必须使用两个换行符 \\n\\n，不要把多套方案挤在同一个自然段里。",
         "三套方案要有差异：第一套优先稳妥通勤/主需求，第二套偏温柔或精致，第三套偏利落或轻松备选。不能只换标题不换思路。",
         "reference_examples 必须填写被该方案参考的 sample-* 编号；reason 要说明该方案自己的搭配逻辑。",
@@ -531,9 +540,9 @@ function buildOutfitGenerationMessages({ user = {}, intent = {}, wardrobe = [], 
           retrieved_examples: retrievedExamples.slice(0, 8).map(compactExample),
           preferences,
           generation_rules: {
-            closet_mode: "所有 items.id 必须来自 wardrobe.id",
+            closet_mode: "所有 items.id 必须来自 wardrobe.id，并使用 #编号",
             inspiration_mode: "非衣柜单品必须使用 insp-*，并明确说明不是当前衣柜已有",
-            answer: "必须输出三套结构化方案；每套包含标题、衣物名称和编号、搭配原因；结尾说明参考的 sample-* 和必要提醒；语气轻松自然；必须分段，问候总述、每套方案、参考样例、温馨提示之间用两个换行符分隔。"
+            answer: "必须输出三套结构化方案；每套包含标题、衣物名称和 #编号、搭配原因；每次提到当前衣柜衣物必须写成 衣物名称(#编号)，禁止只写名称；结尾说明参考的 sample-* 和必要提醒；语气轻松自然；必须分段，问候总述、每套方案、参考样例、温馨提示之间用两个换行符分隔。"
           }
         },
         null,
@@ -561,6 +570,102 @@ async function callQwenOutfitGeneration(payload) {
   };
 }
 
+function buildWanOutfitPrompt({ user = {}, scheme = {}, items = [] }) {
+  const profile = user.profile || {};
+  const itemText = items.map((item, index) => `参考图${index + 1}：${item.name || "衣物"}${item.id ? `(${item.id})` : ""}`).join("；");
+  return [
+    "请基于参考衣物图片生成一张真实自然的穿搭上身效果图。",
+    "画面要求：单人虚拟模特，全身或近全身，姿态自然，干净室内或街拍背景，光线柔和，服装结构清晰可见。",
+    "必须展示上半身和下半身的搭配样式；如果搭配中有鞋子、包、帽子、围巾、首饰或其他配件，也必须在图片中体现。换言之，方案中呈现的所有衣物和配件元素都要在图片中可见，不能只画半身或遗漏下装、鞋包。",
+    "不要生成真人身份、不要生成用户本人、不要添加品牌标志或文字水印。",
+    "尽量忠实保留参考图中的衣物颜色、材质、轮廓和搭配关系；如果鞋包等配件参考图不足，可按文字方案补齐。",
+    `用户资料：性别/风格参考 ${profile.gender || "未指定"}，偏好风格 ${(profile.preferredStyles || []).join("、") || "未指定"}，偏好颜色 ${(profile.preferredColors || []).join("、") || "未指定"}。`,
+    `所选方案：${scheme.title || "穿搭方案"}。`,
+    `方案说明：${scheme.reason || scheme.text || "按当前搭配生成上身效果。"}`,
+    `衣物清单：${itemText || "按文字方案生成"}`
+  ].join("\n");
+}
+
+async function callWanOutfitVisualization({ user = {}, scheme = {}, items = [] }) {
+  const apiKey = process.env.DASHSCOPE_API_KEY;
+  if (!apiKey) {
+    const error = new Error("DASHSCOPE_API_KEY is not configured");
+    error.statusCode = 500;
+    throw error;
+  }
+  const imageItems = items
+    .filter((item) => typeof item.image === "string" && item.image.startsWith("data:image/"))
+    .slice(0, 9);
+  const prompt = buildWanOutfitPrompt({ user, scheme, items });
+  const content = [
+    ...imageItems.map((item) => ({ image: item.image })),
+    { text: prompt }
+  ];
+  const model = process.env.WAN_IMAGE_MODEL || "wan2.7-image-pro";
+  const startedAt = Date.now();
+  const apiResponse = await fetchWithTimeout(dashscopeNativeUrl("/services/aigc/multimodal-generation/generation"), {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model,
+      input: {
+        messages: [{ role: "user", content }]
+      },
+      parameters: {
+        size: process.env.WAN_IMAGE_SIZE || "2K",
+        n: 1,
+        watermark: false,
+        thinking_mode: false
+      }
+    })
+  }, imageTimeoutMs);
+  const data = await apiResponse.json().catch(() => ({}));
+  if (!apiResponse.ok) {
+    const error = new Error(data.message || data.error?.message || "Wan image request failed");
+    error.statusCode = apiResponse.status;
+    throw error;
+  }
+  const images = (data.output?.choices || [])
+    .flatMap((choice) => choice.message?.content || [])
+    .filter((part) => part.image)
+    .map((part) => part.image);
+  if (!images.length) {
+    const error = new Error("万相没有返回图片");
+    error.statusCode = 502;
+    throw error;
+  }
+  return {
+    ok: true,
+    model,
+    images,
+    usage: data.usage || null,
+    requestId: data.request_id || null,
+    elapsedMs: Date.now() - startedAt
+  };
+}
+
+async function handleVisualizeOutfitRequest(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const scheme = body.scheme || {};
+    const items = Array.isArray(body.items) ? body.items : [];
+    if (!scheme.title && !scheme.reason) {
+      sendJson(response, 400, { error: "scheme is required" });
+      return;
+    }
+    const result = await callWanOutfitVisualization({
+      user: body.user || {},
+      scheme,
+      items
+    });
+    sendJson(response, 200, result);
+  } catch (error) {
+    sendJson(response, error.statusCode || 500, { error: error.message });
+  }
+}
 async function handleAnalyzeRequest(request, response) {
   try {
     const body = await readJsonBody(request);
@@ -606,6 +711,7 @@ function getApiStatus() {
     analysisModel: hasDashScopeKey ? process.env.QWEN_ANALYSIS_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
     generationModel: hasDashScopeKey ? process.env.QWEN_GENERATION_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
     embeddingModel: hasDashScopeKey ? process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4" : null,
+    imageModel: hasDashScopeKey ? process.env.WAN_IMAGE_MODEL || "wan2.7-image-pro" : null,
     embeddingIndexReady: fs.existsSync(exampleEmbeddingPath)
   };
 }
@@ -668,7 +774,8 @@ async function handleValidateAndSaveKeyRequest(request, response) {
       QWEN_CHECK_MODEL: process.env.QWEN_CHECK_MODEL || process.env.QWEN_MODEL || "qwen-plus",
       QWEN_ANALYSIS_MODEL: process.env.QWEN_ANALYSIS_MODEL || "qwen-plus",
       QWEN_GENERATION_MODEL: process.env.QWEN_GENERATION_MODEL || "qwen-plus",
-      DASHSCOPE_EMBEDDING_MODEL: process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4"
+      DASHSCOPE_EMBEDDING_MODEL: process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4",
+      WAN_IMAGE_MODEL: process.env.WAN_IMAGE_MODEL || "wan2.7-image-pro"
     });
     process.env.DASHSCOPE_API_KEY = apiKey;
     sendJson(response, 200, { ok: true, saved: true });
@@ -726,6 +833,11 @@ const server = http.createServer((request, response) => {
 
   if (request.method === "POST" && request.url.split("?")[0] === "/api/generate-outfits") {
     handleGenerateOutfitsRequest(request, response);
+    return;
+  }
+
+  if (request.method === "POST" && request.url.split("?")[0] === "/api/visualize-outfit") {
+    handleVisualizeOutfitRequest(request, response);
     return;
   }
 
