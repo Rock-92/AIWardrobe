@@ -16,7 +16,9 @@
         <div class="status-strip" aria-label="pipeline status">
           <span>多用户本地记忆</span>
           <span>150 样例 mock</span>
-          <span>API 未接入</span>
+          <span id="apiStatusBadge">API 未检测</span>
+          <button id="apiCheckButton" class="status-action" type="button">检测</button>
+          <p id="apiStatusHint" class="status-hint" hidden></p>
         </div>
       </header>
 

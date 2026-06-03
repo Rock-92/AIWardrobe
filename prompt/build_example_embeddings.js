@@ -4,6 +4,10 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 const sourcePath = path.join(root, "Dataset", "Description_example.json");
 const outputPath = path.join(root, "Dataset", "example_embeddings.json");
+const dashscopeBaseUrl = (process.env.DASHSCOPE_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1").replace(
+  /\/+$/,
+  ""
+);
 
 loadEnv(path.join(root, ".env"));
 
@@ -35,11 +39,11 @@ function buildEmbeddingText(example) {
 }
 
 async function createEmbeddings(inputs) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("OPENAI_API_KEY is not configured. Create .env from .env.example first.");
+  const apiKey = process.env.DASHSCOPE_API_KEY;
+  if (!apiKey || apiKey.includes("请替换")) throw new Error("DASHSCOPE_API_KEY is not configured. Create .env first.");
 
-  const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
-  const response = await fetch("https://api.openai.com/v1/embeddings", {
+  const model = process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4";
+  const response = await fetch(`${dashscopeBaseUrl}/embeddings`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -58,11 +62,22 @@ async function createEmbeddings(inputs) {
     .map((item) => item.embedding);
 }
 
+async function createAllEmbeddings(inputs, batchSize = 10) {
+  const embeddings = [];
+  for (let index = 0; index < inputs.length; index += batchSize) {
+    const batch = inputs.slice(index, index + batchSize);
+    const batchEmbeddings = await createEmbeddings(batch);
+    embeddings.push(...batchEmbeddings);
+    console.log(`embedded=${embeddings.length}/${inputs.length}`);
+  }
+  return embeddings;
+}
+
 async function main() {
   const examples = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
   const inputs = examples.map(buildEmbeddingText);
-  const embeddings = await createEmbeddings(inputs);
-  const model = process.env.OPENAI_EMBEDDING_MODEL || "text-embedding-3-small";
+  const embeddings = await createAllEmbeddings(inputs);
+  const model = process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4";
 
   const records = examples.map((example, index) => ({
     id: example.id,

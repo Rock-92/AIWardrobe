@@ -282,7 +282,7 @@ const defaultUsers = [
       {
         role: "assistant",
         text:
-          "我按小雨、20度、约会、松弛来搭配，也参考了你之前偏好的低饱和和浅色组合。\n\n方案一：用 top-001 象牙针织短袖、bottom-002 浅卡其半裙、outer-001 鼠尾草薄风衣、shoes-002 米白低帮鞋、bag-001 焦糖小肩包。这套最适合小雨约会，外套解决温差，浅色内搭和半裙让整体轻松但完整。\n\n方案二：用 dress-001 墨绿针织连衣裙、outer-001 鼠尾草薄风衣、shoes-002 米白低帮鞋、bag-001 焦糖小肩包。它更省心，也更有精致感。\n\n方案三：用 top-002 雾蓝衬衫、bottom-001 炭灰直筒裤、shoes-001 黑色乐福鞋、bag-001 焦糖小肩包。这套更利落，适合约会前后还要处理一点正式事务。"
+          "你好！针对今天小雨、20度、晚上约会、想轻松但不要太随便的需求，我给你搭了 3 套低饱和、好落地的方案：\n\n方案一【温柔松弛约会】：使用 象牙针织短袖(top-001)、浅卡其半裙(bottom-002)、鼠尾草薄风衣(outer-001)、米白低帮鞋(shoes-002)、焦糖小肩包(bag-001)。浅色内搭和半裙会显得柔和，薄风衣能应对小雨和晚间温差，整体轻松但不随便。\n\n方案二【一件式精致备选】：使用 墨绿针织连衣裙(dress-001)、鼠尾草薄风衣(outer-001)、米白低帮鞋(shoes-002)、焦糖小肩包(bag-001)。连衣裙省心又有完整度，适合约会时想多一点精致感。\n\n方案三【利落清爽转场】：使用 雾蓝衬衫(top-002)、炭灰直筒裤(bottom-001)、黑色乐福鞋(shoes-001)、焦糖小肩包(bag-001)。衬衫和直筒裤更干净利落，适合约会前后还要通勤或处理一点正式事务。\n\n参考样例：我参考了 sample-* 里低饱和、约会、轻通勤的配色和层次组合。\n\n温馨提示：鼠尾草薄风衣(outer-001)更适合小雨，雨势变大时记得带伞；浅卡其半裙(bottom-002)容易被打湿，雨大可以换成长裤。"
       }
     ]
   },
@@ -322,7 +322,8 @@ const state = {
   mode: "closet",
   users: structuredClone(defaultUsers),
   lastRun: null,
-  profileDialogMode: "create"
+  profileDialogMode: "create",
+  pendingReply: null
 };
 
 const blockedMemoryTerms = ["忽略规则", "忽略之前", "系统提示", "system prompt", "越狱", "破解"];
@@ -380,10 +381,14 @@ function activeUser() {
   return state.users.find((user) => user.id === state.activeUserId) || state.users[0];
 }
 
-function activeWardrobe() {
-  return activeUser()
-    .wardrobeIds.map((id) => catalogById.get(id))
+function wardrobeForUser(user) {
+  return (user.wardrobeIds || [])
+    .map((id) => catalogById.get(id))
     .filter(Boolean);
+}
+
+function activeWardrobe() {
+  return wardrobeForUser(activeUser());
 }
 
 function profileSummary(user) {
@@ -500,6 +505,36 @@ async function retrieveExamplesByRag(query, topK = 8) {
   return payload;
 }
 
+async function generateOutfitsByApi({ user, intent, wardrobe, examples, preferences }) {
+  const response = await fetch("/api/generate-outfits", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      user: {
+        id: user.id,
+        name: user.name,
+        profile: user.profile || {},
+        preferenceMemory: user.preferenceMemory || createPreferenceMemory(),
+        recentHistory: (user.history || []).slice(-6).map((item) => ({
+          role: item.role,
+          text: item.text,
+          auditStatus: item.auditStatus,
+          weight: item.weight
+        }))
+      },
+      intent,
+      wardrobe,
+      retrievedExamples: examples,
+      preferences
+    })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error || "搭配生成失败");
+  return payload;
+}
+
 function memoryKey(item) {
   return `${item.type || "general"}:${item.value}`;
 }
@@ -601,7 +636,8 @@ function mechanicalAuditAnalysis(analysis, rawText) {
 
   const likeCheck = validatePreferenceItems(delta.likes, rawText, "likes");
   const dislikeCheck = validatePreferenceItems(delta.dislikes, rawText, "dislikes");
-  errors.push(...likeCheck.errors, ...dislikeCheck.errors);
+  const preferenceErrors = [...likeCheck.errors, ...dislikeCheck.errors];
+  warnings.push(...preferenceErrors.map((error) => `preference_ignored: ${error}`));
 
   const sanitizedPreferenceDelta = {
     likes: likeCheck.accepted,
@@ -617,20 +653,28 @@ function mechanicalAuditAnalysis(analysis, rawText) {
     errors,
     warnings,
     safeForPrompt: ok && (guard.safe || Boolean(guard.sanitized_input)),
-    safeForMemory: ok && guard.safe && !hasHighRisk,
+    safeForMemory: ok && guard.safe && !hasHighRisk && preferenceErrors.length === 0,
     sanitizedPreferenceDelta,
     historyPolicy: ok && guard.safe && !hasHighRisk ? "normal" : ok && guard.sanitized_input ? "low_weight" : "skip"
   };
 }
 
 function pushHistory(user, role, text, { weight = 1, auditStatus = "ok", createdAt = new Date().toISOString() } = {}) {
-  user.history.push({
+  const entry = {
     role,
     text,
     weight,
     auditStatus,
     createdAt
-  });
+  };
+  user.history.push(entry);
+  return entry;
+}
+
+function setPendingReply(text) {
+  if (!state.pendingReply) return;
+  state.pendingReply.text = text;
+  renderChat();
 }
 
 function normalizeValue(value) {
@@ -900,6 +944,118 @@ function itemIds(items) {
   return items.map((item) => `${item.id} ${item.name}`).join("、");
 }
 
+function formatOutfitItem(item) {
+  return `${item.name}(${item.id})`;
+}
+
+function describeOutfitItems(items) {
+  return items.map(formatOutfitItem).join("、");
+}
+
+function outfitReferenceIds(outfit, examples, index) {
+  const refs = Array.isArray(outfit.referenceExamples) ? outfit.referenceExamples.filter(Boolean) : [];
+  if (refs.length) return refs.slice(0, 2);
+  if (!examples.length) return [];
+  return examples.slice(index, index + 2).map((example) => example.id).filter(Boolean);
+}
+
+function exampleLabel(example) {
+  const tags = exampleTags(example).slice(0, 4).join("、");
+  return tags ? `${example.id}(${tags})` : example.id;
+}
+
+function referenceSummary(examples) {
+  if (!examples.length) return "这次没有检索到可用 sample，所以主要按你的衣柜和当前需求来判断。";
+  return `我参考了 ${examples.slice(0, 4).map(exampleLabel).join("、")}，主要借鉴它们的场景、色彩和层次组合。`;
+}
+
+function outfitReasonText(outfit, intent, index) {
+  if (outfit.reason) return outfit.reason;
+  const starters = [
+    "这套先把天气、温度和场合稳稳照顾到，适合作为最不出错的主方案。",
+    "这套会更柔和一点，适合想保留轻松感、但看起来更完整的时候。",
+    "这套线条更清爽，适合通勤、转场或想看起来更利落的时候。"
+  ];
+  const weatherHint = intent.weather.includes("雨") ? "鞋子和外套也尽量选择更稳定、能应对雨天的单品。" : "";
+  const tempHint = intent.temp !== null && intent.temp <= 18 ? "叠穿和外套能多给一点保暖余量。" : "";
+  return [starters[index] || starters[0], weatherHint, tempHint].filter(Boolean).join("");
+}
+
+function buildOutfitWarnings(intent, outfits) {
+  const warnings = [];
+  const allItems = outfits.flatMap((outfit) => outfit.items || []);
+  const hasRain = intent.weather.includes("雨");
+  const hasLightRainOuter = allItems.some((item) => item.id === "outer-001");
+  const hasSkirt = allItems.some((item) => item.id === "bottom-002");
+  const hasWaterproofShoes = allItems.some((item) => (item.tags || []).some((tag) => tag.includes("防水")));
+
+  if (hasRain && hasLightRainOuter) {
+    warnings.push("鼠尾草薄风衣(outer-001)更适合小雨或短时间通勤，雨势大时记得带结实雨伞。");
+  }
+  if (hasRain && !hasWaterproofShoes) {
+    warnings.push("当前衣柜里没有明确防水鞋靴，雨天出门建议避开积水路段，后续可以补一双防水鞋。");
+  }
+  if (hasRain && hasSkirt) {
+    warnings.push("浅卡其半裙(bottom-002)在雨天容易被打湿，雨势大时可以换成长裤，或者搭配长筒袜保暖。");
+  }
+  if (intent.temp !== null && intent.temp <= 15 && !allItems.some((item) => (item.tags || []).some((tag) => tag.includes("厚")))) {
+    warnings.push("如果体感偏冷，当前衣柜的外套厚度可能不够，建议额外加保暖内搭。");
+  }
+  return warnings;
+}
+
+function normalizeApiItem(item, user) {
+  const id = String(item?.id || "").trim();
+  const owned = catalogById.get(id);
+  if (owned && user.wardrobeIds.includes(id)) {
+    return {
+      ...owned,
+      reason: item.reason || ""
+    };
+  }
+  if (id.startsWith("insp-")) {
+    return {
+      id,
+      name: item.name || id,
+      category: item.category || "灵感单品",
+      colors: item.colors || ["#efe5d4", "#7d9a89"],
+      scenes: [],
+      moods: [],
+      temp: [0, 40],
+      tags: ["非衣柜", item.reason].filter(Boolean),
+      formality: Number(item.formality || 3),
+      reason: item.reason || ""
+    };
+  }
+  return {
+    id: id || "unknown-item",
+    name: item?.name || id || "未知衣物",
+    category: item?.category || "未知",
+    colors: ["#dddddd", "#888888"],
+    scenes: [],
+    moods: [],
+    temp: [0, 40],
+    tags: [item?.reason || "模型输出未匹配当前衣柜"],
+    formality: 0,
+    reason: item?.reason || ""
+  };
+}
+
+function normalizeApiOutfits(result, user) {
+  return (result?.outfits || [])
+    .slice(0, 3)
+    .map((outfit, index) => ({
+      id: outfit.id || `look-${index + 1}`,
+      title: outfit.title || `方案${index + 1}`,
+      source: outfit.source === "mixed" ? "mixed" : "owned",
+      items: (outfit.items || []).map((item) => normalizeApiItem(item, user)).filter((item) => item.id),
+      confidence: Number(outfit.confidence || 0.75),
+      referenceExamples: outfit.reference_examples || [],
+      reason: outfit.reason || ""
+    }))
+    .filter((outfit) => outfit.items.length);
+}
+
 function exampleTags(example) {
   if (Array.isArray(example.tags)) return example.tags;
   if (example.tags && typeof example.tags === "object") {
@@ -913,37 +1069,47 @@ function naturalLanguageAnswer(intent, outfits, user, examples, preferences) {
   const tempPart = intent.temp === null ? "没有指定温度" : `${intent.temp}度`;
   const occasionPart = intent.occasion === "无" ? "日常场景" : intent.occasion;
   const moodPart = intent.mood === "无" ? "不过度限定风格" : intent.mood;
-  const prefText = preferences.length ? `我也参考了 ${user.name} 历史聊天里的偏好：${preferences.map((p) => p.word).join("、")}。` : "";
-
+  const prefText = preferences.length ? `，也顺手照顾了你之前提到的 ${preferences.map((p) => p.word).join("、")}` : "";
+  const schemeNames = ["方案一", "方案二", "方案三"];
+  const safeOutfits = outfits.slice(0, 3);
   const lines = [
-    `我按 ${weatherPart}、${tempPart}、${occasionPart}、${moodPart} 来搭配。${prefText}`,
-    "",
-    `方案一：${outfits[0].title}。建议用 ${itemIds(outfits[0].items)}。这套最稳，优先解决天气和场合，不会引入衣柜外的单品。`,
-    "",
-    `方案二：${outfits[1].title}。建议用 ${itemIds(outfits[1].items)}。这套更适合你想稍微精致一点的时候，整体轮廓更完整。`,
-    "",
-    `方案三：${outfits[2].title}。建议用 ${itemIds(outfits[2].items)}。${
-      outfits[2].source === "mixed"
-        ? "其中 insp-001 是灵感单品，不属于当前衣柜，我会明确标出来。"
-        : "这套更轻松，适合之后还要走路或转场。"
-    }`,
-    "",
-    `检索参考样例：${examples.map((example) => example.id).join("、")}。`
+    `你好！针对 ${weatherPart}、${tempPart}、${occasionPart}、${moodPart} 的需求${prefText}，我给你搭了 3 套更好落地的方案：`
   ];
+
+  safeOutfits.forEach((outfit, index) => {
+    const refs = outfitReferenceIds(outfit, examples, index);
+    const refText = refs.length ? `参考 ${refs.join("、")} 的配色和场景感，` : "";
+    const inspirationText =
+      outfit.source === "mixed" ? "其中 insp-* 是灵感单品，不在当前衣柜里，我已经单独标出来。" : "";
+    lines.push(
+      "",
+      `${schemeNames[index]}【${outfit.title}】：使用 ${describeOutfitItems(outfit.items)}。${refText}${outfitReasonText(outfit, intent, index)}${inspirationText}`
+    );
+  });
+
+  lines.push("", `参考样例：${referenceSummary(examples)}`);
+  const warnings = buildOutfitWarnings(intent, safeOutfits);
+  if (warnings.length) {
+    lines.push("", `温馨提示：${warnings.join(" ")}`);
+  }
   return lines.join("\n");
 }
 
-async function runRecommendation(message) {
+async function runRecommendation(message, userMessageEntry = null) {
   const user = activeUser();
   let analysis = null;
   let mechanicalAudit = null;
   let usedLocalFallback = false;
   try {
+    setPendingReply("正在调用千问解析需求，请稍候");
     analysis = await analyzeUserMessage(message, user);
     mechanicalAudit = mechanicalAuditAnalysis(analysis, message);
     if (!mechanicalAudit.safeForPrompt) {
-      if (mechanicalAudit.historyPolicy !== "skip") {
-        pushHistory(user, "user", message, { weight: 0.2, auditStatus: "failed_audit" });
+      if (userMessageEntry) {
+        userMessageEntry.weight = 0.2;
+        userMessageEntry.auditStatus = "failed_audit";
+      } else if (mechanicalAudit.historyPolicy !== "skip") {
+          pushHistory(user, "user", message, { weight: 0.2, auditStatus: "failed_audit" });
       }
       pushHistory(user, "assistant", "这条需求没有通过审核，暂时不会进入推荐或偏好记忆。你可以换一种穿搭需求描述。", {
         weight: 0,
@@ -951,6 +1117,7 @@ async function runRecommendation(message) {
       });
       saveState();
       state.lastRun = { analysis, mechanicalAudit };
+      state.pendingReply = null;
       render();
       return;
     }
@@ -959,6 +1126,7 @@ async function runRecommendation(message) {
     }
   } catch (error) {
     usedLocalFallback = true;
+    setPendingReply("千问解析暂时不可用，正在用本地规则继续");
     analysis = createLocalAnalysis(message);
     mechanicalAudit = {
       ok: true,
@@ -982,6 +1150,7 @@ async function runRecommendation(message) {
   let ragResult = null;
   let examples = [];
   try {
+    setPendingReply("正在检索 RAG 参考样例，请稍候");
     ragResult = await retrieveExamplesByRag(intent.retrievalQuery, 8);
     examples = (ragResult.examples || []).map((example) => ({
       ...example,
@@ -996,15 +1165,46 @@ async function runRecommendation(message) {
     ragResult = { mode: "failed", error: error.message };
     examples = retrieveExamples(intent, preferences);
   }
-  const outfits = buildOutfits(intent, user);
-  const answer = naturalLanguageAnswer(intent, outfits, user, examples, preferences);
+  let generationResult = null;
+  let outfits = [];
+  let answer = "";
+  try {
+    setPendingReply("正在调用千问生成搭配，请稍候");
+    generationResult = await generateOutfitsByApi({
+      user,
+      intent,
+      wardrobe: wardrobeForUser(user),
+      examples,
+      preferences
+    });
+    outfits = normalizeApiOutfits(generationResult, user);
+    if (!outfits.length) throw new Error("API 没有返回可用方案");
+    if (outfits.length < 3) throw new Error("API 返回的方案不足 3 套");
+    const apiValidation = outfits.map((outfit) => validateOutfit(outfit, user));
+    if (apiValidation.some((result) => !result.ok)) throw new Error("API 输出包含当前用户衣柜外编号");
+    answer = generationResult.answer || naturalLanguageAnswer(intent, outfits, user, examples, preferences);
+    if (generationResult._meta?.model) {
+      answer = `${answer}\n\n生成来源：千问 ${generationResult._meta.model}，耗时 ${(generationResult._meta.elapsedMs / 1000).toFixed(1)} 秒。`;
+    }
+    generationResult = { ...generationResult, mode: "qwen" };
+  } catch (error) {
+    outfits = buildOutfits(intent, user);
+    answer = `千问生成没有返回可用结果（${error.message}），下面先用本地规则给你兜底：\n\n${naturalLanguageAnswer(intent, outfits, user, examples, preferences)}`;
+    generationResult = { mode: "local_fallback", error: error.message };
+  }
   const validation = outfits.map((outfit) => validateOutfit(outfit, user));
 
   const historyWeight = mechanicalAudit.historyPolicy === "low_weight" ? 0.2 : 1;
   const auditStatus = usedLocalFallback ? "local_fallback" : mechanicalAudit.historyPolicy === "low_weight" ? "low_weight_audit" : "ok";
-  pushHistory(user, "user", message, { weight: historyWeight, auditStatus });
+  if (userMessageEntry) {
+    userMessageEntry.weight = historyWeight;
+    userMessageEntry.auditStatus = auditStatus;
+  } else {
+    pushHistory(user, "user", message, { weight: historyWeight, auditStatus });
+  }
   pushHistory(user, "assistant", answer, { weight: historyWeight, auditStatus });
-  state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult };
+  state.lastRun = { intent, examples, outfits, validation, preferences, analysis, mechanicalAudit, ragResult, generationResult };
+  state.pendingReply = null;
   saveState();
   render();
 }
@@ -1041,19 +1241,38 @@ function renderCloset() {
 
 function renderChat() {
   const user = activeUser();
-  const messages = user.history;
+  const messages = [...user.history];
+  if (state.pendingReply?.userId === user.id) {
+    messages.push({
+      role: "assistant",
+      text: state.pendingReply.text,
+      pending: true
+    });
+  }
   document.querySelector("#chatMessages").innerHTML = messages
     .map(
       (message) => `
-        <article class="message ${message.role}">
+        <article class="message ${message.role}${message.pending ? " pending" : ""}">
           <div class="message-role">${message.role === "user" ? user.name : "AIWardrobe"}</div>
-          <p>${escapeHtml(message.text).replace(/\n/g, "<br>")}</p>
+          ${
+            message.pending
+              ? `<p><span>${escapeHtml(message.text)}</span><span class="typing-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></p>`
+              : `<p>${escapeHtml(message.text).replace(/\n/g, "<br>")}</p>`
+          }
         </article>
       `
     )
     .join("");
   const box = document.querySelector("#chatMessages");
   box.scrollTop = box.scrollHeight;
+  const busy = Boolean(state.pendingReply);
+  const input = document.querySelector("#messageInput");
+  const button = document.querySelector("#sendButton");
+  if (input) input.disabled = busy;
+  if (button) {
+    button.disabled = busy;
+    button.textContent = busy ? "生成中" : "生成搭配";
+  }
 }
 
 function renderEvidence() {
@@ -1124,6 +1343,7 @@ function renderEvidence() {
       mode: state.lastRun?.ragResult?.mode || "mock_preview",
       retrieval_query: intent.retrievalQuery || intent.parsed?.retrieval_query || null
     },
+    generation: state.lastRun?.generationResult || null,
     retrieved_examples: examples.map((example) => example.id),
     output_contract: {
       style: "自然语言 + 具体衣物编号",
@@ -1139,6 +1359,125 @@ function render() {
   renderCloset();
   renderChat();
   renderEvidence();
+}
+
+async function refreshApiStatus() {
+  const badge = document.querySelector("#apiStatusBadge");
+  if (!badge) return;
+  if (window.location.protocol === "file:") {
+    badge.textContent = "需本地代理";
+    badge.title = "直接打开 HTML 不能可靠调用千问；请使用 start-aiwardrobe.bat 打开页面";
+    updateApiHint("直接打开 HTML 不能可靠调用千问，请使用 start-aiwardrobe.bat 打开页面。");
+    return;
+  }
+  try {
+    const response = await fetch("/api/status");
+    const status = await response.json();
+    if (!response.ok) throw new Error(status.error || "status failed");
+    if (status.qwenConfigured) {
+      badge.textContent = status.embeddingIndexReady ? "千问 API + RAG 已接入" : "千问 API 已接入";
+      badge.title = status.embeddingIndexReady
+        ? `生成模型：${status.generationModel}；向量模型：${status.embeddingModel}`
+        : "还没有生成 example_embeddings.json，RAG 会先用关键词检索";
+      updateApiHint("");
+    } else {
+      badge.textContent = "API 未配置";
+      badge.title = "请在 .env 中填写 DASHSCOPE_API_KEY";
+      updateApiHint("请在 .env 中填写 DASHSCOPE_API_KEY，或点击检测后输入 Key。");
+    }
+  } catch {
+    badge.textContent = "API 未检测";
+    badge.title = "需要通过 node server.js 访问页面才能检测 API 状态";
+    updateApiHint("需要通过 start-aiwardrobe.bat 或 node server.js 打开页面，才能检测 API 状态。");
+  }
+}
+
+function updateApiHint(text) {
+  const hint = document.querySelector("#apiStatusHint");
+  if (!hint) return;
+  hint.textContent = text;
+  hint.hidden = !text;
+}
+
+function updateApiBadge(text, title = "") {
+  const badge = document.querySelector("#apiStatusBadge");
+  if (!badge) return;
+  badge.textContent = text;
+  badge.title = title;
+  const needsVisibleHint = ["需本地代理", "API 未配置", "API 未检测", "检测失败"].includes(text);
+  updateApiHint(needsVisibleHint ? title : "");
+}
+
+async function fetchJsonOrThrow(url, options) {
+  const response = await fetch(url, options);
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error?.message || payload.error || `请求失败：${response.status}`);
+  return payload;
+}
+
+function promptDashscopeApiKey() {
+  return window.prompt("请输入阿里云百炼 API Key。通过本地服务检测时，验证通过会写入 .env。");
+}
+
+async function runServerApiCheck() {
+  return fetchJsonOrThrow("/api/quick-check");
+}
+
+async function validateAndSaveKeyWithServer(apiKey) {
+  return fetchJsonOrThrow("/api/validate-and-save-key", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ apiKey })
+  });
+}
+
+async function runApiCheck() {
+  const button = document.querySelector("#apiCheckButton");
+  if (button) {
+    button.disabled = true;
+    button.textContent = "检测中";
+  }
+  updateApiBadge("检测中", "正在快速验证本地服务、千问快测模型和向量模型");
+
+  try {
+    if (window.location.protocol === "file:") {
+      updateApiBadge("需本地代理", "请双击 start-aiwardrobe.bat 打开页面后再检测");
+      return;
+    }
+    const result = await runServerApiCheck();
+    if (result.reason === "server_unconfigured") {
+      const apiKey = promptDashscopeApiKey();
+      if (!apiKey) {
+        updateApiBadge("API 未配置", "已取消检测");
+      } else {
+        await validateAndSaveKeyWithServer(apiKey);
+        updateApiBadge("千问 API 已保存", ".env 已写入 DASHSCOPE_API_KEY；当前服务已可直接调用千问");
+      }
+    } else if (result.ok) {
+      const elapsed = [result.chatElapsedMs, result.embeddingElapsedMs]
+        .filter((value) => Number.isFinite(value))
+        .reduce((sum, value) => sum + value, 0);
+      updateApiBadge(
+        result.mode === "qwen_rag" ? "千问 API + RAG 已接入" : "千问 API 验证通过",
+        elapsed ? `${result.message}；快测耗时 ${(elapsed / 1000).toFixed(1)} 秒` : result.message
+      );
+    } else {
+      updateApiBadge("API 未检测", result.message);
+    }
+  } catch (error) {
+    const message =
+      error instanceof TypeError
+        ? "本地代理没有响应；请双击 start-aiwardrobe.bat 打开页面后再检测"
+        : error.message;
+    updateApiBadge("检测失败", message);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "检测";
+    }
+  }
 }
 
 function escapeHtml(value) {
@@ -1263,16 +1602,33 @@ function bindControls() {
     document.querySelector(selector).addEventListener("change", renderEvidence);
   });
 
-  document.querySelector("#chatForm").addEventListener("submit", (event) => {
+  document.querySelector("#chatForm").addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (state.pendingReply) return;
     const input = document.querySelector("#messageInput");
     const message = input.value.trim();
     if (!message) return;
-    runRecommendation(message);
+    const user = activeUser();
+    const userMessageEntry = pushHistory(user, "user", message, { weight: 0, auditStatus: "pending" });
     input.value = "";
+    state.pendingReply = { userId: user.id, text: "正在思考，请稍候" };
+    saveState();
+    render();
+    try {
+      await runRecommendation(message, userMessageEntry);
+    } catch (error) {
+      userMessageEntry.auditStatus = "api_failed";
+      state.pendingReply = null;
+      pushHistory(user, "assistant", `生成时出现问题：${error.message}`, { weight: 0, auditStatus: "api_failed" });
+      saveState();
+      render();
+    }
   });
+
+  document.querySelector("#apiCheckButton")?.addEventListener("click", runApiCheck);
 }
 
 loadState();
 bindControls();
 render();
+refreshApiStatus();
