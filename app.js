@@ -482,10 +482,15 @@ function wardrobeForModel(user) {
 
 function wardrobeItemForVisual(item, user) {
   const displayId = displayIdForItem(item, user);
+  const ownedItem = itemByDisplayId(user, displayId)
+    || wardrobeForUser(user).find((entry) => entry.name === item.name);
+  const hasOwnedImage = typeof ownedItem?.image === "string" && ownedItem.image.startsWith("data:image/");
   return {
     id: displayId,
     name: item.name,
-    image: item.image || imageForWardrobeName(item.name)
+    image: hasOwnedImage ? ownedItem.image : "",
+    imageMode: hasOwnedImage ? "wardrobe_reference" : "text_generated",
+    description: item.reason || (item.tags || []).join("、") || ""
   };
 }
 
@@ -636,19 +641,23 @@ function loadImageElement(src) {
   });
 }
 
-async function compressImageForVisual(src, maxSize = 768) {
+async function compressImageForVisual(src, maxSize = 768, minSize = 320) {
   if (!src || !src.startsWith("data:image/")) return src;
   const image = await loadImageElement(src);
-  const scale = Math.min(1, maxSize / Math.max(image.naturalWidth || image.width, image.naturalHeight || image.height));
-  const width = Math.max(1, Math.round((image.naturalWidth || image.width) * scale));
-  const height = Math.max(1, Math.round((image.naturalHeight || image.height) * scale));
+  const sourceWidth = image.naturalWidth || image.width;
+  const sourceHeight = image.naturalHeight || image.height;
+  const scale = Math.min(1, maxSize / Math.max(sourceWidth, sourceHeight));
+  const drawWidth = Math.max(1, Math.round(sourceWidth * scale));
+  const drawHeight = Math.max(1, Math.round(sourceHeight * scale));
+  const width = Math.max(minSize, drawWidth);
+  const height = Math.max(minSize, drawHeight);
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
   const context = canvas.getContext("2d");
   context.fillStyle = "#ffffff";
   context.fillRect(0, 0, width, height);
-  context.drawImage(image, 0, 0, width, height);
+  context.drawImage(image, Math.round((width - drawWidth) / 2), Math.round((height - drawHeight) / 2), drawWidth, drawHeight);
   return canvas.toDataURL("image/jpeg", 0.82);
 }
 
@@ -666,6 +675,17 @@ async function prepareVisualItems(items) {
   }
   return prepared;
 }
+
+function compactVisualErrorMessage(message) {
+  const text = String(message || "上身效果生成失败").replace(/\s+/g, " ").trim();
+  if (text.includes("resolution must be at least 240x240")) {
+    return "参考图片尺寸过小，已调整生成流程；请重新点击该方案生成。";
+  }
+  return text
+    .replace(/https?:\/\/\S+/g, "[图片链接]")
+    .slice(0, 180);
+}
+
 async function visualizeOutfitByApi({ user, outfit, schemeIndex }) {
   const items = await prepareVisualItems((outfit.items || []).map((item) => wardrobeItemForVisual(item, user)));
   const response = await fetch("/api/visualize-outfit", {
@@ -2023,7 +2043,7 @@ function bindControls() {
       state.visualResult = result;
       state.visualNotice = `生成完成：${result.model || "wan2.7-image-pro"}，耗时 ${((result.elapsedMs || 0) / 1000).toFixed(1)} 秒。图片链接 24 小时内有效。`;
     } catch (error) {
-      state.visualNotice = `生成失败：${error.message}`;
+      state.visualNotice = `生成失败：${compactVisualErrorMessage(error.message)}`;
     } finally {
       state.visualBusy = false;
       renderChat();

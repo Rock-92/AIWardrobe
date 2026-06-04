@@ -572,17 +572,33 @@ async function callQwenOutfitGeneration(payload) {
 
 function buildWanOutfitPrompt({ user = {}, scheme = {}, items = [] }) {
   const profile = user.profile || {};
-  const itemText = items.map((item, index) => `参考图${index + 1}：${item.name || "衣物"}${item.id ? `(${item.id})` : ""}`).join("；");
+  const imageItems = items.filter((item) => typeof item.image === "string" && item.image.startsWith("data:image/"));
+  const textItems = items.filter((item) => !(typeof item.image === "string" && item.image.startsWith("data:image/")));
+  const imageText = imageItems
+    .map((item, index) => `参考图${index + 1}：${item.name || "衣物"}${item.id ? `(${item.id})` : ""}`)
+    .join("；");
+  const textItemText = textItems
+    .map((item) => {
+      const detail = item.description ? `，描述：${item.description}` : "";
+      return `${item.name || "衣物"}${item.id ? `(${item.id})` : ""}${detail}`;
+    })
+    .join("；");
+  const fullItemText = items
+    .map((item) => `${item.name || "衣物"}${item.id ? `(${item.id})` : ""}`)
+    .join("；");
   return [
-    "请基于参考衣物图片生成一张真实自然的穿搭上身效果图。",
+    "请基于参考衣物图片和文字方案生成一张真实自然的穿搭上身效果图。",
     "画面要求：单人虚拟模特，全身或近全身，姿态自然，干净室内或街拍背景，光线柔和，服装结构清晰可见。",
     "必须展示上半身和下半身的搭配样式；如果搭配中有鞋子、包、帽子、围巾、首饰或其他配件，也必须在图片中体现。换言之，方案中呈现的所有衣物和配件元素都要在图片中可见，不能只画半身或遗漏下装、鞋包。",
     "不要生成真人身份、不要生成用户本人、不要添加品牌标志或文字水印。",
-    "尽量忠实保留参考图中的衣物颜色、材质、轮廓和搭配关系；如果鞋包等配件参考图不足，可按文字方案补齐。",
+    "尽量忠实保留参考图中的衣物颜色、材质、轮廓和搭配关系。",
+    "如果某件衣服或配件没有参考图，说明它是灵感单品或衣柜缺图单品，请不要寻找图片、不要报错，而是根据名称、描述、方案风格和整体配色自行设计合适的衣服，并自然融入整套搭配。",
     `用户资料：性别/风格参考 ${profile.gender || "未指定"}，偏好风格 ${(profile.preferredStyles || []).join("、") || "未指定"}，偏好颜色 ${(profile.preferredColors || []).join("、") || "未指定"}。`,
     `所选方案：${scheme.title || "穿搭方案"}。`,
     `方案说明：${scheme.reason || scheme.text || "按当前搭配生成上身效果。"}`,
-    `衣物清单：${itemText || "按文字方案生成"}`
+    `有参考图的衣柜单品：${imageText || "无"}`,
+    `无参考图、需要按文字生成的单品：${textItemText || "无"}`,
+    `完整衣物清单：${fullItemText || "按文字方案生成"}`
   ].join("\n");
 }
 
