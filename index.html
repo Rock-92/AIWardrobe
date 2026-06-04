@@ -26,63 +26,68 @@
         <section class="panel controls-panel" aria-labelledby="user-title">
           <div class="panel-heading">
             <h2 id="user-title">用户</h2>
-            <button id="newUserButton" class="text-button" type="button">新建</button>
+            <div class="user-heading-actions">
+              <button id="deleteUserButton" class="text-button danger-button" type="button">删除</button>
+              <button id="newUserButton" class="text-button" type="button">新建</button>
+            </div>
           </div>
           <div id="userTabs" class="user-tabs" aria-label="用户选择"></div>
           <div class="user-actions">
             <button id="editProfileButton" class="secondary-button" type="button">编辑资料</button>
-            <button id="renameUserButton" class="secondary-button" type="button">重命名</button>
             <button id="clearHistoryButton" class="secondary-button" type="button">清空历史</button>
           </div>
 
           <div class="divider"></div>
 
           <div class="panel-heading compact">
-            <h2 id="request-title">用户需求</h2>
+            <h2 id="request-title">需求</h2>
+            <button
+              id="requestToggleButton"
+              class="request-toggle-button"
+              type="button"
+              aria-controls="intentForm"
+              aria-expanded="true"
+              aria-label="收起需求"
+              title="收起需求"
+            >
+              <span>收起</span>
+            </button>
           </div>
 
           <form id="intentForm" class="control-stack">
+            <div class="three-col">
+              <label class="field">
+                <span>身高（厘米）</span>
+                <input id="heightInput" type="number" value="" placeholder="无" min="120" max="220" />
+              </label>
+
+              <label class="field">
+                <span>体型</span>
+                <input id="bodyTypeInput" type="text" value="" placeholder="无" autocomplete="off" />
+              </label>
+
+              <label class="field">
+                <span>年龄</span>
+                <input id="ageInput" type="number" value="" placeholder="无" min="1" max="120" />
+              </label>
+            </div>
+
             <label class="field">
-              <span>城市</span>
-              <input id="cityInput" type="text" value="" placeholder="无" autocomplete="off" />
+              <span>天气</span>
+              <input id="weatherInput" type="text" value="" placeholder="无" autocomplete="off" />
             </label>
 
             <div class="two-col">
               <label class="field">
-                <span>温度</span>
-                <input id="tempInput" type="number" value="" placeholder="无" min="-10" max="42" />
+                <span>场合</span>
+                <input id="occasionInput" type="text" value="" placeholder="无" autocomplete="off" />
               </label>
 
               <label class="field">
-                <span>天气</span>
-                <select id="weatherInput">
-                  <option value="无" selected>无</option>
-                  <option>小雨</option>
-                  <option>晴</option>
-                  <option>多云</option>
-                  <option>降温</option>
-                  <option>闷热</option>
-                </select>
+                <span>心情</span>
+                <input id="moodInput" type="text" value="" placeholder="无" autocomplete="off" />
               </label>
             </div>
-
-            <fieldset class="segmented" data-control="occasion">
-              <legend>场合</legend>
-              <button type="button" data-value="无" aria-pressed="true">无</button>
-              <button type="button" data-value="通勤" aria-pressed="false">通勤</button>
-              <button type="button" data-value="约会" aria-pressed="false">约会</button>
-              <button type="button" data-value="周末" aria-pressed="false">周末</button>
-              <button type="button" data-value="晚餐" aria-pressed="false">晚餐</button>
-            </fieldset>
-
-            <fieldset class="segmented" data-control="mood">
-              <legend>心情</legend>
-              <button type="button" data-value="无" aria-pressed="true">无</button>
-              <button type="button" data-value="松弛" aria-pressed="false">松弛</button>
-              <button type="button" data-value="精致" aria-pressed="false">精致</button>
-              <button type="button" data-value="明亮" aria-pressed="false">明亮</button>
-              <button type="button" data-value="利落" aria-pressed="false">利落</button>
-            </fieldset>
 
             <fieldset class="segmented wide" data-control="mode">
               <legend>推荐边界</legend>
@@ -133,34 +138,56 @@
           </div>
 
           <div class="evidence-block">
-            <h3>历史偏好</h3>
+            <div class="evidence-block-heading">
+              <h3>历史偏好</h3>
+              <button id="memoryEditButton" class="evidence-toggle-button" type="button" aria-pressed="false">编辑</button>
+            </div>
             <div id="preferenceList" class="tag-row"></div>
           </div>
 
           <div class="evidence-block">
-            <h3>匹配样例</h3>
+            <div class="evidence-block-heading">
+              <h3>匹配样例</h3>
+              <button class="evidence-toggle-button" type="button" data-evidence-toggle="examples" aria-expanded="true">收起</button>
+            </div>
             <div id="exampleList" class="example-list"></div>
           </div>
 
           <div class="evidence-block">
-            <h3>校验结果</h3>
+            <div class="evidence-block-heading">
+              <h3>校验结果</h3>
+              <button class="evidence-toggle-button" type="button" data-evidence-toggle="validation" aria-expanded="true">收起</button>
+            </div>
             <div id="validationList" class="validation-list"></div>
           </div>
 
           <div class="evidence-block">
-            <h3>模型输入摘要</h3>
+            <div class="evidence-block-heading">
+              <h3>模型输入摘要</h3>
+              <button class="evidence-toggle-button" type="button" data-evidence-toggle="prompt" aria-expanded="true">收起</button>
+            </div>
             <pre id="promptPreview" class="prompt-preview"></pre>
           </div>
         </aside>
       </main>
     </div>
 
+    <dialog id="samplePreviewDialog" class="sample-preview-dialog">
+      <div class="sample-preview-shell">
+        <div class="sample-preview-header">
+          <h2 id="samplePreviewTitle">样例预览</h2>
+          <button id="closeSamplePreviewButton" class="icon-button" type="button" aria-label="关闭">×</button>
+        </div>
+        <img id="samplePreviewImage" alt="参考样例图片" />
+      </div>
+    </dialog>
+
     <dialog id="userProfileDialog" class="profile-dialog">
       <form id="userProfileForm" class="profile-form" method="dialog">
         <div class="profile-dialog-header">
           <div>
             <p class="eyebrow">User Profile</p>
-            <h2>新用户信息</h2>
+            <h2>用户信息</h2>
           </div>
           <button id="cancelProfileButton" class="icon-button" type="button" aria-label="关闭">×</button>
         </div>
@@ -212,7 +239,10 @@
         <div class="memory-panel">
           <div class="section-title">
             <h3>历史对话提取</h3>
-            <span id="memoryUpdatedAt">暂无</span>
+            <div class="memory-heading-actions">
+              <span id="memoryUpdatedAt">暂无</span>
+              <button id="profileMemoryEditButton" class="evidence-toggle-button" type="button" aria-pressed="false">编辑</button>
+            </div>
           </div>
           <div class="memory-grid">
             <div>

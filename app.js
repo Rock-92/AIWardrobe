@@ -1,4 +1,4 @@
-const storageKey = "aiwardrobe-chat-prototype-v6";
+﻿const storageKey = "aiwardrobe-chat-prototype-v6";
 
 const wardrobeCatalog = [
   {
@@ -152,62 +152,7 @@ const inspirationItems = [
   }
 ];
 
-const outfitExamples = [
-  {
-    id: "ex-014",
-    title: "小雨约会的浅色针织与薄风衣",
-    scenes: ["约会"],
-    moods: ["松弛", "温柔"],
-    weather: ["小雨", "多云"],
-    temp: [17, 23],
-    tags: ["浅色内搭", "轻外套", "暖色配饰"]
-  },
-  {
-    id: "ex-027",
-    title: "通勤感衬衫和直筒裤",
-    scenes: ["通勤"],
-    moods: ["利落", "精致"],
-    weather: ["晴", "多云", "小雨"],
-    temp: [16, 26],
-    tags: ["冷色上衣", "深色下装", "正式度中高"]
-  },
-  {
-    id: "ex-051",
-    title: "周末条纹上衣与牛仔裤",
-    scenes: ["周末", "约会"],
-    moods: ["松弛", "明亮"],
-    weather: ["晴", "多云"],
-    temp: [18, 30],
-    tags: ["亲和", "休闲", "步行友好"]
-  },
-  {
-    id: "ex-073",
-    title: "晚餐连衣裙与深色鞋包",
-    scenes: ["晚餐", "约会"],
-    moods: ["精致", "温柔"],
-    weather: ["晴", "多云"],
-    temp: [15, 24],
-    tags: ["一件式", "深色基底", "小包点缀"]
-  },
-  {
-    id: "ex-096",
-    title: "降温天的西装叠穿",
-    scenes: ["通勤", "晚餐"],
-    moods: ["利落"],
-    weather: ["降温", "多云"],
-    temp: [10, 18],
-    tags: ["外套", "层次", "正式"]
-  },
-  {
-    id: "ex-118",
-    title: "轻松精致的半裙组合",
-    scenes: ["约会", "周末"],
-    moods: ["松弛", "精致"],
-    weather: ["晴", "小雨", "多云"],
-    temp: [18, 27],
-    tags: ["半裙", "低饱和", "柔和比例"]
-  }
-];
+const outfitExamples = [];
 
 const catalogByName = new Map(wardrobeCatalog.map((item) => [item.name, item]));
 
@@ -242,7 +187,10 @@ function normalizeWardrobeItem(item) {
   if (!name) return null;
   return {
     name,
-    image: item.image || imageForWardrobeName(name)
+    description: item.description || "",
+    image: item.image || imageForWardrobeName(name),
+    imageSource: item.imageSource || "",
+    imagePath: item.imagePath || ""
   };
 }
 
@@ -268,7 +216,10 @@ function wardrobeEntryToRecommendationItem(entry) {
       formality: 3
     }),
     name: entry.name,
-    image: entry.image || imageForWardrobeName(entry.name)
+    description: entry.description || "",
+    image: entry.image || imageForWardrobeName(entry.name),
+    imageSource: entry.imageSource || "",
+    imagePath: entry.imagePath || ""
   };
 }
 
@@ -372,12 +323,28 @@ const state = {
   lastRun: null,
   profileDialogMode: "create",
   pendingReply: null,
+  requestPanelCollapsed: false,
+  evidenceCollapsed: {
+    examples: false,
+    validation: false,
+    prompt: false
+  },
+  memoryEditMode: false,
+  profileMemoryEditMode: false,
   closetEditMode: false,
   closetSearchQuery: "",
   addingWardrobeItem: false,
+  editingWardrobeIndex: null,
   pendingWardrobeImage: "",
+  pendingWardrobeImageChanged: false,
   pendingWardrobeName: "",
+  wardrobeGeneratedItem: null,
+  wardrobeGenerationKind: "",
+  wardrobeRegenerateMode: false,
+  wardrobeRegeneratePrompt: "",
   wardrobeAddNotice: "",
+  wardrobeAddedMessage: "",
+  closetSaving: false,
   visualizingOutfit: false,
   visualResult: null,
   visualBusy: false,
@@ -439,6 +406,43 @@ function activeUser() {
   return state.users.find((user) => user.id === state.activeUserId) || state.users[0];
 }
 
+function resetWardrobeEditorState() {
+  state.addingWardrobeItem = false;
+  state.editingWardrobeIndex = null;
+  state.pendingWardrobeImage = "";
+  state.pendingWardrobeImageChanged = false;
+  state.pendingWardrobeName = "";
+  state.wardrobeGeneratedItem = null;
+  state.wardrobeGenerationKind = "";
+  state.wardrobeRegenerateMode = false;
+  state.wardrobeRegeneratePrompt = "";
+  state.wardrobeAddNotice = "";
+  state.wardrobeAddedMessage = "";
+  state.closetSaving = false;
+}
+
+function openWardrobeAddPanel() {
+  resetWardrobeEditorState();
+  state.addingWardrobeItem = true;
+}
+
+function openWardrobeEditPanel(index) {
+  const item = activeUser().wardrobeItems?.[index];
+  if (!item) return;
+  state.addingWardrobeItem = true;
+  state.editingWardrobeIndex = index;
+  state.pendingWardrobeImage = item.image || "";
+  state.pendingWardrobeImageChanged = false;
+  state.pendingWardrobeName = wardrobeItemName(item) || "";
+  state.wardrobeGeneratedItem = null;
+  state.wardrobeGenerationKind = "";
+  state.wardrobeRegenerateMode = false;
+  state.wardrobeRegeneratePrompt = "";
+  state.wardrobeAddNotice = "";
+  state.wardrobeAddedMessage = "";
+  state.closetSaving = false;
+}
+
 function wardrobeForUser(user) {
   return (user.wardrobeItems || [])
     .map(normalizeWardrobeItem)
@@ -476,6 +480,7 @@ function wardrobeForModel(user) {
   return wardrobeDisplayEntries(user).map(({ item, displayId }) => ({
     id: displayId,
     name: item.name,
+    description: item.description || `${item.name}。暂无详细描述。`,
     image: item.image ? "local_image" : ""
   }));
 }
@@ -484,7 +489,9 @@ function wardrobeItemForVisual(item, user) {
   const displayId = displayIdForItem(item, user);
   const ownedItem = itemByDisplayId(user, displayId)
     || wardrobeForUser(user).find((entry) => entry.name === item.name);
-  const hasOwnedImage = typeof ownedItem?.image === "string" && ownedItem.image.startsWith("data:image/");
+  const hasOwnedImage =
+    typeof ownedItem?.image === "string" &&
+    (ownedItem.image.startsWith("data:image/") || ownedItem.image.startsWith("/GeneratedWardrobeImages/"));
   return {
     id: displayId,
     name: item.name,
@@ -518,17 +525,63 @@ function realHistoryCount(user) {
   return (user.history || []).filter((message) => message.role === "user").length;
 }
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizePreferenceKeyword(value) {
+  const clean = String(value || "").trim().replace(/\s+/g, " ");
+  if (!clean || clean === "无" || clean.length > 16) return "";
+  return clean;
+}
+
+const fallbackPreferenceKeywords = [
+  "松弛",
+  "精致",
+  "明亮",
+  "利落",
+  "温柔",
+  "通勤",
+  "约会",
+  "周末",
+  "晚餐",
+  "浅色",
+  "深色",
+  "低饱和",
+  "正式",
+  "舒适",
+  "半裙",
+  "牛仔",
+  "西装",
+  "外套"
+];
+
+function modelPreferenceKeywords(user) {
+  const memory = user.preferenceMemory || createPreferenceMemory();
+  return [...new Set([
+    ...(memory.likes || []).map((item) => item.value),
+    ...(memory.contextualPreferences || []).flatMap((item) => item.likes || [])
+  ].map(normalizePreferenceKeyword).filter(Boolean))];
+}
+
+function preferenceKeywordCandidates(user, extra = []) {
+  return [...modelPreferenceKeywords(user), ...extra, ...fallbackPreferenceKeywords]
+    .map(normalizePreferenceKeyword)
+    .filter((word, index, list) => word && list.indexOf(word) === index);
+}
+
 function countPreferenceWords(text, candidates, limit = 8) {
   return candidates
+    .map(normalizePreferenceKeyword)
+    .filter((word, index, list) => word && list.indexOf(word) === index)
     .map((word) => ({
       word,
-      count: (text.match(new RegExp(word, "g")) || []).length
+      count: (text.match(new RegExp(escapeRegExp(word), "g")) || []).length
     }))
     .filter((item) => item.count > 0)
     .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
     .slice(0, limit);
 }
-
 function selectedValues(form, name) {
   const values = [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((input) => input.value);
   return values.length ? values : ["无"];
@@ -545,17 +598,29 @@ function renderMemoryPreview(user) {
   const memory = user?.preferenceMemory || createPreferenceMemory();
   const likes = (memory.likes || []).slice(0, 8);
   const dislikes = (memory.dislikes || []).slice(0, 8);
+  const editEnabled = Boolean(user && state.profileDialogMode === "edit" && state.profileMemoryEditMode);
+  const renderTag = (item) =>
+    editEnabled
+      ? `<button type="button" class="match-tag preference-tag is-deletable" data-delete-profile-memory="${escapeHtml(item.value)}" aria-label="删除历史偏好 ${escapeHtml(item.value)}"><span>${escapeHtml(item.value)}</span></button>`
+      : `<span class="match-tag preference-tag"><span>${escapeHtml(item.value)}</span></span>`;
   document.querySelector("#memoryUpdatedAt").textContent = memory.updatedAt ? "已更新" : "暂无";
   document.querySelector("#memoryLikes").innerHTML = likes.length
-    ? likes.map((item) => `<span class="match-tag">${escapeHtml(item.value)}</span>`).join("")
+    ? likes.map(renderTag).join("")
     : `<span class="match-tag">暂无</span>`;
   document.querySelector("#memoryDislikes").innerHTML = dislikes.length
-    ? dislikes.map((item) => `<span class="match-tag">${escapeHtml(item.value)}</span>`).join("")
+    ? dislikes.map(renderTag).join("")
     : `<span class="match-tag">暂无</span>`;
+  const editButton = document.querySelector("#profileMemoryEditButton");
+  if (editButton) {
+    editButton.textContent = editEnabled ? "完成" : "编辑";
+    editButton.setAttribute("aria-pressed", String(editEnabled));
+    editButton.disabled = !user || state.profileDialogMode !== "edit";
+  }
 }
 
 function openProfileDialog(mode, user = null) {
   state.profileDialogMode = mode;
+  state.profileMemoryEditMode = false;
   const dialog = document.querySelector("#userProfileDialog");
   const form = document.querySelector("#userProfileForm");
   const nextIndex = state.users.length + 1;
@@ -607,6 +672,7 @@ async function analyzeUserMessage(message, user) {
     },
     body: JSON.stringify({
       rawUserInput: message,
+      currentIntent: getIntent(),
       userProfile: user.profile || {},
       recentHistory: (user.history || []).slice(-6).map((item) => ({
         role: item.role,
@@ -642,7 +708,8 @@ function loadImageElement(src) {
 }
 
 async function compressImageForVisual(src, maxSize = 768, minSize = 320) {
-  if (!src || !src.startsWith("data:image/")) return src;
+  if (!src) return src;
+  if (!src.startsWith("data:image/") && !src.startsWith("/GeneratedWardrobeImages/")) return src;
   const image = await loadImageElement(src);
   const sourceWidth = image.naturalWidth || image.width;
   const sourceHeight = image.naturalHeight || image.height;
@@ -688,6 +755,7 @@ function compactVisualErrorMessage(message) {
 
 async function visualizeOutfitByApi({ user, outfit, schemeIndex }) {
   const items = await prepareVisualItems((outfit.items || []).map((item) => wardrobeItemForVisual(item, user)));
+  const visualIntent = state.lastRun?.intent || getIntent();
   const response = await fetch("/api/visualize-outfit", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -695,7 +763,13 @@ async function visualizeOutfitByApi({ user, outfit, schemeIndex }) {
       user: {
         id: user.id,
         name: user.name,
-        profile: user.profile || {}
+        profile: {
+          ...(user.profile || {}),
+          currentHeightCm: visualIntent.heightCm,
+          currentBodyType: visualIntent.bodyType,
+          currentAge: visualIntent.age,
+          currentWeather: visualIntent.weather
+        }
       },
       scheme: {
         index: schemeIndex + 1,
@@ -741,19 +815,114 @@ async function generateOutfitsByApi({ user, intent, wardrobe, examples, preferen
   return payload;
 }
 
+async function deleteGeneratedWardrobeImage(item) {
+  if (!item || item.imageSource !== "generated" || !item.imagePath) return;
+  await fetch("/api/delete-generated-wardrobe-image", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ imagePath: item.imagePath })
+  }).catch(() => {});
+}
+
+async function deleteGeneratedWardrobeImages(items) {
+  await Promise.all((items || []).map((item) => deleteGeneratedWardrobeImage(item)));
+}
+
+async function analyzeWardrobeItemByApi({ name, image, instruction = "" }) {
+  const response = await fetch("/api/analyze-wardrobe-item", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name, image, instruction })
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error || "衣物分析失败");
+  return payload;
+}
+
+function localWardrobeItemAnalysis({ name, image, errorMessage = "" }) {
+  const cleanName = (name || "").trim();
+  const finalName = cleanName || `未命名衣物${(activeUser().wardrobeItems || []).length + 1}`;
+  const hasImage = typeof image === "string" && image.startsWith("data:image/");
+  return {
+    name: finalName,
+    description: `${finalName}。${hasImage ? "已保留用户上传的衣物图片。" : "由名称创建的衣柜条目。"}AI 分析暂时不可用，后续搭配会优先参考名称${hasImage ? "和图片" : ""}。`,
+    image: image || "",
+    _meta: {
+      provider: "local_fallback",
+      error: errorMessage || null
+    }
+  };
+}
+
+function saveWardrobeItemToUser({ item, editingIndex = null }) {
+  const user = activeUser();
+  const editingItem = editingIndex !== null ? user.wardrobeItems?.[editingIndex] : null;
+  const finalName = (item.name || `未命名衣物${(user.wardrobeItems || []).length + 1}`).trim();
+  const nextItem = {
+    name: finalName,
+    description: item.description || `${finalName}。暂无详细描述。`,
+    image: item.image || "",
+    imageSource: item.imageSource || "",
+    imagePath: item.imagePath || ""
+  };
+  if (
+    editingItem &&
+    editingItem.imageSource === "generated" &&
+    editingItem.imagePath &&
+    editingItem.imagePath !== nextItem.imagePath
+  ) {
+    deleteGeneratedWardrobeImage(editingItem);
+  }
+  if (editingIndex !== null && editingItem) {
+    user.wardrobeItems = (user.wardrobeItems || []).map((entry, index) => (index === editingIndex ? nextItem : entry));
+  } else {
+    user.wardrobeItems = [...(user.wardrobeItems || []), nextItem];
+  }
+  const displayId = `#${editingIndex !== null && editingItem ? editingIndex + 1 : user.wardrobeItems.length}`;
+  state.lastRun = null;
+  saveState();
+  return {
+    name: finalName,
+    displayId,
+    action: editingIndex !== null && editingItem ? "已更新" : "已添加"
+  };
+}
+
 function memoryKey(item) {
-  return `${item.type || "general"}:${item.value}`;
+  return normalizePreferenceKeyword(item?.value);
 }
 
 function mergePreferenceList(current, incoming) {
-  const merged = new Map((current || []).map((item) => [memoryKey(item), item]));
+  const merged = new Map();
+  (current || []).forEach((item) => {
+    const key = memoryKey(item);
+    if (!key) return;
+    const existing = merged.get(key);
+    merged.set(key, existing && existing.confidence >= item.confidence ? existing : item);
+  });
   (incoming || []).forEach((item) => {
     if (!item?.value) return;
     const key = memoryKey(item);
+    if (!key) return;
     const existing = merged.get(key);
     merged.set(key, existing && existing.confidence >= item.confidence ? existing : item);
   });
   return [...merged.values()].sort((a, b) => b.confidence - a.confidence).slice(0, 24);
+}
+
+function mergeContextualPreferences(current, incoming) {
+  const merged = new Map();
+  [...(current || []), ...(incoming || [])].forEach((item) => {
+    const condition = normalizePreferenceKeyword(item?.condition);
+    const likes = [...new Set((item?.likes || []).map(normalizePreferenceKeyword).filter(Boolean))];
+    const dislikes = [...new Set((item?.dislikes || []).map(normalizePreferenceKeyword).filter(Boolean))];
+    if (!condition && !likes.length && !dislikes.length) return;
+    const key = `${condition}|${likes.join(",")}|${dislikes.join(",")}`;
+    merged.set(key, { condition, likes, dislikes });
+  });
+  return [...merged.values()].slice(-20);
 }
 
 function mergePreferenceMemory(user, preferenceDelta) {
@@ -761,20 +930,18 @@ function mergePreferenceMemory(user, preferenceDelta) {
   const memory = user.preferenceMemory || createPreferenceMemory();
   memory.likes = mergePreferenceList(memory.likes, preferenceDelta.likes);
   memory.dislikes = mergePreferenceList(memory.dislikes, preferenceDelta.dislikes);
-  memory.contextualPreferences = [
-    ...(memory.contextualPreferences || []),
-    ...(preferenceDelta.contextual_preferences || [])
-  ].slice(-20);
+  memory.contextualPreferences = mergeContextualPreferences(memory.contextualPreferences, preferenceDelta.contextual_preferences);
+  delete memory.suppressed;
   memory.updatedAt = new Date().toISOString();
   user.preferenceMemory = memory;
 }
 
 function memoryWords(user) {
   const memory = user.preferenceMemory || createPreferenceMemory();
-  return [
+  return [...new Set([
     ...(memory.likes || []).map((item) => item.value),
     ...(memory.contextualPreferences || []).flatMap((item) => item.likes || [])
-  ].filter(Boolean);
+  ].map(normalizePreferenceKeyword).filter(Boolean))];
 }
 
 function includesNegativeContext(text, value) {
@@ -889,13 +1056,16 @@ function normalizeValue(value) {
 }
 
 function getIntent() {
-  const tempRaw = document.querySelector("#tempInput").value;
+  const heightRaw = document.querySelector("#heightInput").value;
+  const ageRaw = document.querySelector("#ageInput").value;
   return {
-    city: normalizeValue(document.querySelector("#cityInput").value),
-    temp: tempRaw === "" ? null : Number(tempRaw),
-    weather: document.querySelector("#weatherInput").value,
-    occasion: state.occasion,
-    mood: state.mood,
+    heightCm: heightRaw === "" ? null : Number(heightRaw),
+    bodyType: normalizeValue(document.querySelector("#bodyTypeInput").value),
+    age: ageRaw === "" ? null : Number(ageRaw),
+    temp: null,
+    weather: normalizeValue(document.querySelector("#weatherInput").value),
+    occasion: normalizeValue(document.querySelector("#occasionInput").value),
+    mood: normalizeValue(document.querySelector("#moodInput").value),
     mode: state.mode,
     freeText: normalizeValue(document.querySelector("#messageInput").value)
   };
@@ -933,12 +1103,28 @@ function mergeIntentWithMessage(intent, message) {
   }
   const tempMatch = text.match(/(-?\d{1,2})\s*(度|℃)/);
   if (next.temp === null && tempMatch) next.temp = Number(tempMatch[1]);
+  const heightMatch = text.match(/(?:身高|高)\s*(1[2-9]\d|2[0-2]\d)\s*(cm|厘米|公分)?/i);
+  if (next.heightCm === null && heightMatch) next.heightCm = Number(heightMatch[1]);
+  const ageMatch = text.match(/(?:年龄\s*)?((?:[1-9]\d?)|1[01]\d|120)\s*岁|年龄\s*((?:[1-9]\d?)|1[01]\d|120)/);
+  if (next.age == null && ageMatch) next.age = Number(ageMatch[1] || ageMatch[2]);
+  if (next.bodyType === "无") {
+    ["偏瘦", "匀称", "微胖", "高大壮实", "丰满", "体型较大", "比较大", "壮"].some((item) => {
+      if (text.includes(item)) {
+        next.bodyType = item === "体型较大" || item === "比较大" || item === "壮" ? "高大壮实" : item;
+        return true;
+      }
+      return false;
+    });
+  }
   return next;
 }
 
 function createLocalAnalysis(message) {
   const localIntent = mergeIntentWithMessage(getIntent(), message);
   const queryParts = [
+    localIntent.heightCm === null ? null : `身高${localIntent.heightCm}cm`,
+    localIntent.bodyType,
+    localIntent.age === null ? null : `${localIntent.age}岁`,
     localIntent.weather,
     localIntent.temp === null ? null : `${localIntent.temp}度`,
     localIntent.occasion,
@@ -969,7 +1155,11 @@ function createLocalAnalysis(message) {
       avoid: [],
       formality: null,
       comfort_priority: localIntent.mood === "松弛" ? "high" : null,
-      body_or_fit_preferences: [],
+      body_or_fit_preferences: [
+        localIntent.heightCm === null ? null : `身高${localIntent.heightCm}cm`,
+        localIntent.bodyType === "无" ? null : `体型${localIntent.bodyType}`,
+        localIntent.age === null ? null : `年龄${localIntent.age}岁`
+      ].filter(Boolean),
       needs_clarification: false,
       clarifying_question: null,
       retrieval_query: queryParts.join(" ") || message
@@ -997,67 +1187,21 @@ function derivePreferenceSignals(user) {
     ...(profile.preferredColors || []),
     ...memoryWords(user)
   ]
-    .filter((item) => item && item !== "无")
+    .filter(Boolean)
     .join(" ");
-  const trustedHistoryText = (user.history || [])
-    .filter((message) => message.role === "user")
-    .filter((message) => (message.weight ?? 1) >= 0.5 && !["failed_audit", "api_failed"].includes(message.auditStatus))
-    .map((message) => message.text)
-    .join(" ");
-  const text = `${profileText} ${trustedHistoryText}`;
-  const candidates = [
-    "松弛",
-    "精致",
-    "明亮",
-    "利落",
-    "温柔",
-    "通勤",
-    "约会",
-    "周末",
-    "晚餐",
-    "浅色",
-    "深色",
-    "低饱和",
-    "正式",
-    "舒适",
-    "半裙",
-    "牛仔",
-    "西装",
-    "外套"
+  const text = profileText;
+  const profileKeywords = [
+    profile.gender,
+    ...(profile.preferredStyles || []),
+    ...(profile.preferredItems || []),
+    ...(profile.preferredColors || [])
   ];
-  return countPreferenceWords(text, candidates);
+  return countPreferenceWords(text, preferenceKeywordCandidates(user, profileKeywords), 12);
 }
-
 function deriveLearnedPreferenceSignals(user) {
-  const trustedHistoryText = (user.history || [])
-    .filter((message) => message.role === "user")
-    .filter((message) => (message.weight ?? 1) >= 0.5 && !["failed_audit", "api_failed"].includes(message.auditStatus))
-    .map((message) => message.text)
-    .join(" ");
-  const text = `${memoryWords(user).join(" ")} ${trustedHistoryText}`;
-  const candidates = [
-    "松弛",
-    "精致",
-    "明亮",
-    "利落",
-    "温柔",
-    "通勤",
-    "约会",
-    "周末",
-    "晚餐",
-    "浅色",
-    "深色",
-    "低饱和",
-    "正式",
-    "舒适",
-    "半裙",
-    "牛仔",
-    "西装",
-    "外套"
-  ];
-  return countPreferenceWords(text, candidates);
+  const text = memoryWords(user).join(" ");
+  return countPreferenceWords(text, preferenceKeywordCandidates(user), 12);
 }
-
 function scoreEntity(entity, intent, preferences) {
   let score = 0;
   if (intent.temp !== null && entity.temp && withinTemp(entity.temp, intent.temp)) score += 2.4;
@@ -1296,16 +1440,77 @@ function exampleTags(example) {
   return [];
 }
 
+function sampleDisplayTags(example) {
+  const tags = example.tags && typeof example.tags === "object" && !Array.isArray(example.tags)
+    ? [
+        ...(example.tags.season || []),
+        ...(example.tags.occasion || []),
+        ...(example.tags.style || [])
+      ]
+    : exampleTags(example);
+  return [...new Set(tags)]
+    .filter((tag) => tag && !["男", "女", "中性"].includes(tag))
+    .slice(0, 3);
+}
+
+function sampleImageSrc(example) {
+  const imagePath = example?.image_path || example?.pic || "";
+  if (!imagePath) return "";
+  return imagePath.startsWith("/") ? imagePath : `/${imagePath.replace(/\\/g, "/")}`;
+}
+
+function referencedEvidenceExamples(examples, outfits) {
+  if (!state.lastRun) return [];
+  const byId = new Map((examples || []).map((example) => [example.id, example]));
+  const ids = [];
+  (outfits || []).forEach((outfit) => {
+    (outfit.referenceExamples || []).forEach((id) => {
+      if (id && !ids.includes(id)) ids.push(id);
+    });
+  });
+  const answerText = state.lastRun?.generationResult?.answer || "";
+  [...String(answerText).matchAll(/sample-\d{4}/g)].forEach((match) => {
+    if (!ids.includes(match[0])) ids.push(match[0]);
+  });
+  return ids.map((id) => byId.get(id)).filter(Boolean);
+}
+
+function preferenceWordMatches(value, target) {
+  const cleanValue = normalizePreferenceKeyword(value);
+  const cleanTarget = normalizePreferenceKeyword(target);
+  return cleanValue && cleanTarget && (cleanValue === cleanTarget || cleanValue.includes(cleanTarget));
+}
+
+function removePreferenceWord(user, word) {
+  const memory = user.preferenceMemory || createPreferenceMemory();
+  const target = normalizePreferenceKeyword(word);
+  memory.likes = (memory.likes || []).filter((item) => !preferenceWordMatches(item.value, target));
+  memory.dislikes = (memory.dislikes || []).filter((item) => !preferenceWordMatches(item.value, target));
+  memory.contextualPreferences = (memory.contextualPreferences || []).map((item) => ({
+    ...item,
+    likes: (item.likes || []).filter((value) => !preferenceWordMatches(value, target)),
+    dislikes: (item.dislikes || []).filter((value) => !preferenceWordMatches(value, target))
+  })).filter((item) => item.condition || (item.likes || []).length || (item.dislikes || []).length);
+  delete memory.suppressed;
+  memory.updatedAt = new Date().toISOString();
+  user.preferenceMemory = memory;
+}
+
 function naturalLanguageAnswer(intent, outfits, user, examples, preferences) {
   const weatherPart = intent.weather === "无" ? "没有指定天气" : `${intent.weather}`;
   const tempPart = intent.temp === null ? "没有指定温度" : `${intent.temp}度`;
+  const bodyPart = [
+    intent.heightCm === null ? null : `身高${intent.heightCm}cm`,
+    intent.bodyType === "无" ? null : `体型${intent.bodyType}`,
+    intent.age === null ? null : `年龄${intent.age}岁`
+  ].filter(Boolean).join("、") || "没有指定身高、体型和年龄";
   const occasionPart = intent.occasion === "无" ? "日常场景" : intent.occasion;
   const moodPart = intent.mood === "无" ? "不过度限定风格" : intent.mood;
   const prefText = preferences.length ? `，也顺手照顾了你之前提到的 ${preferences.map((p) => p.word).join("、")}` : "";
   const schemeNames = ["方案一", "方案二", "方案三"];
   const safeOutfits = outfits.slice(0, 3);
   const lines = [
-    `你好！针对 ${weatherPart}、${tempPart}、${occasionPart}、${moodPart} 的需求${prefText}，我给你搭了 3 套更好落地的方案：`
+    `你好！针对 ${weatherPart}、${tempPart}、${bodyPart}、${occasionPart}、${moodPart} 的需求${prefText}，我给你搭了 3 套更好落地的方案：`
   ];
 
   safeOutfits.forEach((outfit, index) => {
@@ -1373,10 +1578,19 @@ async function runRecommendation(message, userMessageEntry = null) {
 
   const sanitizedMessage = analysis.guard?.sanitized_input || message;
   const parsedIntent = analysis.intent || {};
+  const mergedIntent = mergeIntentWithMessage(getIntent(), sanitizedMessage);
+  const frontendQueryParts = [
+    mergedIntent.age === null ? null : `${mergedIntent.age}岁`,
+    mergedIntent.heightCm === null ? null : `身高${mergedIntent.heightCm}cm`,
+    mergedIntent.bodyType === "无" ? null : `体型${mergedIntent.bodyType}`,
+    mergedIntent.weather === "无" ? null : mergedIntent.weather,
+    mergedIntent.occasion === "无" ? null : mergedIntent.occasion,
+    mergedIntent.mood === "无" ? null : mergedIntent.mood
+  ].filter(Boolean);
   const intent = {
-    ...mergeIntentWithMessage(getIntent(), sanitizedMessage),
+    ...mergedIntent,
     parsed: parsedIntent,
-    retrievalQuery: parsedIntent.retrieval_query || sanitizedMessage
+    retrievalQuery: [parsedIntent.retrieval_query || sanitizedMessage, ...frontendQueryParts].filter(Boolean).join(" ")
   };
   const preferences = derivePreferenceSignals(user);
   let ragResult = null;
@@ -1453,10 +1667,14 @@ function renderUsers() {
     .join("");
   const user = activeUser();
   document.querySelector("#activeUserBadge").textContent = `资料偏好：${compactProfileSummary(user)} · ${realHistoryCount(user)} 条对话`;
+  const deleteButton = document.querySelector("#deleteUserButton");
+  if (deleteButton) deleteButton.disabled = state.users.length <= 1;
 }
 
 function renderCloset() {
   const wardrobe = activeWardrobe();
+  const generationBusy = Boolean(state.pendingReply);
+  const closetEditEnabled = state.closetEditMode && !generationBusy;
   const query = state.closetSearchQuery.trim().toLowerCase();
   const numberedWardrobe = wardrobe.map((item, index) => ({
     item,
@@ -1479,7 +1697,7 @@ function renderCloset() {
     ? visibleWardrobe
         .map(
           ({ item, displayId, wardrobeIndex }) => `
-        <div class="closet-tile${state.closetEditMode ? " is-editing" : ""}">
+        <div class="closet-tile${closetEditEnabled ? " is-editing" : ""}" role="button" tabindex="0" data-edit-wardrobe-index="${wardrobeIndex}" aria-label="编辑 ${escapeHtml(displayId)} ${escapeHtml(item.name)}" title="编辑这件衣服">
           <button class="closet-delete" type="button" data-delete-wardrobe-index="${wardrobeIndex}" aria-label="删除 ${escapeHtml(displayId)} ${escapeHtml(item.name)}" title="删除这件衣服">×</button>
           <img class="closet-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" />
           <small>${escapeHtml(displayId)}</small>
@@ -1497,11 +1715,14 @@ function renderCloset() {
   const editButton = document.querySelector("#closetEditButton");
   if (editButton) {
     editButton.textContent = state.closetEditMode ? "完成" : "编辑";
-    editButton.setAttribute("aria-pressed", String(state.closetEditMode));
+    editButton.setAttribute("aria-pressed", String(closetEditEnabled));
+    editButton.disabled = generationBusy;
+    editButton.title = generationBusy ? "生成搭配时不能编辑衣柜" : "";
   }
   const addButton = document.querySelector("#closetAddButton");
   if (addButton) {
-    addButton.hidden = !state.closetEditMode;
+    addButton.hidden = !closetEditEnabled;
+    addButton.disabled = generationBusy;
   }
 }
 
@@ -1538,29 +1759,63 @@ function renderOutfitVisualPanel() {
   `;
 }
 function renderAddWardrobePanel() {
-  const preview = state.pendingWardrobeImage
-    ? `<img src="${escapeHtml(state.pendingWardrobeImage)}" alt="已导入衣物图片" />`
+  const isEditing = Number.isInteger(state.editingWardrobeIndex);
+  const generated = state.wardrobeGeneratedItem;
+  const displayImage = generated?.image || state.pendingWardrobeImage;
+  const displayName = generated?.name || state.pendingWardrobeName || "";
+  const preview = displayImage
+    ? `<img src="${escapeHtml(displayImage)}" alt="已导入衣物图片" />`
     : `<span>选择本地图片</span>`;
+  const generatedDescription = "";
+  const generatedActions = generated
+    ? `
+      <div class="wardrobe-generated-confirm">
+        <p>${escapeHtml(state.wardrobeAddedMessage || "相应内容已生成。是否添加到衣柜？")}</p>
+        ${
+          state.wardrobeRegenerateMode && !state.wardrobeAddedMessage
+            ? `<label class="wardrobe-regenerate-field">
+                <span>补充生成条件</span>
+                <textarea id="wardrobeRegeneratePromptInput" rows="3" placeholder="比如：更像真实商品图、颜色更浅、保留圆领短袖特征">${escapeHtml(state.wardrobeRegeneratePrompt || "")}</textarea>
+              </label>`
+            : ""
+        }
+        <div class="wardrobe-add-actions">
+          <button id="cancelWardrobeAddButton" type="button" ${state.closetSaving ? "disabled" : ""}>取消</button>
+          ${
+            state.wardrobeAddedMessage
+              ? ""
+              : `<button id="regenerateWardrobeButton" type="button" ${state.closetSaving ? "disabled" : ""}>${state.wardrobeRegenerateMode ? "再次生成" : "重新生成"}</button>
+                 <button id="confirmWardrobeAddButton" class="send-button compact" type="button" ${state.closetSaving ? "disabled" : ""}>添加</button>`
+          }
+        </div>
+      </div>
+    `
+    : "";
   return `
     <form id="wardrobeAddForm" class="wardrobe-add-panel">
       <div class="wardrobe-add-header">
-        <p class="eyebrow">Add Item</p>
-        <h2>添加衣物</h2>
+        <p class="eyebrow">${isEditing ? "Edit Item" : "Add Item"}</p>
+        <h2>${isEditing ? "编辑衣物" : "添加衣物"}</h2>
       </div>
       <label class="wardrobe-image-import">
         <input id="wardrobeImageInput" type="file" accept="image/*" />
         <div class="wardrobe-image-preview">${preview}</div>
-        <strong>本地导入图片</strong>
+        <strong>${isEditing ? "更换本地图片" : "本地导入图片"}</strong>
       </label>
       <label class="wardrobe-name-field">
-        <span>添加名称</span>
-        <input id="wardrobeNameInput" type="text" maxlength="28" placeholder="比如：白色短袖" autocomplete="off" value="${escapeHtml(state.pendingWardrobeName || "")}" required />
+        <span>衣物名称</span>
+        <input id="wardrobeNameInput" type="text" maxlength="28" placeholder="比如：白色短袖" autocomplete="off" value="${escapeHtml(displayName)}" ${state.wardrobeAddedMessage ? "disabled" : ""} />
       </label>
+      ${generatedDescription}
       <p id="wardrobeAddNotice" class="wardrobe-add-notice" aria-live="polite">${escapeHtml(state.wardrobeAddNotice || "")}</p>
-      <div class="wardrobe-add-actions">
-        <button id="cancelWardrobeAddButton" type="button">取消</button>
-        <button id="completeWardrobeAddButton" class="send-button compact" type="submit">完成</button>
-      </div>
+      ${
+        generated
+          ? generatedActions
+          : `<div class="wardrobe-add-actions">
+              <button id="cancelWardrobeAddButton" type="button" ${state.closetSaving ? "disabled" : ""}>取消</button>
+              <button id="completeWardrobeAddButton" class="send-button compact" type="submit" ${state.closetSaving ? "disabled" : ""}>${state.closetSaving ? "处理中" : isEditing ? "保存" : "完成"}</button>
+            </div>`
+      }
     </form>
   `;
 }
@@ -1623,35 +1878,56 @@ function renderEvidence() {
   const user = activeUser();
   const preferences = state.lastRun?.preferences || derivePreferenceSignals(user);
   const learnedPreferences = deriveLearnedPreferenceSignals(user);
+  const visibleLearnedPreferences = learnedPreferences.filter((pref) => pref.count >= 2);
   const latestUserMessage = [...user.history].reverse().find((message) => message.role === "user")?.text || "";
   const previewIntent = latestUserMessage ? mergeIntentWithMessage(getIntent(), latestUserMessage) : getIntent();
   const intent = state.lastRun?.intent || previewIntent;
-  const examples = state.lastRun?.examples || retrieveExamples(intent, preferences);
-  const outfits = state.lastRun?.outfits || (latestUserMessage ? buildOutfits(intent, user) : []);
+  const examples = state.lastRun?.examples || [];
+  const outfits = state.lastRun?.outfits || [];
+  const evidenceExamples = referencedEvidenceExamples(examples, outfits);
   const validation =
     state.lastRun?.validation || (outfits.length ? outfits.map((outfit) => validateOutfit(outfit, user)) : []);
 
-  document.querySelector("#preferenceList").innerHTML = learnedPreferences.length
-    ? learnedPreferences.map((pref) => `<span class="match-tag">${pref.word} ×${pref.count}</span>`).join("")
+  document.querySelector("#preferenceList").innerHTML = visibleLearnedPreferences.length
+    ? visibleLearnedPreferences.map((pref) => `
+        ${
+          state.memoryEditMode
+            ? `<button type="button" class="match-tag preference-tag is-deletable" data-delete-memory="${escapeHtml(pref.word)}" aria-label="删除偏好 ${escapeHtml(pref.word)}"><span>${escapeHtml(pref.word)}</span></button>`
+            : `<span class="match-tag preference-tag"><span>${escapeHtml(pref.word)}</span></span>`
+        }
+      `).join("")
     : `<span class="match-tag">暂无历史偏好</span>`;
+  const memoryEditButton = document.querySelector("#memoryEditButton");
+  if (memoryEditButton) {
+    memoryEditButton.textContent = state.memoryEditMode ? "完成" : "编辑";
+    memoryEditButton.setAttribute("aria-pressed", String(state.memoryEditMode));
+  }
 
-  document.querySelector("#exampleList").innerHTML = examples
-    .map(
-      (example) => `
-        <div class="example-row">
-          <strong>${example.id} · ${(example.title || example.description || "").slice(0, 42)}</strong>
-          <div class="tag-row">
-            ${exampleTags(example)
-              .slice(0, 8)
-              .map((tag) => `<span class="match-tag">${tag}</span>`)
-              .join("")}
+  document.querySelector("#exampleList").innerHTML = state.lastRun
+    ? evidenceExamples.length
+      ? evidenceExamples
+          .map((example) => {
+            const imageSrc = sampleImageSrc(example);
+            return `
+        <div class="example-row compact-example-row">
+          <div>
+            <strong>${escapeHtml(example.id)}</strong>
+            <div class="tag-row">
+              ${sampleDisplayTags(example)
+                .map((tag) => `<span class="match-tag">${escapeHtml(tag)}</span>`)
+                .join("")}
+            </div>
           </div>
+          <button class="sample-preview-button" type="button" data-sample-preview="${escapeHtml(imageSrc)}" data-sample-title="${escapeHtml(example.id)}" ${imageSrc ? "" : "disabled"}>预览</button>
         </div>
-      `
-    )
-    .join("");
+      `;
+          })
+          .join("")
+      : `<div class="example-row evidence-placeholder">本次模型没有返回可展示的参考样例。</div>`
+    : `<div class="example-row evidence-placeholder">调用模型生成搭配后会显示参考样例。</div>`;
 
-  document.querySelector("#validationList").innerHTML = outfits.length
+  document.querySelector("#validationList").innerHTML = state.lastRun
+    ? outfits.length
     ? outfits
         .map((outfit, index) => {
           const result = validation[index];
@@ -1670,7 +1946,8 @@ function renderEvidence() {
           `;
         })
         .join("")
-    : `<div class="validation-row"><span class="check-dot">i</span><div><strong>等待对话</strong><p>生成搭配后会校验衣物编号。</p></div></div>`;
+    : `<div class="validation-row"><span class="check-dot">i</span><div><strong>等待输出</strong><p>模型生成后会校验衣物编号。</p></div></div>`
+    : `<div class="validation-row"><span class="check-dot">i</span><div><strong>等待模型调用</strong><p>调用模型生成搭配后会显示校验结果。</p></div></div>`;
 
   const context = {
     user: {
@@ -1679,7 +1956,7 @@ function renderEvidence() {
       profile: user.profile,
       wardrobe_items: wardrobeDisplayEntries(user).map((entry) => entry.displayId),
       profile_preference_summary: profileSummary(user),
-      learned_preferences: learnedPreferences.map((pref) => pref.word),
+      learned_preferences: visibleLearnedPreferences.map((pref) => pref.word),
       recommendation_signals: preferences.map((pref) => pref.word),
       preference_memory: user.preferenceMemory || createPreferenceMemory()
     },
@@ -1691,7 +1968,7 @@ function renderEvidence() {
       retrieval_query: intent.retrievalQuery || intent.parsed?.retrieval_query || null
     },
     generation: state.lastRun?.generationResult || null,
-    retrieved_examples: examples.map((example) => example.id),
+    retrieved_examples: evidenceExamples.map((example) => example.id),
     output_contract: {
       style: "自然语言 + 具体衣物编号",
       closet_mode: "只能使用当前用户 wardrobe_items（#编号）",
@@ -1699,9 +1976,43 @@ function renderEvidence() {
     }
   };
   document.querySelector("#promptPreview").textContent = JSON.stringify(context, null, 2);
+  renderEvidenceCollapsedState();
+}
+
+function renderEvidenceCollapsedState() {
+  [
+    ["examples", "#exampleList"],
+    ["validation", "#validationList"],
+    ["prompt", "#promptPreview"]
+  ].forEach(([key, selector]) => {
+    const collapsed = Boolean(state.evidenceCollapsed[key]);
+    const content = document.querySelector(selector);
+    const button = document.querySelector(`button[data-evidence-toggle="${key}"]`);
+    if (content) content.hidden = collapsed;
+    if (button) {
+      button.textContent = collapsed ? "展开" : "收起";
+      button.setAttribute("aria-expanded", String(!collapsed));
+    }
+  });
+}
+
+function renderRequestPanelState() {
+  const form = document.querySelector("#intentForm");
+  const toggle = document.querySelector("#requestToggleButton");
+  if (!form || !toggle) return;
+  const collapsed = Boolean(state.requestPanelCollapsed);
+  form.hidden = collapsed;
+  toggle.setAttribute("aria-expanded", String(!collapsed));
+  toggle.setAttribute("aria-label", collapsed ? "展开需求" : "收起需求");
+  toggle.title = collapsed ? "展开需求" : "收起需求";
+  toggle.querySelector("span").textContent = collapsed ? "展开" : "收起";
 }
 
 function render() {
+  document.documentElement.classList.toggle("image-mode", state.visualizingOutfit || state.addingWardrobeItem);
+  document.documentElement.classList.toggle("wardrobe-edit-mode", state.addingWardrobeItem);
+  document.documentElement.classList.toggle("visual-tryon-mode", state.visualizingOutfit);
+  renderRequestPanelState();
   renderUsers();
   renderCloset();
   renderChat();
@@ -1848,44 +2159,67 @@ function bindControls() {
     state.visualResult = null;
     state.visualBusy = false;
     state.visualNotice = "";
-    state.pendingWardrobeImage = "";
-    state.pendingWardrobeName = "";
-    state.wardrobeAddNotice = "";
+    resetWardrobeEditorState();
     state.lastRun = null;
     saveState();
     render();
   });
 
-  document.querySelector("#closetRail").addEventListener("click", (event) => {
+  document.querySelector("#closetRail").addEventListener("click", async (event) => {
     const button = event.target.closest("button[data-delete-wardrobe-index]");
-    if (!button) return;
-    const deleteIndex = Number(button.dataset.deleteWardrobeIndex);
-    const user = activeUser();
-    user.wardrobeItems = (user.wardrobeItems || []).filter((_, index) => index !== deleteIndex);
-    state.lastRun = null;
-    saveState();
+    if (button) {
+      const deleteIndex = Number(button.dataset.deleteWardrobeIndex);
+      const user = activeUser();
+      const deletedItem = user.wardrobeItems?.[deleteIndex];
+      if (!deletedItem) return;
+      const displayId = `#${deleteIndex + 1}`;
+      const itemName = wardrobeItemName(deletedItem) || "未命名衣物";
+      if (!window.confirm(`确定要删除「${displayId}-${itemName}」这件衣服吗？`)) return;
+      if (deletedItem?.imageSource === "generated") {
+        await deleteGeneratedWardrobeImage(deletedItem);
+      }
+      user.wardrobeItems = (user.wardrobeItems || []).filter((_, index) => index !== deleteIndex);
+      if (state.editingWardrobeIndex === deleteIndex) resetWardrobeEditorState();
+      state.lastRun = null;
+      saveState();
+      render();
+      return;
+    }
+    const tile = event.target.closest("[data-edit-wardrobe-index]");
+    if (!tile) return;
+    if (state.pendingReply) return;
+    openWardrobeEditPanel(Number(tile.dataset.editWardrobeIndex));
+    render();
+  });
+  document.querySelector("#closetRail").addEventListener("keydown", (event) => {
+    if (!["Enter", " "].includes(event.key)) return;
+    if (event.target.closest("button[data-delete-wardrobe-index]")) return;
+    const tile = event.target.closest("[data-edit-wardrobe-index]");
+    if (!tile) return;
+    if (state.pendingReply) return;
+    event.preventDefault();
+    openWardrobeEditPanel(Number(tile.dataset.editWardrobeIndex));
     render();
   });
   document.querySelector("#closetEditButton").addEventListener("click", () => {
     state.closetEditMode = !state.closetEditMode;
     if (!state.closetEditMode) {
-      state.addingWardrobeItem = false;
-      state.pendingWardrobeImage = "";
-      state.pendingWardrobeName = "";
-      state.wardrobeAddNotice = "";
+      resetWardrobeEditorState();
     }
     render();
   });
   document.querySelector("#closetAddButton").addEventListener("click", () => {
-    state.addingWardrobeItem = true;
-    state.pendingWardrobeImage = "";
-    state.pendingWardrobeName = "";
-    state.wardrobeAddNotice = "";
+    openWardrobeAddPanel();
     render();
   });
   document.querySelector("#closetSearchInput").addEventListener("input", (event) => {
     state.closetSearchQuery = event.target.value;
     renderCloset();
+  });
+
+  document.querySelector("#requestToggleButton").addEventListener("click", () => {
+    state.requestPanelCollapsed = !state.requestPanelCollapsed;
+    renderRequestPanelState();
   });
 
   document.querySelector("#newUserButton").addEventListener("click", () => {
@@ -1898,6 +2232,26 @@ function bindControls() {
 
   document.querySelector("#cancelProfileButton").addEventListener("click", () => {
     document.querySelector("#userProfileDialog").close();
+  });
+
+  document.querySelector("#profileMemoryEditButton").addEventListener("click", (event) => {
+    event.preventDefault();
+    if (state.profileDialogMode !== "edit") return;
+    state.profileMemoryEditMode = !state.profileMemoryEditMode;
+    renderMemoryPreview(activeUser());
+  });
+
+  document.querySelector("#userProfileForm").addEventListener("click", (event) => {
+    const deleteButton = event.target.closest("button[data-delete-profile-memory]");
+    if (!deleteButton) return;
+    event.preventDefault();
+    const word = deleteButton.dataset.deleteProfileMemory;
+    if (!window.confirm(`确定要删除「${word}」的历史偏好吗？`)) return;
+    removePreferenceWord(activeUser(), word);
+    state.lastRun = null;
+    saveState();
+    renderMemoryPreview(activeUser());
+    renderEvidence();
   });
 
   document.querySelector("#userProfileForm").addEventListener("change", (event) => {
@@ -1958,15 +2312,6 @@ function bindControls() {
     render();
   });
 
-  document.querySelector("#renameUserButton").addEventListener("click", () => {
-    const user = activeUser();
-    const name = window.prompt("重命名用户", user.name);
-    if (!name) return;
-    user.name = name.trim();
-    saveState();
-    render();
-  });
-
   document.querySelector("#clearHistoryButton").addEventListener("click", () => {
     const user = activeUser();
     if (!window.confirm(`清空 ${user.name} 的聊天历史？`)) return;
@@ -1989,6 +2334,23 @@ function bindControls() {
     render();
   });
 
+  document.querySelector("#deleteUserButton").addEventListener("click", async () => {
+    const user = activeUser();
+    if (!user || state.users.length <= 1) return;
+    const confirmed = window.confirm(
+      `删除用户「${user.name}」？\n\n这会永久删除该用户的资料、偏好记忆、聊天历史和衣柜。该用户衣柜中的模型生成图片也会从本地删除；本地上传图片不会被额外删除。`
+    );
+    if (!confirmed) return;
+    await deleteGeneratedWardrobeImages(user.wardrobeItems || []);
+    state.users = state.users.filter((item) => item.id !== user.id);
+    state.activeUserId = state.users[0]?.id || "";
+    state.lastRun = null;
+    state.visualizingOutfit = false;
+    resetWardrobeEditorState();
+    saveState();
+    render();
+  });
+
   document.querySelectorAll(".segmented").forEach((group) => {
     group.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-value]");
@@ -2000,9 +2362,45 @@ function bindControls() {
     });
   });
 
-  ["#cityInput", "#tempInput", "#weatherInput"].forEach((selector) => {
+  ["#heightInput", "#bodyTypeInput", "#ageInput", "#weatherInput", "#occasionInput", "#moodInput"].forEach((selector) => {
     document.querySelector(selector).addEventListener("input", renderEvidence);
     document.querySelector(selector).addEventListener("change", renderEvidence);
+  });
+
+  document.querySelector(".evidence-panel").addEventListener("click", (event) => {
+    const memoryButton = event.target.closest("#memoryEditButton");
+    if (memoryButton) {
+      state.memoryEditMode = !state.memoryEditMode;
+      renderEvidence();
+      return;
+    }
+    const memoryDeleteButton = event.target.closest("button[data-delete-memory]");
+    if (memoryDeleteButton) {
+      const word = memoryDeleteButton.dataset.deleteMemory;
+      if (!window.confirm(`确定要删除「${word}」的历史偏好吗？`)) return;
+      removePreferenceWord(activeUser(), word);
+      saveState();
+      renderEvidence();
+      return;
+    }
+    const previewButton = event.target.closest("button[data-sample-preview]");
+    if (previewButton && previewButton.dataset.samplePreview) {
+      const dialog = document.querySelector("#samplePreviewDialog");
+      document.querySelector("#samplePreviewTitle").textContent = `${previewButton.dataset.sampleTitle || "样例"} 预览`;
+      document.querySelector("#samplePreviewImage").src = previewButton.dataset.samplePreview;
+      dialog.showModal();
+      return;
+    }
+    const button = event.target.closest("button[data-evidence-toggle]");
+    if (button) {
+      const key = button.dataset.evidenceToggle;
+      state.evidenceCollapsed[key] = !state.evidenceCollapsed[key];
+      renderEvidence();
+    }
+  });
+
+  document.querySelector("#closeSamplePreviewButton").addEventListener("click", () => {
+    document.querySelector("#samplePreviewDialog").close();
   });
 
   document.querySelector("#chatMessages").addEventListener("click", async (event) => {
@@ -2062,6 +2460,12 @@ function bindControls() {
     const reader = new FileReader();
     reader.onload = () => {
       state.pendingWardrobeImage = String(reader.result || "");
+      state.pendingWardrobeImageChanged = true;
+      state.wardrobeGeneratedItem = null;
+      state.wardrobeGenerationKind = "";
+      state.wardrobeRegenerateMode = false;
+      state.wardrobeRegeneratePrompt = "";
+      state.wardrobeAddedMessage = "";
       state.wardrobeAddNotice = "图片导入成功。";
       renderChat();
     };
@@ -2073,44 +2477,175 @@ function bindControls() {
   });
 
   document.querySelector("#chatMessages").addEventListener("input", (event) => {
-    if (!event.target.matches("#wardrobeNameInput")) return;
-    state.pendingWardrobeName = event.target.value;
+    if (event.target.matches("#wardrobeNameInput")) {
+      state.pendingWardrobeName = event.target.value;
+      if (state.wardrobeGeneratedItem) {
+        state.wardrobeGeneratedItem = {
+          ...state.wardrobeGeneratedItem,
+          name: event.target.value
+        };
+      }
+      state.wardrobeAddedMessage = "";
+      return;
+    }
+    if (event.target.matches("#wardrobeRegeneratePromptInput")) {
+      state.wardrobeRegeneratePrompt = event.target.value;
+    }
   });
 
-  document.querySelector("#chatMessages").addEventListener("click", (event) => {
-    if (!event.target.closest("#cancelWardrobeAddButton")) return;
-    state.addingWardrobeItem = false;
-    state.pendingWardrobeImage = "";
-    state.pendingWardrobeName = "";
-    state.wardrobeAddNotice = "";
-    render();
+  document.querySelector("#chatMessages").addEventListener("click", async (event) => {
+    if (event.target.closest("#cancelWardrobeAddButton")) {
+      resetWardrobeEditorState();
+      render();
+      return;
+    }
+    if (event.target.closest("#confirmWardrobeAddButton")) {
+      const generated = state.wardrobeGeneratedItem;
+      if (!generated || state.closetSaving) return;
+      const editingIndex = Number.isInteger(state.editingWardrobeIndex) ? state.editingWardrobeIndex : null;
+      const saved = saveWardrobeItemToUser({ item: generated, editingIndex });
+      state.wardrobeAddedMessage = `已添加！${saved.name}，编号${saved.displayId}。`;
+      state.wardrobeAddNotice = "";
+      render();
+      return;
+    }
+    if (event.target.closest("#regenerateWardrobeButton")) {
+      if (!state.wardrobeRegenerateMode) {
+        state.wardrobeRegenerateMode = true;
+        renderChat();
+        return;
+      }
+      if (state.closetSaving) return;
+      const instruction = (document.querySelector("#wardrobeRegeneratePromptInput")?.value || state.wardrobeRegeneratePrompt).trim();
+      const name = (document.querySelector("#wardrobeNameInput")?.value || state.pendingWardrobeName || state.wardrobeGeneratedItem?.name || "").trim();
+      const kind = state.wardrobeGenerationKind;
+      const imageForAnalysis = kind === "description" ? state.pendingWardrobeImage || state.wardrobeGeneratedItem?.image || "" : "";
+      state.closetSaving = true;
+      state.wardrobeAddNotice =
+        kind === "description"
+          ? "正在添加衣物描述，请稍候..."
+          : "正在添加衣物示意图，请稍候...";
+      renderChat();
+      try {
+        const analysis = await analyzeWardrobeItemByApi({ name, image: imageForAnalysis, instruction });
+        const nextItem = {
+          name: (analysis.name || name || state.wardrobeGeneratedItem?.name || "").trim(),
+          description: analysis.description || state.wardrobeGeneratedItem?.description || "",
+          image:
+            kind === "description"
+              ? state.pendingWardrobeImage || state.wardrobeGeneratedItem?.image || ""
+              : analysis.image || state.wardrobeGeneratedItem?.image || "",
+          imageSource:
+            kind === "description"
+              ? (state.pendingWardrobeImage || state.wardrobeGeneratedItem?.image || "").startsWith("/GeneratedWardrobeImages/")
+                ? state.wardrobeGeneratedItem?.imageSource || "generated"
+                : ""
+              : analysis.imageSource || state.wardrobeGeneratedItem?.imageSource || "",
+          imagePath:
+            kind === "description"
+              ? (state.pendingWardrobeImage || state.wardrobeGeneratedItem?.image || "").startsWith("/GeneratedWardrobeImages/")
+                ? state.wardrobeGeneratedItem?.imagePath || ""
+                : ""
+              : analysis.imagePath || state.wardrobeGeneratedItem?.imagePath || ""
+        };
+        state.wardrobeGeneratedItem = nextItem;
+        state.pendingWardrobeName = nextItem.name;
+        if (nextItem.image) state.pendingWardrobeImage = nextItem.image;
+        state.wardrobeAddNotice = "";
+      } catch (error) {
+        state.wardrobeAddNotice = `重新生成失败：${compactVisualErrorMessage(error.message)}`;
+      } finally {
+        state.closetSaving = false;
+        renderChat();
+      }
+    }
   });
 
-  document.querySelector("#chatMessages").addEventListener("submit", (event) => {
+  document.querySelector("#chatMessages").addEventListener("submit", async (event) => {
     if (!event.target.matches("#wardrobeAddForm")) return;
     event.preventDefault();
+    if (state.closetSaving) return;
     const name = (document.querySelector("#wardrobeNameInput")?.value || state.pendingWardrobeName).trim();
-    if (!state.pendingWardrobeImage) {
-      state.wardrobeAddNotice = "请先导入一张衣物图片。";
-      renderChat();
-      return;
-    }
-    if (!name) {
-      state.wardrobeAddNotice = "请填写衣物名称。";
-      renderChat();
-      return;
-    }
+    const editingIndex = Number.isInteger(state.editingWardrobeIndex) ? state.editingWardrobeIndex : null;
     const user = activeUser();
-    user.wardrobeItems = [...(user.wardrobeItems || []), { name, image: state.pendingWardrobeImage }];
-    const displayId = `#${user.wardrobeItems.length}`;
-    state.addingWardrobeItem = false;
-    state.pendingWardrobeImage = "";
-    state.pendingWardrobeName = "";
-    state.wardrobeAddNotice = "";
+    const editingItem = editingIndex !== null ? user.wardrobeItems?.[editingIndex] : null;
+    if (!state.pendingWardrobeImage && !name) {
+      state.wardrobeAddNotice = "请至少填写衣物名称或导入一张图片。";
+      renderChat();
+      return;
+    }
+    const originalName = editingItem ? wardrobeItemName(editingItem) || "" : "";
+    const hasName = Boolean(name);
+    const hasImage = typeof state.pendingWardrobeImage === "string" && state.pendingWardrobeImage.startsWith("data:image/");
+    const needsGeneratedName = !hasName && hasImage;
+    const needsGeneratedImage = hasName && !hasImage;
+    const shouldRegenerateAnalysis = needsGeneratedName || needsGeneratedImage;
+    const generationKind = needsGeneratedName ? "description" : needsGeneratedImage ? "image" : "";
+    const imageForAnalysis = needsGeneratedName ? state.pendingWardrobeImage || "" : "";
+    state.closetSaving = true;
     state.lastRun = null;
-    saveState();
+    state.wardrobeAddNotice = shouldRegenerateAnalysis
+      ? imageForAnalysis
+        ? "正在添加衣物描述，请稍候..."
+        : "正在添加衣物示意图，请稍候..."
+      : "正在保存衣物。";
     render();
-    window.alert(`${name}(${displayId}) 已添加到当前衣柜。`);
+    let analysis = null;
+    let usedAnalysisFallback = false;
+    if (shouldRegenerateAnalysis) {
+      try {
+        analysis = await analyzeWardrobeItemByApi({ name, image: imageForAnalysis });
+        usedAnalysisFallback =
+          analysis?._meta?.provider === "local_fallback" ||
+          Boolean(analysis?._meta?.analysisError || analysis?._meta?.illustrationError);
+      } catch (error) {
+        usedAnalysisFallback = true;
+        analysis = localWardrobeItemAnalysis({
+          name,
+          image: imageForAnalysis,
+          errorMessage: error.message
+        });
+      }
+    } else {
+      analysis = {
+        name: name || originalName,
+        description: editingItem?.description || "",
+        image: state.pendingWardrobeImage || editingItem?.image || ""
+      };
+    }
+    const finalName = (analysis.name || name || `未命名衣物${(user.wardrobeItems || []).length + 1}`).trim();
+    const finalImage = state.pendingWardrobeImageChanged
+      ? state.pendingWardrobeImage || analysis.image || ""
+      : shouldRegenerateAnalysis
+        ? analysis.image || editingItem?.image || state.pendingWardrobeImage || ""
+        : editingItem?.image || state.pendingWardrobeImage || "";
+    const finalImageIsGenerated = finalImage.startsWith("/GeneratedWardrobeImages/");
+    const nextItem = {
+      name: finalName,
+      description: analysis.description || `${finalName}。暂无详细描述。`,
+      image: finalImage,
+      imageSource: finalImageIsGenerated ? analysis.imageSource || editingItem?.imageSource || "generated" : "",
+      imagePath: finalImageIsGenerated ? analysis.imagePath || editingItem?.imagePath || "" : ""
+    };
+    if (shouldRegenerateAnalysis) {
+      state.wardrobeGeneratedItem = nextItem;
+      state.wardrobeGenerationKind = generationKind;
+      state.pendingWardrobeName = finalName;
+      if (finalImage) state.pendingWardrobeImage = finalImage;
+      state.wardrobeRegenerateMode = false;
+      state.wardrobeRegeneratePrompt = "";
+      state.wardrobeAddNotice = usedAnalysisFallback ? "部分 AI 步骤暂时失败，已使用本地兜底。" : "";
+      state.closetSaving = false;
+      renderChat();
+      return;
+    }
+    const saved = saveWardrobeItemToUser({ item: nextItem, editingIndex });
+    state.wardrobeGeneratedItem = nextItem;
+    state.wardrobeGenerationKind = "";
+    state.wardrobeAddedMessage = `已添加！${saved.name}，编号${saved.displayId}。`;
+    state.wardrobeAddNotice = "";
+    state.closetSaving = false;
+    render();
   });
 
   document.querySelector("#chatForm").addEventListener("submit", async (event) => {
@@ -2122,6 +2657,8 @@ function bindControls() {
     const user = activeUser();
     const userMessageEntry = pushHistory(user, "user", message, { weight: 0, auditStatus: "pending" });
     input.value = "";
+    state.closetEditMode = false;
+    resetWardrobeEditorState();
     state.pendingReply = { userId: user.id, text: "正在思考，请稍候" };
     saveState();
     render();
@@ -2143,3 +2680,4 @@ loadState();
 bindControls();
 render();
 refreshApiStatus();
+
