@@ -1,4 +1,5 @@
 ﻿const storageKey = "aiwardrobe-chat-prototype-v6";
+const visualPromptVersion = "outfit-framing-v4";
 
 const wardrobeCatalog = [
   {
@@ -944,6 +945,14 @@ function memoryWords(user) {
   ].map(normalizePreferenceKeyword).filter(Boolean))];
 }
 
+function memoryWordOccurrences(user) {
+  const memory = user.preferenceMemory || createPreferenceMemory();
+  return [
+    ...(memory.likes || []).map((item) => item.value),
+    ...(memory.contextualPreferences || []).flatMap((item) => item.likes || [])
+  ].map(normalizePreferenceKeyword).filter(Boolean);
+}
+
 function includesNegativeContext(text, value) {
   if (!text || !value) return false;
   const index = text.indexOf(value);
@@ -1199,8 +1208,18 @@ function derivePreferenceSignals(user) {
   return countPreferenceWords(text, preferenceKeywordCandidates(user, profileKeywords), 12);
 }
 function deriveLearnedPreferenceSignals(user) {
-  const text = memoryWords(user).join(" ");
+  const text = memoryWordOccurrences(user).join(" ");
   return countPreferenceWords(text, preferenceKeywordCandidates(user), 12);
+}
+
+function visiblePreferenceSignals(preferences, { maxVisible = 8, minVisible = 4 } = {}) {
+  const highFrequency = preferences.filter((pref) => pref.count >= 2).slice(0, maxVisible);
+  if (highFrequency.length >= minVisible) return highFrequency;
+  const used = new Set(highFrequency.map((pref) => pref.word));
+  const supplements = preferences
+    .filter((pref) => pref.count > 0 && !used.has(pref.word))
+    .slice(0, minVisible - highFrequency.length);
+  return [...highFrequency, ...supplements].slice(0, maxVisible);
 }
 function scoreEntity(entity, intent, preferences) {
   let score = 0;
@@ -1878,7 +1897,7 @@ function renderEvidence() {
   const user = activeUser();
   const preferences = state.lastRun?.preferences || derivePreferenceSignals(user);
   const learnedPreferences = deriveLearnedPreferenceSignals(user);
-  const visibleLearnedPreferences = learnedPreferences.filter((pref) => pref.count >= 2);
+  const visibleLearnedPreferences = visiblePreferenceSignals(learnedPreferences);
   const latestUserMessage = [...user.history].reverse().find((message) => message.role === "user")?.text || "";
   const previewIntent = latestUserMessage ? mergeIntentWithMessage(getIntent(), latestUserMessage) : getIntent();
   const intent = state.lastRun?.intent || previewIntent;
@@ -2425,7 +2444,7 @@ function bindControls() {
     const user = activeUser();
     state.lastRun.visualResults = state.lastRun.visualResults || {};
     const cachedResult = state.lastRun.visualResults[schemeIndex];
-    if (cachedResult?.images?.length) {
+    if (cachedResult?.images?.length && cachedResult.promptVersion === visualPromptVersion) {
       state.visualResult = cachedResult;
       state.visualNotice = `已显示本次聊天中方案${schemeIndex + 1}生成过的效果图，没有重复调用万相。`;
       renderChat();
@@ -2437,8 +2456,9 @@ function bindControls() {
     renderChat();
     try {
       const result = await visualizeOutfitByApi({ user, outfit, schemeIndex });
-      state.lastRun.visualResults[schemeIndex] = result;
-      state.visualResult = result;
+      const versionedResult = { ...result, promptVersion: visualPromptVersion };
+      state.lastRun.visualResults[schemeIndex] = versionedResult;
+      state.visualResult = versionedResult;
       state.visualNotice = `生成完成：${result.model || "wan2.7-image-pro"}，耗时 ${((result.elapsedMs || 0) / 1000).toFixed(1)} 秒。图片链接 24 小时内有效。`;
     } catch (error) {
       state.visualNotice = `生成失败：${compactVisualErrorMessage(error.message)}`;
@@ -2680,4 +2700,5 @@ loadState();
 bindControls();
 render();
 refreshApiStatus();
+
 

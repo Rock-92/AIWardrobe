@@ -886,9 +886,29 @@ function deleteGeneratedWardrobeImageFile(imagePath) {
   return true;
 }
 
+function textHasHat(text) {
+  const clean = String(text || "").replace(/连帽(卫衣|夹克|外套|上衣|衫|款)?/g, "");
+  return /帽/.test(clean);
+}
+
+function outfitHasHat({ scheme = {}, items = [] }) {
+  const itemTexts = [
+    ...(scheme.items || []).flatMap((item) => [item.name, item.category]),
+    ...items.flatMap((item) => [item.name, item.category])
+  ].filter(Boolean);
+  return (itemTexts.length ? itemTexts : [scheme.text]).filter(Boolean).some(textHasHat);
+}
+
 function buildWanOutfitPrompt({ user = {}, scheme = {}, items = [] }) {
   const profile = user.profile || {};
   const bodyContext = physicalContext({ profile });
+  const hasHat = outfitHasHat({ scheme, items });
+  const framingRule = hasHat
+    ? "构图最高优先级：本套搭配有帽子元素，生成完整全身人像，从头到鞋全部入画，帽子、上半身、下半身和鞋子都要完整可见，脸部自然协调。"
+    : "构图最高优先级：本套搭配没有帽子元素，必须生成 neck-to-feet outfit crop。画面上边缘从脖子开始裁切，只裁掉头部，必须露出完整左右双肩和肩线；头、脸、五官、耳朵、头发全部不得出现。必须完整展示上半身、下半身、双脚和鞋子。禁止 full-body portrait with face、upper body crop、chest crop、waist crop、thigh crop、knee crop。";
+  const accessoryRule = hasHat
+    ? "必须展示上半身和下半身的搭配样式；鞋子、包、帽子、围巾、首饰或其他配件如果出现在方案中，都必须在图片中体现。"
+    : "必须展示上半身和下半身的搭配样式；鞋子、包、围巾、首饰或其他非头部配件如果出现在方案中，都必须在图片中体现。";
   const imageItems = items.filter((item) => typeof item.image === "string" && item.image.startsWith("data:image/"));
   const textItems = items.filter((item) => !(typeof item.image === "string" && item.image.startsWith("data:image/")));
   const imageText = imageItems
@@ -905,8 +925,13 @@ function buildWanOutfitPrompt({ user = {}, scheme = {}, items = [] }) {
     .join("；");
   return [
     "请基于参考衣物图片和文字方案生成一张真实自然的穿搭上身效果图。",
-    "画面要求：单人虚拟模特，只展示头部以下的身体部分，画面从脖颈或肩部以下开始裁切，不要露脸、不要五官、不要完整头部；姿态自然，干净室内或街拍背景，光线柔和，服装结构清晰可见。",
-    "必须展示上半身和下半身的搭配样式；如果搭配中有鞋子、包、帽子、围巾、首饰或其他配件，也必须在图片中体现。换言之，方案中呈现的所有衣物和配件元素都要在图片中可见，不能只画半身或遗漏下装、鞋包。",
+    "画面要求：单人虚拟模特，姿态自然，干净室内或街拍背景，光线柔和，服装结构清晰可见。",
+    framingRule,
+    hasHat
+      ? "合格构图：完整全身、帽子和鞋子都在画面内。"
+      : "合格构图：画面从脖子开始到鞋子结束，双肩清楚可见；若出现脸、头发、完整头部，或没有露出双肩，即为不合格。",
+    "参考衣物图片只用于提取衣物颜色、材质、轮廓和细节，不得照搬参考图的半身、腰部局部、腿部局部或商品裁剪构图；必须按上面的构图最高优先级重新生成完整穿搭视图。",
+    accessoryRule,
     "不要生成真人身份、不要生成用户本人、不要添加品牌标志或文字水印。",
     "尽量忠实保留参考图中的衣物颜色、材质、轮廓和搭配关系。",
     "如果某件衣服或配件没有参考图，说明它是灵感单品或衣柜缺图单品，请不要寻找图片、不要报错，而是根据名称、描述、方案风格和整体配色自行设计合适的衣服，并自然融入整套搭配。",
