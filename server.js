@@ -702,9 +702,7 @@ async function callQwenWardrobeItemAnalysis({ name = "", image = "", instruction
   const hasImage = typeof image === "string" && image.startsWith("data:image/");
   const hasName = Boolean(String(name || "").trim());
   const model = hasImage
-    ? hasName
-      ? process.env.QWEN_VISION_MODEL || "qwen-vl-plus"
-      : process.env.QWEN_IMAGE_ONLY_MODEL || process.env.QWEN_MODEL || "qwen-plus"
+    ? process.env.QWEN_IMAGE_TO_TEXT_MODEL || process.env.QWEN_IMAGE_ONLY_MODEL || "qwen3.7-plus"
     : process.env.QWEN_ANALYSIS_MODEL || process.env.QWEN_MODEL || "qwen-plus";
   const content = hasImage
     ? [
@@ -764,12 +762,13 @@ async function handleAnalyzeWardrobeItemRequest(request, response) {
     const name = String(body.name || "").trim();
     const image = String(body.image || "").trim();
     const instruction = String(body.instruction || "").trim();
+    const forceModel = Boolean(body.forceModel);
     const hasImage = image.startsWith("data:image/");
     if (!name && !hasImage) {
       sendJson(response, 400, { error: "请至少提供衣物名称或图片" });
       return;
     }
-    if (name && hasImage && !instruction) {
+    if (name && hasImage && !instruction && !forceModel) {
       sendJson(response, 200, {
         name,
         description: localWardrobeDescription({ name, hasImage }).description,
@@ -1080,8 +1079,9 @@ function getApiStatus() {
     checkModel: hasDashScopeKey ? process.env.QWEN_CHECK_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
     analysisModel: hasDashScopeKey ? process.env.QWEN_ANALYSIS_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
     generationModel: hasDashScopeKey ? process.env.QWEN_GENERATION_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
+    imageToTextModel: hasDashScopeKey ? process.env.QWEN_IMAGE_TO_TEXT_MODEL || process.env.QWEN_IMAGE_ONLY_MODEL || "qwen3.7-plus" : null,
     visionModel: hasDashScopeKey ? process.env.QWEN_VISION_MODEL || "wan2.7-image-pro" : null,
-    imageOnlyModel: hasDashScopeKey ? process.env.QWEN_IMAGE_ONLY_MODEL || process.env.QWEN_MODEL || "qwen-plus" : null,
+    imageOnlyModel: hasDashScopeKey ? process.env.QWEN_IMAGE_ONLY_MODEL || "qwen3.7-plus" : null,
     embeddingModel: hasDashScopeKey ? process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4" : null,
     imageModel: hasDashScopeKey ? process.env.WAN_IMAGE_MODEL || "wan2.7-image-pro" : null,
     embeddingIndexReady: fs.existsSync(exampleEmbeddingPath)
@@ -1146,8 +1146,9 @@ async function handleValidateAndSaveKeyRequest(request, response) {
       QWEN_CHECK_MODEL: process.env.QWEN_CHECK_MODEL || process.env.QWEN_MODEL || "qwen-plus",
       QWEN_ANALYSIS_MODEL: process.env.QWEN_ANALYSIS_MODEL || "qwen-plus",
       QWEN_GENERATION_MODEL: process.env.QWEN_GENERATION_MODEL || "qwen-plus",
+      QWEN_IMAGE_TO_TEXT_MODEL: process.env.QWEN_IMAGE_TO_TEXT_MODEL || "qwen3.7-plus",
       QWEN_VISION_MODEL: process.env.QWEN_VISION_MODEL || "wan2.7-image-pro",
-      QWEN_IMAGE_ONLY_MODEL: process.env.QWEN_IMAGE_ONLY_MODEL || "qwen-plus",
+      QWEN_IMAGE_ONLY_MODEL: process.env.QWEN_IMAGE_ONLY_MODEL || "qwen3.7-plus",
       DASHSCOPE_EMBEDDING_MODEL: process.env.DASHSCOPE_EMBEDDING_MODEL || "text-embedding-v4",
       WAN_IMAGE_MODEL: process.env.WAN_IMAGE_MODEL || "wan2.7-image-pro"
     });

@@ -829,13 +829,13 @@ async function deleteGeneratedWardrobeImages(items) {
   await Promise.all((items || []).map((item) => deleteGeneratedWardrobeImage(item)));
 }
 
-async function analyzeWardrobeItemByApi({ name, image, instruction = "" }) {
+async function analyzeWardrobeItemByApi({ name, image, instruction = "", forceModel = false }) {
   const response = await fetch("/api/analyze-wardrobe-item", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ name, image, instruction })
+    body: JSON.stringify({ name, image, instruction, forceModel })
   });
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(payload.error || "衣物分析失败");
@@ -2547,7 +2547,7 @@ function bindControls() {
           : "正在添加衣物示意图，请稍候...";
       renderChat();
       try {
-        const analysis = await analyzeWardrobeItemByApi({ name, image: imageForAnalysis, instruction });
+        const analysis = await analyzeWardrobeItemByApi({ name, image: imageForAnalysis, instruction, forceModel: true });
         const nextItem = {
           name: (analysis.name || name || state.wardrobeGeneratedItem?.name || "").trim(),
           description: analysis.description || state.wardrobeGeneratedItem?.description || "",

@@ -6,3 +6,5 @@ generated/
 node_modules/
 .codex_preview/
 .edge-profile/
+Clothes/
+GeneratedWardrobeImages/
