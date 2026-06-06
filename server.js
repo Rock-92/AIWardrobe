@@ -904,7 +904,7 @@ function buildWanOutfitPrompt({ user = {}, scheme = {}, items = [] }) {
   const hasHat = outfitHasHat({ scheme, items });
   const framingRule = hasHat
     ? "构图最高优先级：本套搭配有帽子元素，生成完整全身人像，从头到鞋全部入画，帽子、上半身、下半身和鞋子都要完整可见，脸部自然协调。"
-    : "构图最高优先级：本套搭配没有帽子元素，必须生成 neck-to-feet outfit crop。画面上边缘从脖子开始裁切，只裁掉头部，必须露出完整左右双肩和肩线；头、脸、五官、耳朵、头发全部不得出现。必须完整展示上半身、下半身、双脚和鞋子。禁止 full-body portrait with face、upper body crop、chest crop、waist crop、thigh crop、knee crop。";
+    : "构图最高优先级：本套搭配没有帽子元素，必须生成从脖子到鞋子的全身人像。画面上边缘从脖子开始裁切，只裁掉头部，必须露出完整左右双肩和肩线；头、脸、五官、耳朵、头发全部不得出现。必须完整展示上半身、下半身、双脚和鞋子。禁止露脸人像、上半身人像、从胸部裁剪、从腰部裁剪、从大腿裁剪、从膝盖裁剪。";
   const accessoryRule = hasHat
     ? "必须展示上半身和下半身的搭配样式；鞋子、包、帽子、围巾、首饰或其他配件如果出现在方案中，都必须在图片中体现。"
     : "必须展示上半身和下半身的搭配样式；鞋子、包、围巾、首饰或其他非头部配件如果出现在方案中，都必须在图片中体现。";
