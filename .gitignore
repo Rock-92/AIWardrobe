@@ -8,3 +8,5 @@ node_modules/
 .edge-profile/
 Clothes/
 GeneratedWardrobeImages/
+UploadedWardrobeImages/
+Dataset/local_db.json

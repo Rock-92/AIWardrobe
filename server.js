@@ -8,6 +8,8 @@ const envPath = path.join(root, ".env");
 loadEnv(envPath);
 const exampleDescriptionPath = path.join(root, "Dataset", "Description_example.json");
 const exampleEmbeddingPath = path.join(root, "Dataset", "example_embeddings.json");
+const localDbPath = path.join(root, "Dataset", "local_db.json");
+const uploadedWardrobeImageDir = path.join(root, "UploadedWardrobeImages");
 const generatedWardrobeImageDir = path.join(root, "GeneratedWardrobeImages");
 const dashscopeBaseUrl = (process.env.DASHSCOPE_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1").replace(
   /\/+$/,
@@ -67,6 +69,151 @@ function readJsonBody(request) {
     });
     request.on("error", reject);
   });
+}
+
+function createPreferenceMemory() {
+  return {
+    likes: [],
+    dislikes: [],
+    contextualPreferences: [],
+    updatedAt: null
+  };
+}
+
+function ensureLocalDataDirs() {
+  fs.mkdirSync(path.dirname(localDbPath), { recursive: true });
+  fs.mkdirSync(uploadedWardrobeImageDir, { recursive: true });
+}
+
+function normalizePreferenceMemory(memory = {}) {
+  return {
+    ...createPreferenceMemory(),
+    ...memory,
+    contextualPreferences: memory.contextualPreferences || memory.contextual_preferences || []
+  };
+}
+
+function normalizeDbWardrobeItem(item) {
+  if (typeof item === "string") {
+    const name = item.trim();
+    return name ? { name, description: "", image: "" } : null;
+  }
+  if (!item || typeof item !== "object") return null;
+  const name = String(item.name || "").trim();
+  const image = String(item.image || "").trim();
+  if (!name && !image) return null;
+  return {
+    ...item,
+    name: name || "未命名衣物",
+    description: String(item.description || "").trim(),
+    image,
+    imageSource: String(item.imageSource || "").trim(),
+    imagePath: String(item.imagePath || "").trim()
+  };
+}
+
+function normalizeDbUser(user, index = 0) {
+  const id = String(user?.id || `user-${Date.now()}-${index}`);
+  return {
+    ...user,
+    id,
+    name: String(user?.name || `用户${index + 1}`),
+    profile: user?.profile || {},
+    preferenceMemory: normalizePreferenceMemory(user?.preferenceMemory),
+    wardrobeItems: Array.isArray(user?.wardrobeItems) ? user.wardrobeItems.map(normalizeDbWardrobeItem).filter(Boolean) : [],
+    history: Array.isArray(user?.history) ? user.history : []
+  };
+}
+
+function normalizeDb(db = {}) {
+  const users = Array.isArray(db.users) ? db.users.map(normalizeDbUser).filter(Boolean) : [];
+  const activeUserId = users.some((user) => user.id === db.activeUserId) ? db.activeUserId : users[0]?.id || null;
+  return {
+    activeUserId,
+    users
+  };
+}
+
+function safeUploadedImageName(value) {
+  return String(value || "wardrobe")
+    .trim()
+    .replace(/[\\/:*?"<>|]+/g, "-")
+    .replace(/\s+/g, "-")
+    .slice(0, 36) || "wardrobe";
+}
+
+function saveUploadedDataImage(dataUrl, name = "") {
+  const match = String(dataUrl || "").match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+  if (!match) return null;
+  ensureLocalDataDirs();
+  const mime = match[1].toLowerCase();
+  const extension = mime.includes("png")
+    ? ".png"
+    : mime.includes("webp")
+      ? ".webp"
+      : mime.includes("gif")
+        ? ".gif"
+        : ".jpg";
+  const filename = `${Date.now()}-${safeUploadedImageName(name)}-${Math.random().toString(16).slice(2, 8)}${extension}`;
+  const filePath = path.join(uploadedWardrobeImageDir, filename);
+  fs.writeFileSync(filePath, Buffer.from(match[2], "base64"));
+  return {
+    image: `/UploadedWardrobeImages/${filename}`,
+    imagePath: `UploadedWardrobeImages/${filename}`,
+    imageSource: "uploaded"
+  };
+}
+
+function persistWardrobeImages(db) {
+  return {
+    ...db,
+    users: db.users.map((user) => ({
+      ...user,
+      wardrobeItems: (user.wardrobeItems || []).map((item) => {
+        if (typeof item.image === "string" && item.image.startsWith("data:image/")) {
+          const saved = saveUploadedDataImage(item.image, item.name);
+          return saved ? { ...item, ...saved } : item;
+        }
+        return item;
+      })
+    }))
+  };
+}
+
+function readLocalDb() {
+  ensureLocalDataDirs();
+  if (!fs.existsSync(localDbPath)) {
+    return { activeUserId: null, users: [] };
+  }
+  try {
+    return normalizeDb(JSON.parse(fs.readFileSync(localDbPath, "utf8")));
+  } catch {
+    return { activeUserId: null, users: [] };
+  }
+}
+
+function writeLocalDb(db) {
+  ensureLocalDataDirs();
+  const normalized = persistWardrobeImages(normalizeDb(db));
+  fs.writeFileSync(localDbPath, JSON.stringify(normalized, null, 2), "utf8");
+  return normalized;
+}
+
+function handleStateRequest(_request, response) {
+  sendJson(response, 200, readLocalDb());
+}
+
+async function handleSaveStateRequest(request, response) {
+  try {
+    const body = await readJsonBody(request);
+    const saved = writeLocalDb({
+      activeUserId: body.activeUserId,
+      users: Array.isArray(body.users) ? body.users : []
+    });
+    sendJson(response, 200, saved);
+  } catch (error) {
+    sendJson(response, error.statusCode || 500, { error: error.message });
+  }
 }
 
 function extractJsonText(text) {
@@ -1181,6 +1328,16 @@ async function handleGenerateOutfitsRequest(request, response) {
 }
 
 const server = http.createServer((request, response) => {
+  if (request.method === "GET" && request.url.split("?")[0] === "/api/state") {
+    handleStateRequest(request, response);
+    return;
+  }
+
+  if (request.method === "POST" && request.url.split("?")[0] === "/api/state") {
+    handleSaveStateRequest(request, response);
+    return;
+  }
+
   if (request.method === "GET" && request.url.split("?")[0] === "/api/status") {
     handleApiStatusRequest(response);
     return;

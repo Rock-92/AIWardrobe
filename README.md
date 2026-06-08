@@ -2,7 +2,7 @@
 
 AIWardrobe 是一个对话式 AI 智能衣柜原型。当前版本已经串联了用户资料、需求输入、衣柜管理、RAG 样例检索、千问穿搭生成、历史偏好记忆、结果校验和万相穿搭效果图生成。
 
-当前项目仍以本地 Web 原型为主，用户状态暂存在浏览器 `localStorage` 中，后续建议迁移到本地数据库或后端存储。
+当前项目仍以本地 Web 原型为主，用户历史对话、长期偏好和衣柜数据会保存到后端本地文件 `Dataset/local_db.json`。用户上传衣物图会保存到 `UploadedWardrobeImages/`，模型生成的衣物图会保存到 `GeneratedWardrobeImages/`。
 
 ## 快速启动
 
@@ -208,7 +208,7 @@ qwen_tools/run_all_checks.bat
 
 ## 当前限制与下一步
 
-- 当前用户状态主要保存在浏览器 `localStorage`，刷新/迁移设备时不够稳定。
+- 当前用户状态保存在后端本地文件 `Dataset/local_db.json`；迁移设备时需要同时迁移该文件以及 `UploadedWardrobeImages/`、`GeneratedWardrobeImages/` 中的图片。
 - 需要引入本地数据库，统一保存用户、衣柜、偏好、历史和生成图索引。
 - 需要补充固定评测集，覆盖天气、场合、偏好冲突、衣柜缺失、跨用户隔离等案例。
 - 需要继续强化 validator，支持模型输出不合格后的自动重试。

@@ -356,18 +356,20 @@ const blockedMemoryTerms = ["忽略规则", "忽略之前", "系统提示", "sys
 const negativeIntentPatterns = ["不要", "不喜欢", "别", "避免", "拒绝", "不想", "讨厌"];
 const maxPreferenceConfidence = 1;
 
-function loadState() {
+function loadStateFromBrowser() {
   const raw = localStorage.getItem(storageKey);
-  if (!raw) return;
+  if (!raw) return false;
   try {
     const saved = JSON.parse(raw);
     if (Array.isArray(saved.users) && saved.users.length) {
       state.users = saved.users.map(normalizeUser);
       state.activeUserId = saved.activeUserId || saved.users[0].id;
+      return true;
     }
   } catch {
     localStorage.removeItem(storageKey);
   }
+  return false;
 }
 
 function normalizeUser(user) {
@@ -393,14 +395,51 @@ function normalizeUser(user) {
   };
 }
 
-function saveState() {
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify({
-      users: state.users,
-      activeUserId: state.activeUserId
-    })
-  );
+async function loadState() {
+  try {
+    const response = await fetch("/api/state");
+    if (!response.ok) throw new Error("state load failed");
+    const saved = await response.json();
+    if (Array.isArray(saved.users) && saved.users.length) {
+      state.users = saved.users.map(normalizeUser);
+      state.activeUserId = saved.activeUserId || saved.users[0].id;
+      return;
+    }
+  } catch (error) {
+    console.warn("AIWardrobe local backend state was not loaded.", error);
+  }
+  const migrated = loadStateFromBrowser();
+  if (!migrated) {
+    state.users = structuredClone(defaultUsers).map(normalizeUser);
+    state.activeUserId = state.users[0]?.id || "user-1";
+  }
+  await saveState({ syncFromServer: true });
+}
+
+async function saveState({ syncFromServer = false } = {}) {
+  const payload = {
+    users: state.users,
+    activeUserId: state.activeUserId
+  };
+  try {
+    const response = await fetch("/api/state", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error("state save failed");
+    const saved = await response.json();
+    if (syncFromServer && Array.isArray(saved.users) && saved.users.length) {
+      state.users = saved.users.map(normalizeUser);
+      state.activeUserId = saved.activeUserId || state.activeUserId;
+    }
+    localStorage.setItem(storageKey, JSON.stringify({ ...payload, backendSyncedAt: new Date().toISOString() }));
+  } catch (error) {
+    console.warn("AIWardrobe state was not saved to the local backend.", error);
+    localStorage.setItem(storageKey, JSON.stringify(payload));
+  }
 }
 
 function activeUser() {
@@ -857,7 +896,7 @@ function localWardrobeItemAnalysis({ name, image, errorMessage = "" }) {
   };
 }
 
-function saveWardrobeItemToUser({ item, editingIndex = null }) {
+async function saveWardrobeItemToUser({ item, editingIndex = null }) {
   const user = activeUser();
   const editingItem = editingIndex !== null ? user.wardrobeItems?.[editingIndex] : null;
   const finalName = (item.name || `未命名衣物${(user.wardrobeItems || []).length + 1}`).trim();
@@ -883,7 +922,7 @@ function saveWardrobeItemToUser({ item, editingIndex = null }) {
   }
   const displayId = `#${editingIndex !== null && editingItem ? editingIndex + 1 : user.wardrobeItems.length}`;
   state.lastRun = null;
-  saveState();
+  await saveState({ syncFromServer: true });
   return {
     name: finalName,
     displayId,
@@ -2523,7 +2562,7 @@ function bindControls() {
       const generated = state.wardrobeGeneratedItem;
       if (!generated || state.closetSaving) return;
       const editingIndex = Number.isInteger(state.editingWardrobeIndex) ? state.editingWardrobeIndex : null;
-      const saved = saveWardrobeItemToUser({ item: generated, editingIndex });
+      const saved = await saveWardrobeItemToUser({ item: generated, editingIndex });
       state.wardrobeAddedMessage = `已添加！${saved.name}，编号${saved.displayId}。`;
       state.wardrobeAddNotice = "";
       render();
@@ -2659,7 +2698,7 @@ function bindControls() {
       renderChat();
       return;
     }
-    const saved = saveWardrobeItemToUser({ item: nextItem, editingIndex });
+    const saved = await saveWardrobeItemToUser({ item: nextItem, editingIndex });
     state.wardrobeGeneratedItem = nextItem;
     state.wardrobeGenerationKind = "";
     state.wardrobeAddedMessage = `已添加！${saved.name}，编号${saved.displayId}。`;
@@ -2696,9 +2735,13 @@ function bindControls() {
   document.querySelector("#apiCheckButton")?.addEventListener("click", runApiCheck);
 }
 
-loadState();
-bindControls();
-render();
-refreshApiStatus();
+async function init() {
+  await loadState();
+  bindControls();
+  render();
+  refreshApiStatus();
+}
+
+init();
 
 
