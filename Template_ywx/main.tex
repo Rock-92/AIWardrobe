@@ -1,0 +1,182 @@
+\documentclass{applemlr}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+
+\setcounter{tocdepth}{2}
+\setlist[itemize]{leftmargin=*, itemsep=0.4em}
+\setlist[enumerate]{leftmargin=*, itemsep=0.4em}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\definecolor{listingbg}{gray}{0.95}
+\definecolor{listingborder}{HTML}{D0D3D4}
+\definecolor{listingcomment}{HTML}{5E8050}
+\definecolor{listingkeyword}{HTML}{007AFF}
+
+\lstdefinestyle{aiproject}{
+  backgroundcolor=\color{listingbg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{listingborder},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{listingkeyword}\bfseries,
+  commentstyle=\color{listingcomment},
+  numbers=left,
+  numberstyle=\scriptsize\color{listingkeyword},
+  stepnumber=1,
+  numbersep=6pt,
+  breaklines=true,
+  columns=fullflexible,
+  captionpos=b,
+  keepspaces=true
+}
+
+
+\usepackage{xcolor}       % 用于颜色定义
+\usepackage[most]{tcolorbox} % 引入 tcolorbox 宏包
+
+\newtcbox{\code}{
+  nobeforeafter, % 确保它是一个行内命令
+  colback=black!10, % 背景颜色 (10%的黑色，即浅灰色)
+  colframe=black!60, % 边框颜色 (60%的黑色)
+  boxrule=0.5pt,    % 边框粗细
+  arc=2pt,          % 圆角大小
+  boxsep=0pt,       % 内部文字与边框的间距
+  left=3pt, right=3pt, top=2pt, bottom=2pt, % 分别设置四个方向的间距
+  % raise=1.5pt, % 稍微向上调整盒子位置，让它和文本对齐更好看
+  fontupper=\ttfamily % 盒子内的文字使用打字机字体
+}
+
+
+
+
+\title{基于Qwen大模型的AI智能衣柜穿搭助手}
+
+\author{武昂达}
+\author{刘景鲁豫}
+\author{姚文熙}
+\affiliation{上海交通大学自动化与感知学院}
+
+\metadata[课程信息]{人工智能算法实践}
+\metadata[提交日期]{2026 年 6 月 x 日}
+
+\abstract{
+待报告全部完成后补充
+}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{引言}
+\label{sec: Brief Intro}
+
+对于现在的大学生而言，日常生活中有许多看似轻松不要紧，实际研究起来却耗费时间和精力的事情，穿搭就是其中的一个典型例子。
+每天上课、实验、社团、面试或出游等等，不同场合下的衣着风格有不同要求；
+但现实中，许多同学往往因为时间紧、经验不足，或是懒得反复搭配，最后长期停留在几套固定组合上。
+例如许多男同学夏天习惯上身短袖加条黑短裤，冬天则是羽绒服加条长裤，不用太过考虑，一套就能管一周。
+这样的选择虽然足够方便，但却很难体现个人风格，无形中让生活少了一些精致，还容易让衣柜中已有的衣物利用率变低。
+而随着大语言模型与多模态生成技术的发展，AI 工具展现出的能力已经逐渐从单纯回答问题“进化”为共同参与决策。
+因此，我们想到搭建一个 AI 衣柜助手，让它来帮助我们参谋每天应该穿些什么。
+
+我们认为穿搭推荐并不只是一个简单的文本生成问题，
+直接向大模型询问“今天穿什么”虽然能够得到一些建议，但这类建议往往比较泛泛，甚至会推荐用户根本没有的衣服。
+一个真正可用、可靠的 AI 智能衣柜助手，需要同时理解用户的基本信息、场合需求、风格偏好、已有衣物以及历史反馈，并在这些约束下给出具体、可执行的搭配方案。
+因此，我们希望将大语言模型从一次性的聊天工具，进一步构建成一个\textbf{面向日常穿搭决策的个性化 AI Agent。}
+
+基于这个目标，我们\textbf{设计并实现了 AIWardrobe ———— 一个基于 Qwen 大模型的 AI 智能衣柜穿搭助手。}
+这个助手支持用户创建个人档案，维护自己的衣柜，并通过自然语言输入当天的场景、心情、天气或风格需求。
+为了避免推荐结果脱离现实，助手在生成穿搭方案前会结合用户衣柜信息，并利用人工收集和描述的 150 余条穿搭案例构建参考案例库，通过语义向量检索找到与当前需求相近的搭配风格。
+与此同时，系统还会从用户对话中抽取长期偏好，例如喜欢的颜色、版型、风格以及明确不喜欢的元素，使后续推荐能够逐渐贴近用户个人习惯。
+
+从技术实现上来看，我们的项目搭建了“需求解析—安全审核—案例检索—衣柜约束—方案生成—可视化展示—偏好更新”的完整链路。
+前端负责用户信息录入、衣柜编辑、对话交互和结果展示，后端负责模型调用、RAG 检索、Prompt 组织、数据存储与异常兜底。
+穿搭助手不仅生成三套文字化穿搭建议，还提供参考案例证据和虚拟上身效果，使用户能够更直观地判断推荐是否符合自己的需求。
+因此，相较于单纯的大模型问答，\textbf{我们的穿搭助手更强调穿搭的系统性、个性化和可落地性。}
+
+我们的报告将围绕 AIWardrobe 助手的设计与实现展开说明。
+首先，我们将介绍相关工作与项目使用的数据来源；
+之后，我们会阐述系统架构、RAG 检索机制、用户偏好记忆、衣柜约束与多模态生成流程等链路流程涉及到的结构与技术；
+最后通过具体实验分析助手在穿搭推荐、个性化适配和安全可靠性方面的表现，并对我们的项目进行进一步发展的展望。
+
+
+\section{相关工作}
+\label{sec: Related Works}
+
+本项目涉及的相关工作主要可以从四个方面展开：
+个性化穿搭推荐、检索增强生成、大语言模型智能体与个性化记忆、多模态图像生成与虚拟上身。
+这些方向分别对应项目中的推荐方案、参考案例检索、用户偏好记忆和上身可视化模块。
+
+\subsection{个性化穿搭推荐}
+
+穿搭推荐不同于普通商品推荐，它不仅要判断用户是否喜欢某件单品，还要考虑多件衣物之间的组合关系。
+Han et al. 提出利用序列模型学习服装单品之间的兼容性，将一套 outfit 看作多个 fashion item 组成的序列，
+从而判断整体搭配是否合理 \citep{han2017learning}。
+后续也有工作使用 Transformer 建模 outfit 中不同单品的关系，
+例如 Sarkar et al. 的 OutfitTransformer 就用于学习整套穿搭的表示，
+从而支持后续服装兼容性判断和推荐任务 \citep{sarkar2023outfittransformer}。
+这些研究说明，穿搭推荐的重点并不是简单推荐单件衣服，而是理解颜色、版型、风格、材质和场景之间的组合关系。
+
+不过，现实中的穿搭推荐还需要考虑“可穿性”。如果系统推荐了用户衣柜中不存在的衣服，即使风格上合理，也难以真正落地。
+因此，我们的项目在生成穿搭方案时加入了用户衣柜约束，使模型的推荐结果尽量围绕用户已有衣物展开。
+这也是本项目区别于普通聊天式穿搭模型的重要特点。
+
+\subsection{检索增强生成 (RAG)}
+
+检索增强生成是一类将外部知识检索与大模型生成相结合的方法。
+Lewis et al. 提出的 RAG 框架将参数化生成模型与非参数化知识索引结合，
+在生成答案前先检索相关文档，再基于检索结果进行回答 \citep{lewis2020retrieval}。
+这一思想能够在一定程度上减少模型幻觉，同时提升生成结果与具体任务之间的相关性。
+我们意识到用户的衣柜与模型返回的穿搭结果也应该具有这种强相关性，因而这启发我们在项目中运用 RAG 技术让大模型生成穿搭。
+
+在我们的项目中，RAG 并不是用于检索百科知识，而是用于检索穿搭参考案例。
+在调用模型前，我们人工整理了 150 余条社交媒体穿搭案例，并为每条案例标注了风格、颜色、场景和搭配简介。
+当用户输入穿搭需求后，系统会根据语义向量检索相似案例，并将这些案例作为大模型生成穿搭方案的参考。
+通过这种方法，可以让模型的推荐结果更具体、更“有人味”，也更接近真实穿搭场景。
+
+\subsection{大语言模型智能体与个性化记忆}
+
+近年来，大语言模型逐渐从单轮问答工具发展为能够调用工具、保存记忆并执行多步骤任务的智能系统。
+Park et al. 提出的 Generative Agents 展示了如何为语言模型代理构建记忆、反思和规划机制，
+使其能够在虚拟环境中表现出连续的行为 \citep{park2023generative}。
+这一思路启发我们将穿搭助手设计为一个具有状态和记忆的个性化 Agent，而不是一次性的文本生成器。
+
+对于我们的项目而言，用户的历史偏好非常重要。
+若用户曾表达“不喜欢高跟鞋”“喜欢宽松版型”或“偏好冷色系”等个性化偏好，那么这些信息都应该影响后续推荐。
+因此，助手应当主动从对话中抽取 likes、dislikes 和 contextual preferences 等结构化偏好，并在后续生成中作为约束使用。
+同时，为了避免用户输入中含有越权请求或有 prompt injection 等影响模型的行为，我们也在需求解析阶段加入了安全审核。
+
+\subsection{多模态生成与虚拟上身}
+
+穿搭推荐天然具有视觉属性。单纯的文字建议虽然能够说明“上衣搭配什么裤子”，但用户往往仍然需要在脑中想象整体效果。
+这就会为用户带来额外的思考成本，尤其对于不熟悉穿搭的人来说，文字描述和真实上身效果之间仍然存在距离。
+因此，近年来多模态图像生成、虚拟试穿和人物图像编辑技术也逐渐被应用到服装展示和搭配预览中。
+
+虚拟试穿任务的目标是在保留人物身份、姿态和体型的同时，将目标服装自然地迁移到人物图像上。
+Zhu et al. 的 TryOnDiffusion 及同类工作表明，扩散模型能够在服装保真度和人物图像自然度之间取得较好的平衡，
+这为服装展示和试穿预览提供了新的技术路径 \citep{zhu2023tryondiffusion}。
+虽然本项目中的穿搭可视化模块并不追求精确的服装物理仿真，但它可以给用户提供一个直观的视觉参考。
+用户在查看三套穿搭方案后，可以进一步观察对应的虚拟穿搭效果图，从整体比例、颜色关系和风格氛围上判断推荐是否符合预期。
+
+总体而言，我们的 AIWardrobe 并不是简单套用某一个已有模型，而是综合了穿搭推荐、RAG 检索、
+个性化记忆和多模态生成等多个方向技术的穿搭 Agent。
+我们项目的重点不在于提出一个新的基础模型或推荐算法，
+而在于\textbf{将大模型已有的强大能力通过技术手段组织成一个完整、可交互、可落地的日常穿搭决策智能体。}
+
+
+\addcontentsline{toc}{section}{参考文献}
+\bibliographystyle{ieeetr}
+\bibliography{ref}
+
+
+\end{document}

@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{han2017learning}
+X.~Han, Z.~Wu, Y.-G. Jiang, and L.~S. Davis, ``Learning fashion compatibility with bidirectional lstms,'' in {\em Proceedings of the 25th ACM international conference on Multimedia}, MM ’17, p.~1078–1086, ACM, Oct. 2017.
+
+\bibitem{sarkar2023outfittransformer}
+R.~Sarkar, N.~Bodla, M.~I. Vasileva, Y.-L. Lin, A.~Beniwal, A.~Lu, and G.~Medioni, ``Outfittransformer: Learning outfit representations for fashion recommendation,'' 2022.
+
+\bibitem{lewis2020retrieval}
+P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal, H.~Küttler, M.~Lewis, W.~tau Yih, T.~Rocktäschel, S.~Riedel, and D.~Kiela, ``Retrieval-augmented generation for knowledge-intensive nlp tasks,'' 2021.
+
+\bibitem{park2023generative}
+J.~S. Park, J.~C. O'Brien, C.~J. Cai, M.~R. Morris, P.~Liang, and M.~S. Bernstein, ``Generative agents: Interactive simulacra of human behavior,'' 2023.
+
+\bibitem{zhu2023tryondiffusion}
+L.~Zhu, D.~Yang, T.~Zhu, F.~Reda, W.~Chan, C.~Saharia, M.~Norouzi, and I.~Kemelmacher-Shlizerman, ``Tryondiffusion: A tale of two unets,'' 2023.
+
+\end{thebibliography}
