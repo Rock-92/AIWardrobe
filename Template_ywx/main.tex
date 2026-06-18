@@ -597,6 +597,7 @@ RAG 检索、衣柜约束、穿搭生成到虚拟上身展示的完整链路。
 与文本生成不同，图像生成阶段更容易出现构图错误、衣物不完整、无关元素或人物身份不合适等问题，
 因此我们在后端单独设计了面向万相模型的 Prompt，部分核心约束内容如下~\autoref{lst:prompt_wan} 中所示。
 
+\vspace{0.8em}
 \lstinputlisting[style=aiproject, caption={生成穿搭虚拟上身效果图的核心约束 Prompt 片段。},label={lst:prompt_wan}]
 {store/prompt_wan.js}
 
