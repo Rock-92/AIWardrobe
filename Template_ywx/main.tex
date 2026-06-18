@@ -544,7 +544,7 @@ RAG 检索、衣柜约束、穿搭生成到虚拟上身展示的完整链路。
 这个环节中，后端 Prompt 对穿搭生成做了较强约束，即在衣柜模式下，模型只能使用 wardrobe 中真实存在的 \code{item.id}，
 且必须使用 \code{\#1}、\code{\#2} 这样的编号；RAG 样例只能作为风格参考，不能被当作用户已有衣物；
 如果处于灵感模式，非衣柜单品也必须以 \code{insp-} 开头并标明来源。
-具体的 Prompt ~\autoref{lst:prompt_generate} 所示。
+具体的 Prompt 如~\autoref{lst:prompt_generate} 所示。
 
 \vspace{0.8em}
 \lstinputlisting[style=aiproject, caption={后端穿搭生成阶段的衣柜约束 Prompt 片段。},label={lst:prompt_generate}]
@@ -595,7 +595,7 @@ RAG 检索、衣柜约束、穿搭生成到虚拟上身展示的完整链路。
 这一模块主要为用户选择穿搭方案提供视觉参考，因此生成图像的形式与质量也是需要加以把控的。
 在用户选择某一套穿搭方案后，系统会进一步调用 \code{/api/visualize-outfit} 接口生成虚拟上身效果图。
 与文本生成不同，图像生成阶段更容易出现构图错误、衣物不完整、无关元素或人物身份不合适等问题，
-因此我们在后端单独设计了面向万相模型的 Prompt，部分核心约束内容如下~\autoref{lst:prompt_wan} 中所示。
+因此我们在后端单独设计了面向万相模型的 Prompt，部分核心约束内容如~\autoref{lst:prompt_wan} 中所示。
 
 \vspace{0.8em}
 \lstinputlisting[style=aiproject, caption={生成穿搭虚拟上身效果图的核心约束 Prompt 片段。},label={lst:prompt_wan}]
